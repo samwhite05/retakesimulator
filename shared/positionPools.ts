@@ -37,6 +37,7 @@ export interface SitePositionPool {
   };
   defenderPositions: PositionDef[];
   attackerRetakePaths: PositionDef[]; // Common retake entry points
+  retakeSpawns: PositionDef[];        // Where attacking team starts from
 }
 
 export interface MapPositionPools {
@@ -216,6 +217,30 @@ export const ASCENT_POSITIONS: MapPositionPools = {
           description: "Retake entry through B Main",
         },
       ],
+      // Retake spawn positions — where the attacking team starts from
+      retakeSpawns: [
+        {
+          id: "spawn-ct-left",
+          name: "CT Left",
+          position: { x: 0.55, y: 0.72 },
+          role: "retake_spawn",
+          description: "Left side of CT spawn",
+        },
+        {
+          id: "spawn-ct-center",
+          name: "CT Center",
+          position: { x: 0.62, y: 0.75 },
+          role: "retake_spawn",
+          description: "Center of CT spawn",
+        },
+        {
+          id: "spawn-ct-right",
+          name: "CT Right",
+          position: { x: 0.70, y: 0.72 },
+          role: "retake_spawn",
+          description: "Right side of CT spawn",
+        },
+      ],
     },
     {
       siteId: "ascent-a",
@@ -348,6 +373,11 @@ export const ASCENT_POSITIONS: MapPositionPools = {
           description: "Retake entry through A Main",
         },
       ],
+      retakeSpawns: [
+        { id: "spawn-ct-left", name: "CT Left", position: { x: 0.30, y: 0.72 }, role: "retake_spawn" },
+        { id: "spawn-ct-center", name: "CT Center", position: { x: 0.38, y: 0.75 }, role: "retake_spawn" },
+        { id: "spawn-ct-right", name: "CT Right", position: { x: 0.45, y: 0.72 }, role: "retake_spawn" },
+      ],
     },
   ],
 };
@@ -368,74 +398,24 @@ export const HAVEN_POSITIONS: MapPositionPools = {
         radius: 0.06,
       },
       defenderPositions: [
-        {
-          id: "c-default",
-          name: "Default",
-          position: { x: 0.76, y: 0.40 },
-          role: "anchor",
-        },
-        {
-          id: "c-garage",
-          name: "Garage",
-          position: { x: 0.82, y: 0.30 },
-          role: "anchor",
-        },
-        {
-          id: "c-long",
-          name: "C Long",
-          position: { x: 0.85, y: 0.45 },
-          role: "anchor",
-        },
-        {
-          id: "c-heaven",
-          name: "C Heaven",
-          position: { x: 0.74, y: 0.25 },
-          role: "anchor",
-        },
-        {
-          id: "c-link",
-          name: "C Link",
-          position: { x: 0.70, y: 0.35 },
-          role: "anchor",
-        },
-        {
-          id: "c-garage-post",
-          name: "Garage (Post-Plant)",
-          position: { x: 0.80, y: 0.28 },
-          role: "postplant",
-        },
-        {
-          id: "c-long-post",
-          name: "C Long (Post-Plant)",
-          position: { x: 0.84, y: 0.42 },
-          role: "postplant",
-        },
-        {
-          id: "c-link-post",
-          name: "C Link (Post-Plant)",
-          position: { x: 0.72, y: 0.38 },
-          role: "postplant",
-        },
-        {
-          id: "c-ct",
-          name: "CT Spawn",
-          position: { x: 0.70, y: 0.55 },
-          role: "lurker",
-        },
+        { id: "c-default", name: "Default", position: { x: 0.76, y: 0.40 }, role: "anchor" },
+        { id: "c-garage", name: "Garage", position: { x: 0.82, y: 0.30 }, role: "anchor" },
+        { id: "c-long", name: "C Long", position: { x: 0.85, y: 0.45 }, role: "anchor" },
+        { id: "c-heaven", name: "C Heaven", position: { x: 0.74, y: 0.25 }, role: "anchor" },
+        { id: "c-link", name: "C Link", position: { x: 0.70, y: 0.35 }, role: "anchor" },
+        { id: "c-garage-post", name: "Garage (Post-Plant)", position: { x: 0.80, y: 0.28 }, role: "postplant" },
+        { id: "c-long-post", name: "C Long (Post-Plant)", position: { x: 0.84, y: 0.42 }, role: "postplant" },
+        { id: "c-link-post", name: "C Link (Post-Plant)", position: { x: 0.72, y: 0.38 }, role: "postplant" },
+        { id: "c-ct", name: "CT Spawn", position: { x: 0.70, y: 0.55 }, role: "lurker" },
       ],
       attackerRetakePaths: [
-        {
-          id: "retake-ct",
-          name: "From CT",
-          position: { x: 0.65, y: 0.60 },
-          role: "common",
-        },
-        {
-          id: "retake-clong",
-          name: "Through C Long",
-          position: { x: 0.88, y: 0.50 },
-          role: "common",
-        },
+        { id: "retake-ct", name: "From CT", position: { x: 0.65, y: 0.60 }, role: "common" },
+        { id: "retake-clong", name: "Through C Long", position: { x: 0.88, y: 0.50 }, role: "common" },
+      ],
+      retakeSpawns: [
+        { id: "spawn-ct-left", name: "CT Left", position: { x: 0.65, y: 0.68 }, role: "retake_spawn" },
+        { id: "spawn-ct-center", name: "CT Center", position: { x: 0.72, y: 0.72 }, role: "retake_spawn" },
+        { id: "spawn-ct-right", name: "CT Right", position: { x: 0.80, y: 0.68 }, role: "retake_spawn" },
       ],
     },
     {
@@ -446,50 +426,20 @@ export const HAVEN_POSITIONS: MapPositionPools = {
         radius: 0.06,
       },
       defenderPositions: [
-        {
-          id: "b-default",
-          name: "Default",
-          position: { x: 0.76, y: 0.62 },
-          role: "anchor",
-        },
-        {
-          id: "b-unicorn",
-          name: "Unicorn",
-          position: { x: 0.72, y: 0.68 },
-          role: "anchor",
-        },
-        {
-          id: "b-elsewhere",
-          name: "Elsewhere",
-          position: { x: 0.80, y: 0.60 },
-          role: "anchor",
-        },
-        {
-          id: "b-garage",
-          name: "B Garage",
-          position: { x: 0.84, y: 0.65 },
-          role: "anchor",
-        },
-        {
-          id: "b-mid",
-          name: "B Mid",
-          position: { x: 0.68, y: 0.55 },
-          role: "anchor",
-        },
+        { id: "b-default", name: "Default", position: { x: 0.76, y: 0.62 }, role: "anchor" },
+        { id: "b-unicorn", name: "Unicorn", position: { x: 0.72, y: 0.68 }, role: "anchor" },
+        { id: "b-elsewhere", name: "Elsewhere", position: { x: 0.80, y: 0.60 }, role: "anchor" },
+        { id: "b-garage", name: "B Garage", position: { x: 0.84, y: 0.65 }, role: "anchor" },
+        { id: "b-mid", name: "B Mid", position: { x: 0.68, y: 0.55 }, role: "anchor" },
       ],
       attackerRetakePaths: [
-        {
-          id: "retake-ct",
-          name: "From CT",
-          position: { x: 0.70, y: 0.72 },
-          role: "common",
-        },
-        {
-          id: "retake-mid",
-          name: "Through Mid",
-          position: { x: 0.65, y: 0.55 },
-          role: "common",
-        },
+        { id: "retake-ct", name: "From CT", position: { x: 0.70, y: 0.72 }, role: "common" },
+        { id: "retake-mid", name: "Through Mid", position: { x: 0.65, y: 0.55 }, role: "common" },
+      ],
+      retakeSpawns: [
+        { id: "spawn-ct-left", name: "CT Left", position: { x: 0.65, y: 0.78 }, role: "retake_spawn" },
+        { id: "spawn-ct-center", name: "CT Center", position: { x: 0.72, y: 0.82 }, role: "retake_spawn" },
+        { id: "spawn-ct-right", name: "CT Right", position: { x: 0.80, y: 0.78 }, role: "retake_spawn" },
       ],
     },
     {
@@ -500,50 +450,20 @@ export const HAVEN_POSITIONS: MapPositionPools = {
         radius: 0.06,
       },
       defenderPositions: [
-        {
-          id: "a-default",
-          name: "Default",
-          position: { x: 0.24, y: 0.38 },
-          role: "anchor",
-        },
-        {
-          id: "a-tower",
-          name: "Tower",
-          position: { x: 0.18, y: 0.28 },
-          role: "anchor",
-        },
-        {
-          id: "a-main",
-          name: "A Main",
-          position: { x: 0.28, y: 0.32 },
-          role: "anchor",
-        },
-        {
-          id: "a-heaven",
-          name: "A Heaven",
-          position: { x: 0.20, y: 0.24 },
-          role: "anchor",
-        },
-        {
-          id: "a-link",
-          name: "A Link",
-          position: { x: 0.30, y: 0.42 },
-          role: "anchor",
-        },
+        { id: "a-default", name: "Default", position: { x: 0.24, y: 0.38 }, role: "anchor" },
+        { id: "a-tower", name: "Tower", position: { x: 0.18, y: 0.28 }, role: "anchor" },
+        { id: "a-main", name: "A Main", position: { x: 0.28, y: 0.32 }, role: "anchor" },
+        { id: "a-heaven", name: "A Heaven", position: { x: 0.20, y: 0.24 }, role: "anchor" },
+        { id: "a-link", name: "A Link", position: { x: 0.30, y: 0.42 }, role: "anchor" },
       ],
       attackerRetakePaths: [
-        {
-          id: "retake-ct",
-          name: "From CT",
-          position: { x: 0.30, y: 0.55 },
-          role: "common",
-        },
-        {
-          id: "retake-amain",
-          name: "Through A Main",
-          position: { x: 0.35, y: 0.30 },
-          role: "common",
-        },
+        { id: "retake-ct", name: "From CT", position: { x: 0.30, y: 0.55 }, role: "common" },
+        { id: "retake-amain", name: "Through A Main", position: { x: 0.35, y: 0.30 }, role: "common" },
+      ],
+      retakeSpawns: [
+        { id: "spawn-ct-left", name: "CT Left", position: { x: 0.25, y: 0.58 }, role: "retake_spawn" },
+        { id: "spawn-ct-center", name: "CT Center", position: { x: 0.32, y: 0.62 }, role: "retake_spawn" },
+        { id: "spawn-ct-right", name: "CT Right", position: { x: 0.40, y: 0.58 }, role: "retake_spawn" },
       ],
     },
   ],

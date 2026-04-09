@@ -6,33 +6,33 @@ import { getRandomDefenderPositions, getSitePositions, type PositionDef } from "
  * Ascent B-Site — 3v2 Post-Plant Retake
  *
  * Setup: Spike planted at B default. Enemies holding post-plant positions.
- * Uses the position pool system for randomized, tactically valid enemy positions.
+ * Uses the position pool system for randomized, tactically valid positions.
  *
  * HOW POSITIONS WORK:
  * - Position pools are defined in shared/positionPools.ts
- * - Each site has pools organized by role: anchor, postplant, lurker, offangle
+ * - Each site has pools organized by role: anchor, postplant, lurker, offangle, retake_spawn
  * - getRandomDefenderPositions() picks N random positions from the pool
- * - To add new positions: open the minimap, note pixel coords, convert to 0-1 normalized, add to pool
+ * - retakeSpawns define where the attacking team starts from (pre-set, logical positions)
  *
  * CONVERTING PIXEL COORDS TO NORMALIZED:
  * - Minimap is 1024x1024 pixels
  * - normalized_x = pixel_x / 1024
  * - normalized_y = pixel_y / 1024
- * - Example: pixel (750, 380) → normalized (0.732, 0.371)
  */
 
-// Get B-site position pool
 const bSitePool = getSitePositions("ascent", "ascent-b")!;
 
 // Randomly pick 2 defender positions from postplant + anchor pools
-// This creates variety — each day could show different enemy positions
 const defenderPositions = getRandomDefenderPositions(bSitePool, 2, ["postplant", "anchor"]);
 
-// Pick 1 hidden enemy from lurker/offangle pool (the "gotcha" position)
+// Pick 1 hidden enemy from lurker/offangle pool
 const hiddenPositions = getRandomDefenderPositions(bSitePool, 1, ["lurker", "offangle"]);
 
 // Get correct utility for the comp: Sova + Omen + Jett
 const availableUtility = getCompUtility(["sova", "omen", "jett"]);
+
+// Use pre-defined retake spawn positions for the attacking team
+const attackerSpawns = bSitePool.retakeSpawns.slice(0, 3);
 
 export const ascentB3v2: Scenario = {
   id: "ascent-b-3v2-001",
@@ -40,27 +40,27 @@ export const ascentB3v2: Scenario = {
   map: "ascent",
   minimapImage: "/assets/minimaps/ascent.png",
 
-  // Spike location — uses the plant zone center from the position pool
+  // Spike location from position pool
   spikeSite: bSitePool.plantZone.center,
 
-  // Your team's starting positions (retake spawn — CT side)
+  // Attacking team starting from retake spawn positions (logical approach spots)
   friendlyAgents: [
     {
       id: "sova",
       displayName: "Sova",
-      position: { x: 0.62, y: 0.68 }, // CT spawn area
+      position: attackerSpawns[0]?.position || { x: 0.55, y: 0.72 },
       role: "initiator",
     },
     {
       id: "omen",
       displayName: "Omen",
-      position: { x: 0.58, y: 0.65 },
+      position: attackerSpawns[1]?.position || { x: 0.62, y: 0.75 },
       role: "controller",
     },
     {
       id: "jett",
       displayName: "Jett",
-      position: { x: 0.65, y: 0.72 },
+      position: attackerSpawns[2]?.position || { x: 0.70, y: 0.72 },
       role: "duelist",
     },
   ],
