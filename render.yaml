@@ -17,10 +17,7 @@ services:
           name: retake-roulette-db
           property: connectionString
       - key: FRONTEND_URL
-        fromService:
-          name: retake-roulette-frontend
-          type: web
-          property: url
+        sync: false
     healthCheckPath: /api/health
 
   # Frontend Service (Next.js)
@@ -35,10 +32,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          name: retake-roulette-backend
-          type: web
-          property: url
+        sync: false
 
 databases:
   - name: retake-roulette-db
