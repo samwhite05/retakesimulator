@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* ========================================
+   Valorant Theme
+   ======================================== */
+
+:root {
+  --valorant-red: #FF4655;
+  --valorant-red-glow: rgba(255, 70, 85, 0.4);
+  --valorant-dark: #0F1923;
+  --valorant-surface: #1A2634;
+  --valorant-surface-hover: #243447;
+  --valorant-text: #ECE8E1;
+  --valorant-text-dim: #8B99A5;
+  --valorant-success: #1DF5A0;
+  --valorant-warning: #FFB900;
+  --valorant-blue: #5BCEFA;
+  --valorant-pink: #FF6B9D;
+}
+
+@theme {
+  --color-*: initial;
+
+  /* Valorant palette */
+  --color-vr: #FF4655;
+  --color-vr-glow: rgba(255, 70, 85, 0.4);
+  --color-vdark: #0F1923;
+  --color-vsurface: #1A2634;
+  --color-vsurface-hover: #243447;
+  --color-vtext: #ECE8E1;
+  --color-vtext-dim: #8B99A5;
+  --color-vsuccess: #1DF5A0;
+  --color-vwarning: #FFB900;
+  --color-vblue: #5BCEFA;
+  --color-vpink: #FF6B9D;
+
+  /* Fonts */
+  --font-heading: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ========================================
+   Global Styles
+   ======================================== */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--valorant-dark);
+  color: var(--valorant-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--valorant-red);
+  color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--valorant-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--valorant-surface-hover);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--valorant-red);
+}

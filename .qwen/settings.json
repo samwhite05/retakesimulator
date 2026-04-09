@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew *)",
+      "Bash(curl *)",
+      "Bash(bash)",
+      "Bash(npm install *)",
+      "Bash(chmod *)",
+      "Bash(git init)",
+      "Bash(git add *)"
+    ]
+  },
+  "$version": 3
+}
