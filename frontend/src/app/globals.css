@@ -1,27 +1,10 @@
 @import "tailwindcss";
 
 /* ========================================
-   Valorant Theme
+   Valorant Theme - Custom Colors
    ======================================== */
 
-:root {
-  --valorant-red: #FF4655;
-  --valorant-red-glow: rgba(255, 70, 85, 0.4);
-  --valorant-dark: #0F1923;
-  --valorant-surface: #1A2634;
-  --valorant-surface-hover: #243447;
-  --valorant-text: #ECE8E1;
-  --valorant-text-dim: #8B99A5;
-  --valorant-success: #1DF5A0;
-  --valorant-warning: #FFB900;
-  --valorant-blue: #5BCEFA;
-  --valorant-pink: #FF6B9D;
-}
-
 @theme {
-  --color-*: initial;
-
-  /* Valorant palette */
   --color-vr: #FF4655;
   --color-vr-glow: rgba(255, 70, 85, 0.4);
   --color-vdark: #0F1923;
@@ -33,15 +16,24 @@
   --color-vwarning: #FFB900;
   --color-vblue: #5BCEFA;
   --color-vpink: #FF6B9D;
-
-  /* Fonts */
-  --font-heading: 'Oswald', 'Arial Narrow', sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* ========================================
    Global Styles
    ======================================== */
+
+:root {
+  --valorant-red: #FF4655;
+  --valorant-dark: #0F1923;
+  --valorant-surface: #1A2634;
+  --valorant-surface-hover: #243447;
+  --valorant-text: #ECE8E1;
+  --valorant-text-dim: #8B99A5;
+  --valorant-success: #1DF5A0;
+  --valorant-warning: #FFB900;
+  --valorant-blue: #5BCEFA;
+  --valorant-pink: #FF6B9D;
+}
 
 * {
   -webkit-tap-highlight-color: transparent;
