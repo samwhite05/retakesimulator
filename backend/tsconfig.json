@@ -23,7 +23,7 @@
   },
   "include": [
     "src/**/*",
-    "../../shared/**/*.ts"
+    "../shared/**/*.ts"
   ],
   "exclude": [
     "node_modules",
