@@ -1,4 +1,4 @@
-import type { Scenario } from "@shared/types";
+import type { Scenario } from "../../../shared/types";
 import { ascentB3v2 } from "./ascent-b-3v2";
 
 // Re-export for direct access

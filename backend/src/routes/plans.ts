@@ -2,7 +2,7 @@ import { Router } from "express";
 import { pool } from "../db";
 import { evaluatePlan } from "../engine/ruleEngine";
 import { generateAnimation } from "../engine/animationGenerator";
-import type { PlayerPlan } from "@shared/types";
+import type { PlayerPlan } from "../../../shared/types";
 
 const router = Router();
 

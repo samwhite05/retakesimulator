@@ -1,6 +1,6 @@
-import type { Scenario } from "@shared/types";
-import { getCompUtility } from "@shared/agentAbilities";
-import { getRandomDefenderPositions, getSitePositions, type PositionDef } from "@shared/positionPools";
+import type { Scenario } from "../../../shared/types";
+import { getCompUtility } from "../../../shared/agentAbilities";
+import { getRandomDefenderPositions, getSitePositions, type PositionDef } from "../../../shared/positionPools";
 
 /**
  * Ascent B-Site — 3v2 Post-Plant Retake

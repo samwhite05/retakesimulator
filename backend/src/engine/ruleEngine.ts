@@ -5,7 +5,7 @@ import type {
   Rule,
   RuleResult,
   AnimationEvent,
-} from "@shared/types";
+} from "../../../shared/types";
 import { checkUtilityLOS } from "./lineOfSight";
 
 /**

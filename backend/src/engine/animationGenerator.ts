@@ -3,7 +3,7 @@ import type {
   Outcome,
   AnimationEvent,
   RuleResult,
-} from "@shared/types";
+} from "../../../shared/types";
 
 /**
  * Generates a unique animation event timeline from a player's plan and its evaluated outcome.
