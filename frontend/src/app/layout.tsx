@@ -1,28 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Oswald } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const oswald = Oswald({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-oswald",
+  variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Retake Roulette — Daily Valorant Tactical Puzzle",
+  title: "Retake Roulette — Daily Tactical Puzzle",
   description:
-    "One post-plant scenario per day. Draw your retake plan on the minimap, execute, and see how it plays out. Can you out-think the community?",
-  keywords: ["Valorant", "retake", "tactical puzzle", "daily challenge", "minimap"],
+    "One post-plant scenario per day. Draw your retake plan, execute, and see how it plays out.",
+  keywords: ["Valorant", "retake", "tactical puzzle", "daily challenge"],
   openGraph: {
     title: "Retake Roulette",
-    description: "Daily Valorant retake puzzle — plan your retake, execute, compare with the community",
+    description: "Daily retake puzzle — plan, execute, compare.",
     type: "website",
   },
 };
@@ -35,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${oswald.variable} font-body antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         {children}
       </body>

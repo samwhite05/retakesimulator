@@ -6,25 +6,25 @@ import type { Outcome } from "@shared/types";
 
 const TIER_CONFIG = {
   clean: {
-    color: "text-vsuccess",
-    bgColor: "bg-vsuccess/10",
-    borderColor: "border-vsuccess/30",
+    color: "text-success",
+    glowColor: "rgba(0, 255, 136, 0.08)",
+    borderColor: "border-success/20",
     label: "CLEAN RETAKE",
-    emoji: "🎯",
+    mono: "CLEAN",
   },
   messy: {
-    color: "text-vwarning",
-    bgColor: "bg-vwarning/10",
-    borderColor: "border-vwarning/30",
+    color: "text-warning",
+    glowColor: "rgba(255, 170, 0, 0.08)",
+    borderColor: "border-warning/20",
     label: "MESSY BUT SUCCESSFUL",
-    emoji: "💥",
+    mono: "MESSY",
   },
   failed: {
-    color: "text-vr",
-    bgColor: "bg-vr/10",
-    borderColor: "border-vr/30",
+    color: "text-danger",
+    glowColor: "rgba(255, 59, 92, 0.08)",
+    borderColor: "border-danger/20",
     label: "RETAKE FAILED",
-    emoji: "💀",
+    mono: "FAILED",
   },
 };
 
@@ -53,7 +53,6 @@ export default function ResultsPage() {
   };
 
   const handleShare = () => {
-    // TODO: Generate shareable image
     const text = outcome
       ? `Retake Roulette — ${TIER_CONFIG[outcome.tier].label}\nScore: ${outcome.score}/100\nCan you do better?`
       : "Check out Retake Roulette!";
@@ -67,10 +66,12 @@ export default function ResultsPage() {
 
   if (loading || !outcome) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-vdark">
+      <main className="min-h-screen flex items-center justify-center bg-void">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-vr border-t-transparent" />
-          <p className="mt-4 text-vtext-dim text-sm">Loading results...</p>
+          <div className="inline-block animate-spin rounded-none h-5 w-5 border border-cyan border-t-transparent" />
+          <p className="mt-4 text-text-muted text-xs font-mono" style={{ letterSpacing: "0.5px" }}>
+            LOADING RESULTS...
+          </p>
         </div>
       </main>
     );
@@ -79,67 +80,87 @@ export default function ResultsPage() {
   const tier = TIER_CONFIG[outcome.tier];
 
   return (
-    <main className="min-h-screen bg-vdark px-4 py-8">
+    <main className="min-h-screen bg-void px-4 py-8">
       <div className="max-w-lg mx-auto space-y-6">
-        {/* Tier Badge */}
+        {/* Tier Badge — pure black card with glow */}
         <div
-          className={`${tier.bgColor} ${tier.borderColor} border rounded-xl p-8 text-center space-y-4`}
+          className={`border ${tier.borderColor} rounded p-8 text-center space-y-4`}
+          style={{ backgroundColor: tier.glowColor }}
         >
-          <span className="text-4xl">{tier.emoji}</span>
-          <h1 className={`font-heading text-3xl font-bold tracking-wider ${tier.color}`}>
+          <span
+            className="text-text-muted text-[10px] uppercase font-mono tracking-widest block"
+            style={{ letterSpacing: "0.7px" }}
+          >
+            {tier.mono}
+          </span>
+          <h1
+            className={`text-3xl font-mono tracking-wider ${tier.color}`}
+            style={{ lineHeight: 1.0, letterSpacing: "0.5px" }}
+          >
             {tier.label}
           </h1>
-          <p className="text-vtext-dim text-sm">{outcome.summary}</p>
+          <p className="text-text-secondary text-sm">{outcome.summary}</p>
         </div>
 
-        {/* Score */}
-        <div className="bg-vsurface rounded-xl p-6 space-y-4">
+        {/* Score — metrics display */}
+        <div className="bg-pure-black rounded p-6 border border-border-10 space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="font-heading text-lg text-vtext tracking-wide">SCORE</h2>
-            <span className={`font-heading text-4xl font-bold ${tier.color}`}>
+            <h2
+              className="text-text-tertiary text-xs uppercase font-mono tracking-widest"
+              style={{ letterSpacing: "0.7px" }}
+            >
+              SCORE
+            </h2>
+            <span className={`font-mono tracking-tight ${tier.color}`} style={{ fontSize: "2.5rem", lineHeight: 1 }}>
               {outcome.score}
-              <span className="text-vtext-dim text-lg">/100</span>
+              <span className="text-text-muted text-base">/100</span>
             </span>
           </div>
 
-          {/* Score Bar */}
-          <div className="h-2 bg-vdark rounded-full overflow-hidden">
+          {/* Score Bar — minimal */}
+          <div className="h-1 bg-border-04 rounded-none overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all ${outcome.tier === "clean"
-                  ? "bg-vsuccess"
+              className={`h-full rounded-none transition-all ${outcome.tier === "clean"
+                  ? "bg-success"
                   : outcome.tier === "messy"
-                    ? "bg-vwarning"
-                    : "bg-vr"
+                    ? "bg-warning"
+                    : "bg-danger"
                 }`}
               style={{ width: `${outcome.score}%` }}
             />
           </div>
 
-          {/* Community Rank */}
-          <p className="text-vtext-dim text-xs text-center">
-            Submit your plan to see how you rank against the community
+          <p className="text-text-muted text-xs text-center font-mono" style={{ letterSpacing: "0.3px" }}>
+            SUBMIT TO SEE COMMUNITY RANK
           </p>
         </div>
 
         {/* Rule Breakdown */}
-        <div className="bg-vsurface rounded-xl p-6 space-y-3">
-          <h2 className="font-heading text-lg text-vtext tracking-wide">BREAKDOWN</h2>
+        <div className="bg-pure-black rounded p-6 border border-border-10 space-y-3">
+          <h2
+            className="text-text-tertiary text-xs uppercase font-mono tracking-widest mb-4"
+            style={{ letterSpacing: "0.7px" }}
+          >
+            BREAKDOWN
+          </h2>
 
           {outcome.scoreBreakdown.map((rule) => (
             <div
               key={rule.ruleId}
-              className={`flex items-start gap-3 p-3 rounded-lg ${rule.passed ? "bg-vsuccess/5" : "bg-vr/5"
+              className={`flex items-start gap-3 p-3 rounded border ${rule.passed
+                  ? "border-success/10 bg-success-dim"
+                  : "border-border-04 bg-transparent"
                 }`}
             >
-              <span className="text-lg flex-shrink-0">
-                {rule.passed ? "✅" : "❌"}
+              <span className="text-sm flex-shrink-0 font-mono text-text-muted">
+                {rule.passed ? "OK" : "--"}
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-vtext text-sm font-medium">{rule.description}</p>
-                <p className="text-vtext-dim text-xs mt-0.5">{rule.detail}</p>
+                <p className="text-text-primary text-sm">{rule.description}</p>
+                <p className="text-text-muted text-xs mt-0.5 font-mono">{rule.detail}</p>
               </div>
               <span
-                className={`text-sm font-mono flex-shrink-0 ${rule.passed ? "text-vsuccess" : "text-vtext-dim"
+                className={`text-xs font-mono flex-shrink-0 ${rule.passed ? "text-success" : "text-text-muted"
                   }`}
               >
                 +{rule.earnedPoints}/{rule.maxPoints}
@@ -150,11 +171,16 @@ export default function ResultsPage() {
 
         {/* Highlights */}
         {outcome.highlights.length > 0 && (
-          <div className="bg-vsurface rounded-xl p-6 space-y-2">
-            <h2 className="font-heading text-lg text-vsuccess tracking-wide">WHAT WORKED</h2>
+          <div className="bg-pure-black rounded p-6 border border-border-08 space-y-2">
+            <h2
+              className="text-success text-xs uppercase font-mono tracking-widest"
+              style={{ letterSpacing: "0.7px" }}
+            >
+              WHAT WORKED
+            </h2>
             {outcome.highlights.map((h, i) => (
-              <p key={i} className="text-vtext-dim text-sm flex items-start gap-2">
-                <span className="text-vsuccess mt-0.5">▸</span>
+              <p key={i} className="text-text-secondary text-sm flex items-start gap-2">
+                <span className="text-success mt-1 text-xs font-mono">▸</span>
                 {h}
               </p>
             ))}
@@ -163,11 +189,16 @@ export default function ResultsPage() {
 
         {/* Mistakes */}
         {outcome.mistakes.length > 0 && (
-          <div className="bg-vsurface rounded-xl p-6 space-y-2">
-            <h2 className="font-heading text-lg text-vr tracking-wide">WHAT FAILED</h2>
+          <div className="bg-pure-black rounded p-6 border border-border-08 space-y-2">
+            <h2
+              className="text-danger text-xs uppercase font-mono tracking-widest"
+              style={{ letterSpacing: "0.7px" }}
+            >
+              WHAT FAILED
+            </h2>
             {outcome.mistakes.map((m, i) => (
-              <p key={i} className="text-vtext-dim text-sm flex items-start gap-2">
-                <span className="text-vr mt-0.5">▸</span>
+              <p key={i} className="text-text-secondary text-sm flex items-start gap-2">
+                <span className="text-danger mt-1 text-xs font-mono">▸</span>
                 {m}
               </p>
             ))}
@@ -178,15 +209,17 @@ export default function ResultsPage() {
         <div className="flex gap-3">
           <button
             onClick={handleShare}
-            className="flex-1 py-3 bg-vsurface hover:bg-vsurface-hover rounded-lg text-vtext font-heading tracking-wider uppercase transition-colors"
+            className="flex-1 py-3 bg-transparent border border-border-10 hover:border-border-12 rounded text-text-secondary font-mono text-xs tracking-widest uppercase transition-colors"
+            style={{ letterSpacing: "0.7px" }}
           >
-            Share
+            SHARE
           </button>
           <button
             onClick={handlePlayAgain}
-            className="flex-1 py-3 bg-vr hover:bg-vr/90 rounded-lg text-white font-heading tracking-wider uppercase transition-colors"
+            className="flex-1 py-3 bg-text-primary hover:bg-text-primary/90 rounded text-void font-mono text-xs tracking-widest uppercase transition-all"
+            style={{ letterSpacing: "0.7px" }}
           >
-            Back to Home
+            PLAY AGAIN
           </button>
         </div>
       </div>

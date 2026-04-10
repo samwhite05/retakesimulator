@@ -262,20 +262,28 @@ export default function AdminCreatePage() {
   });
 
   return (
-    <main className="min-h-screen bg-vdark text-vtext flex flex-col">
-      {/* Header */}
-      <header className="bg-vsurface/80 backdrop-blur-sm border-b border-vtext-dim/10 px-4 py-3 flex items-center justify-between flex-shrink-0">
+    <main className="min-h-screen bg-void text-text-primary flex flex-col">
+      {/* Header — sticky, dark, border containment */}
+      <header className="bg-void/90 backdrop-blur-sm border-b border-border-06 px-4 py-3 flex items-center justify-between flex-shrink-0">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push("/")} className="text-vtext-dim hover:text-vtext text-sm">← Back</button>
-          <h1 className="font-heading text-lg text-vr tracking-wide">SCENARIO CREATOR</h1>
+          <button onClick={() => router.push("/")} className="text-text-muted hover:text-text-primary text-sm font-mono transition-colors" style={{ letterSpacing: "0.3px" }}>
+            ← BACK
+          </button>
+          <h1 className="text-sm text-text-primary tracking-tight font-mono" style={{ letterSpacing: "0.5px" }}>SCENARIO CREATOR</h1>
         </div>
         <div className="flex gap-2">
           <button onClick={() => {
             const w = window.open("", "_blank");
-            if (w) { w.document.write(`<pre style="background:#0F1923;color:#ECE8E1;padding:20px;white-space:pre-wrap;">${JSON.stringify(scenarioJson, null, 2)}</pre>`); }
-          }} className="px-3 py-1.5 bg-vsurface hover:bg-vsurface-hover rounded text-xs">Preview</button>
-          <button onClick={copyJson} className="px-3 py-1.5 bg-vsurface hover:bg-vsurface-hover rounded text-xs">Copy JSON</button>
-          <button onClick={saveScenario} className="px-4 py-1.5 bg-vr hover:bg-vr/90 rounded text-xs text-white font-medium">Save</button>
+            if (w) { w.document.write(`<pre style="background:#0f0f0f;color:#ffffff;padding:20px;white-space:pre-wrap;font-family:monospace;">${JSON.stringify(scenarioJson, null, 2)}</pre>`); }
+          }} className="px-3 py-1.5 bg-charcoal hover:bg-charcoal/80 border border-border-08 rounded text-xs font-mono transition-colors" style={{ letterSpacing: "0.3px", borderRadius: 2 }}>
+            PREVIEW
+          </button>
+          <button onClick={copyJson} className="px-3 py-1.5 bg-charcoal hover:bg-charcoal/80 border border-border-08 rounded text-xs font-mono transition-colors" style={{ letterSpacing: "0.3px", borderRadius: 2 }}>
+            COPY JSON
+          </button>
+          <button onClick={saveScenario} className="px-4 py-1.5 bg-text-primary hover:bg-text-primary/90 rounded text-void text-xs font-mono transition-all" style={{ letterSpacing: "0.3px", borderRadius: 2 }}>
+            SAVE
+          </button>
         </div>
       </header>
 
@@ -284,9 +292,9 @@ export default function AdminCreatePage() {
         {/* Left: Map + Canvas */}
         <div className="flex-1 flex flex-col min-h-0">
           {/* Map/Site selectors */}
-          <div className="px-4 py-3 border-b border-vtext-dim/10 flex-shrink-0 flex flex-wrap gap-3">
+          <div className="px-4 py-3 border-b border-border-06 flex-shrink-0 flex flex-wrap gap-3">
             <div>
-              <label className="text-[10px] text-vtext-dim uppercase tracking-wider block mb-1">Map</label>
+              <label className="text-[10px] text-text-muted uppercase tracking-wider block mb-1 font-mono" style={{ letterSpacing: "0.3px" }}>MAP</label>
               <select
                 value={selectedMap.mapId}
                 onChange={(e) => {
@@ -294,7 +302,8 @@ export default function AdminCreatePage() {
                   setSelectedMap(map);
                   setSelectedSite(map.sites[0]);
                 }}
-                className="bg-vdark border border-vtext-dim/20 rounded px-2 py-1 text-sm text-vtext"
+                className="bg-void border border-border-10 rounded px-2 py-1 text-sm text-text-primary font-mono"
+                style={{ borderRadius: 2 }}
               >
                 {ALL_MAP_POSITIONS.map((m) => (
                   <option key={m.mapId} value={m.mapId}>{m.mapName}</option>
@@ -302,14 +311,17 @@ export default function AdminCreatePage() {
               </select>
             </div>
             <div>
-              <label className="text-[10px] text-vtext-dim uppercase tracking-wider block mb-1">Site</label>
+              <label className="text-[10px] text-text-muted uppercase tracking-wider block mb-1 font-mono" style={{ letterSpacing: "0.3px" }}>SITE</label>
               <div className="flex gap-1">
                 {selectedMap.sites.map((site) => (
                   <button
                     key={site.siteId}
                     onClick={() => setSelectedSite(site)}
-                    className={`px-3 py-1 rounded text-xs font-medium ${selectedSite.siteId === site.siteId ? "bg-vr text-white" : "bg-vdark text-vtext-dim"
+                    className={`px-3 py-1 border text-xs font-mono transition-all ${selectedSite.siteId === site.siteId
+                      ? "border-cyan/30 bg-cyan-dim text-cyan"
+                      : "border-border-08 text-text-muted hover:border-border-10"
                       }`}
+                    style={{ borderRadius: 2, letterSpacing: "0.3px" }}
                   >
                     {site.siteName}
                   </button>
@@ -317,26 +329,27 @@ export default function AdminCreatePage() {
               </div>
             </div>
             <div className="flex-1 min-w-[200px]">
-              <label className="text-[10px] text-vtext-dim uppercase tracking-wider block mb-1">Scenario Name</label>
+              <label className="text-[10px] text-text-muted uppercase tracking-wider block mb-1 font-mono" style={{ letterSpacing: "0.3px" }}>SCENARIO NAME</label>
               <input
                 type="text"
                 value={scenarioName}
                 onChange={(e) => setScenarioName(e.target.value)}
                 placeholder="Auto-generated if empty"
-                className="w-full bg-vdark border border-vtext-dim/20 rounded px-2 py-1 text-sm text-vtext"
+                className="w-full bg-void border border-border-10 rounded px-2 py-1 text-sm text-text-primary font-mono placeholder:text-text-muted/30"
+                style={{ borderRadius: 2 }}
               />
             </div>
           </div>
 
           {/* Canvas */}
-          <div className="flex-1 relative bg-vdark min-h-[400px]" ref={containerRef}>
+          <div className="flex-1 relative bg-void min-h-[400px]" ref={containerRef}>
             {toolMode !== "select" && (
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-vr/90 backdrop-blur-sm text-white px-4 py-2 rounded text-xs font-medium z-10 whitespace-nowrap">
-                {toolMode === "place-spike" && "🔴 Click to place spike"}
-                {toolMode === "place-defender" && `🔴 Click to place defender (${selectedDefenderAgent})`}
-                {toolMode === "place-hidden" && `👻 Click to place hidden (${selectedDefenderAgent})`}
-                {toolMode === "place-attacker-spawn" && `🔵 Place spawn for ${playerAgents[placedItems.filter(i => i.type === "attacker-spawn").length] || "..."}`}
-                {toolMode === "place-retake-entry" && "🟢 Click to place retake entry"}
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-pure-black/95 backdrop-blur-sm border border-border-10 text-text-primary px-4 py-2 text-xs font-mono z-10 whitespace-nowrap" style={{ borderRadius: 4, letterSpacing: "0.5px" }}>
+                {toolMode === "place-spike" && "CLICK TO PLACE SPIKE"}
+                {toolMode === "place-defender" && `CLICK TO PLACE DEFENDER (${selectedDefenderAgent})`}
+                {toolMode === "place-hidden" && `CLICK TO PLACE HIDDEN (${selectedDefenderAgent})`}
+                {toolMode === "place-attacker-spawn" && `PLACE SPAWN FOR ${playerAgents[placedItems.filter(i => i.type === "attacker-spawn").length] || "..."}`}
+                {toolMode === "place-retake-entry" && "CLICK TO PLACE RETAKE ENTRY"}
               </div>
             )}
 
@@ -349,17 +362,17 @@ export default function AdminCreatePage() {
               className={toolMode !== "select" ? "cursor-crosshair" : "cursor-default"}
             >
               <Layer>
-                <Rect x={0} y={0} width={containerSize.width} height={containerSize.height} fill="#121D28" />
-                <Rect x={MAP_PADDING} y={MAP_PADDING} width={containerSize.width - MAP_PADDING * 2} height={containerSize.height - MAP_PADDING * 2} fill="#0A1118" />
+                <Rect x={0} y={0} width={containerSize.width} height={containerSize.height} fill="#000000" />
+                <Rect x={MAP_PADDING} y={MAP_PADDING} width={containerSize.width - MAP_PADDING * 2} height={containerSize.height - MAP_PADDING * 2} fill="#0a0a0a" />
 
-                {/* Grid */}
+                {/* Grid — subtle */}
                 {Array.from({ length: 9 }).map((_, i) => {
                   const x = MAP_PADDING + ((i + 1) / 10) * (containerSize.width - MAP_PADDING * 2);
-                  return <Line key={`vg-${i}`} points={[x, MAP_PADDING, x, containerSize.height - MAP_PADDING]} stroke="rgba(42,58,74,0.15)" strokeWidth={0.5} />;
+                  return <Line key={`vg-${i}`} points={[x, MAP_PADDING, x, containerSize.height - MAP_PADDING]} stroke="rgba(255,255,255,0.04)" strokeWidth={0.5} />;
                 })}
                 {Array.from({ length: 9 }).map((_, i) => {
                   const y = MAP_PADDING + ((i + 1) / 10) * (containerSize.height - MAP_PADDING * 2);
-                  return <Line key={`hg-${i}`} points={[MAP_PADDING, y, containerSize.width - MAP_PADDING, y]} stroke="rgba(42,58,74,0.15)" strokeWidth={0.5} />;
+                  return <Line key={`hg-${i}`} points={[MAP_PADDING, y, containerSize.width - MAP_PADDING, y]} stroke="rgba(255,255,255,0.04)" strokeWidth={0.5} />;
                 })}
 
                 {/* Plant zone */}
@@ -367,8 +380,8 @@ export default function AdminCreatePage() {
                   x={MAP_PADDING + selectedSite.plantZone.center.x * (containerSize.width - MAP_PADDING * 2)}
                   y={MAP_PADDING + selectedSite.plantZone.center.y * (containerSize.height - MAP_PADDING * 2)}
                   radius={selectedSite.plantZone.radius * (containerSize.width - MAP_PADDING * 2)}
-                  fill="rgba(29,245,160,0.06)"
-                  stroke="rgba(29,245,160,0.25)"
+                  fill="rgba(0,255,136,0.04)"
+                  stroke="rgba(0,255,136,0.15)"
                   strokeWidth={1}
                   dash={[4, 4]}
                 />
@@ -389,7 +402,7 @@ export default function AdminCreatePage() {
                     x={MAP_PADDING + pos.position.x * (containerSize.width - MAP_PADDING * 2)}
                     y={MAP_PADDING + pos.position.y * (containerSize.height - MAP_PADDING * 2)}
                     radius={2}
-                    fill="rgba(107,125,142,0.15)"
+                    fill="rgba(255,255,255,0.06)"
                   />
                 ))}
               </Layer>
@@ -403,8 +416,8 @@ export default function AdminCreatePage() {
                       x={toCanvas(placedItems.find((i) => i.type === "spike")!.position).x}
                       y={toCanvas(placedItems.find((i) => i.type === "spike")!.position).y}
                       radius={14}
-                      fill="rgba(255,70,85,0.1)"
-                      stroke="#FF4655"
+                      fill="rgba(255,59,92,0.08)"
+                      stroke="#ff3b5c"
                       strokeWidth={2}
                       dash={[3, 3]}
                     />
@@ -413,8 +426,8 @@ export default function AdminCreatePage() {
                       y={toCanvas(placedItems.find((i) => i.type === "spike")!.position).y - 18}
                       text="SPIKE"
                       fontSize={9}
-                      fill="#FF4655"
-                      fontFamily="Oswald, sans-serif"
+                      fill="#ff3b5c"
+                      fontFamily="monospace"
                       letterSpacing={1}
                     />
                   </Group>
@@ -427,8 +440,8 @@ export default function AdminCreatePage() {
                       x={toCanvas(item.position).x}
                       y={toCanvas(item.position).y}
                       radius={12}
-                      fill="rgba(255,70,85,0.2)"
-                      stroke="#FF4655"
+                      fill="rgba(255,59,92,0.15)"
+                      stroke="#ff3b5c"
                       strokeWidth={2}
                     />
                     <AgentFaceBubble
@@ -447,8 +460,8 @@ export default function AdminCreatePage() {
                       x={toCanvas(item.position).x}
                       y={toCanvas(item.position).y}
                       radius={10}
-                      fill="rgba(255,70,85,0.1)"
-                      stroke="#FF4655"
+                      fill="rgba(255,59,92,0.06)"
+                      stroke="#ff3b5c"
                       strokeWidth={1.5}
                       dash={[3, 3]}
                     />
@@ -457,22 +470,22 @@ export default function AdminCreatePage() {
                       y={toCanvas(item.position).y - 5}
                       text="?"
                       fontSize={10}
-                      fill="rgba(255,70,85,0.5)"
-                      fontFamily="Oswald, sans-serif"
+                      fill="rgba(255,59,92,0.4)"
+                      fontFamily="monospace"
                       fontStyle="bold"
                     />
                   </Group>
                 ))}
 
-                {/* Attacker spawns (player team starting positions) */}
+                {/* Attacker spawns */}
                 {placedItems.filter((i) => i.type === "attacker-spawn").map((item, idx) => (
                   <Group key={item.id}>
                     <Circle
                       x={toCanvas(item.position).x}
                       y={toCanvas(item.position).y}
                       radius={14}
-                      fill="rgba(91,206,250,0.1)"
-                      stroke="#5BCEFA"
+                      fill="rgba(0,137,255,0.08)"
+                      stroke="#0089ff"
                       strokeWidth={2}
                       dash={[3, 3]}
                     />
@@ -487,8 +500,8 @@ export default function AdminCreatePage() {
                       y={toCanvas(item.position).y + 20}
                       text={`P${idx + 1}`}
                       fontSize={8}
-                      fill="#5BCEFA"
-                      fontFamily="Oswald, sans-serif"
+                      fill="#0089ff"
+                      fontFamily="monospace"
                     />
                   </Group>
                 ))}
@@ -500,8 +513,8 @@ export default function AdminCreatePage() {
                       x={toCanvas(item.position).x}
                       y={toCanvas(item.position).y}
                       radius={8}
-                      fill="rgba(29,245,160,0.1)"
-                      stroke="#1DF5A0"
+                      fill="rgba(0,255,136,0.06)"
+                      stroke="#00ff88"
                       strokeWidth={1.5}
                     />
                     <Text
@@ -509,8 +522,8 @@ export default function AdminCreatePage() {
                       y={toCanvas(item.position).y + 16}
                       text={item.label || ""}
                       fontSize={8}
-                      fill="#1DF5A0"
-                      fontFamily="Inter, sans-serif"
+                      fill="#00ff88"
+                      fontFamily="sans-serif"
                     />
                   </Group>
                 ))}
@@ -519,44 +532,45 @@ export default function AdminCreatePage() {
           </div>
 
           {/* Tool buttons bar */}
-          <div className="px-4 py-2 border-t border-vtext-dim/10 flex-shrink-0 flex flex-wrap gap-1.5">
-            <button onClick={() => setToolMode("place-spike")} className={`px-2.5 py-1.5 rounded text-xs font-medium ${toolMode === "place-spike" ? "bg-vr text-white" : "bg-vdark text-vtext-dim"}`}>🔴 Spike</button>
-            <select value={selectedDefenderAgent} onChange={(e) => setSelectedDefenderAgent(e.target.value)} className="bg-vdark border border-vtext-dim/20 rounded px-1.5 py-1 text-xs text-vtext">
+          <div className="px-4 py-2 border-t border-border-06 flex-shrink-0 flex flex-wrap gap-1.5">
+            <button onClick={() => setToolMode("place-spike")} className={`px-2.5 py-1.5 border text-xs font-mono transition-all ${toolMode === "place-spike" ? "border-danger/30 bg-danger-dim text-danger" : "border-border-06 text-text-muted hover:border-border-10"}`} style={{ borderRadius: 2, letterSpacing: "0.3px" }}>SPIKE</button>
+            <select value={selectedDefenderAgent} onChange={(e) => setSelectedDefenderAgent(e.target.value)} className="bg-void border border-border-10 rounded px-1.5 py-1 text-xs text-text-primary font-mono" style={{ borderRadius: 2 }}>
               {ALL_AGENTS.map((a) => <option key={a.id} value={a.id}>{a.displayName}</option>)}
             </select>
-            <button onClick={() => setToolMode("place-defender")} className={`px-2.5 py-1.5 rounded text-xs font-medium ${toolMode === "place-defender" ? "bg-red-600/80 text-white" : "bg-vdark text-vtext-dim"}`}>🔴 Defender</button>
-            <button onClick={() => setToolMode("place-hidden")} className={`px-2.5 py-1.5 rounded text-xs font-medium ${toolMode === "place-hidden" ? "bg-red-800/80 text-white" : "bg-vdark text-vtext-dim"}`}>👻 Hidden</button>
-            <button onClick={() => setToolMode("place-attacker-spawn")} className={`px-2.5 py-1.5 rounded text-xs font-medium ${toolMode === "place-attacker-spawn" ? "bg-blue-600/80 text-white" : "bg-vdark text-vtext-dim"}`}>🔵 Spawn</button>
-            <button onClick={() => setToolMode("place-retake-entry")} className={`px-2.5 py-1.5 rounded text-xs font-medium ${toolMode === "place-retake-entry" ? "bg-green-600/80 text-white" : "bg-vdark text-vtext-dim"}`}>🟢 Entry</button>
-            <button onClick={() => setToolMode("select")} className={`px-2.5 py-1.5 rounded text-xs font-medium ${toolMode === "select" ? "bg-vsurface-hover text-white" : "bg-vdark text-vtext-dim"}`}>🖱️ Done</button>
-            <button onClick={() => setPlacedItems([])} className="px-2.5 py-1.5 rounded text-xs text-vr ml-auto">Clear All</button>
+            <button onClick={() => setToolMode("place-defender")} className={`px-2.5 py-1.5 border text-xs font-mono transition-all ${toolMode === "place-defender" ? "border-danger/30 bg-danger-dim text-danger" : "border-border-06 text-text-muted hover:border-border-10"}`} style={{ borderRadius: 2, letterSpacing: "0.3px" }}>DEFENDER</button>
+            <button onClick={() => setToolMode("place-hidden")} className={`px-2.5 py-1.5 border text-xs font-mono transition-all ${toolMode === "place-hidden" ? "border-danger/20 bg-danger-dim text-danger" : "border-border-06 text-text-muted hover:border-border-10"}`} style={{ borderRadius: 2, letterSpacing: "0.3px" }}>HIDDEN</button>
+            <button onClick={() => setToolMode("place-attacker-spawn")} className={`px-2.5 py-1.5 border text-xs font-mono transition-all ${toolMode === "place-attacker-spawn" ? "border-signal/30 bg-cyan-dim text-signal" : "border-border-06 text-text-muted hover:border-border-10"}`} style={{ borderRadius: 2, letterSpacing: "0.3px" }}>SPAWN</button>
+            <button onClick={() => setToolMode("place-retake-entry")} className={`px-2.5 py-1.5 border text-xs font-mono transition-all ${toolMode === "place-retake-entry" ? "border-success/30 bg-success-dim text-success" : "border-border-06 text-text-muted hover:border-border-10"}`} style={{ borderRadius: 2, letterSpacing: "0.3px" }}>ENTRY</button>
+            <button onClick={() => setToolMode("select")} className={`px-2.5 py-1.5 border text-xs font-mono transition-all ${toolMode === "select" ? "border-border-12 text-text-primary" : "border-border-06 text-text-muted hover:border-border-10"}`} style={{ borderRadius: 2, letterSpacing: "0.3px" }}>DONE</button>
+            <button onClick={() => setPlacedItems([])} className="px-2.5 py-1.5 border border-border-06 text-xs text-danger font-mono ml-auto hover:border-danger/30 transition-all" style={{ borderRadius: 2, letterSpacing: "0.3px" }}>CLEAR</button>
           </div>
         </div>
 
         {/* Right: Player Comp + Details */}
-        <div className="lg:w-80 bg-vsurface/50 border-t lg:border-t-0 lg:border-l border-vtext-dim/10 overflow-y-auto flex-shrink-0">
+        <div className="lg:w-80 bg-pure-black border-t lg:border-t-0 lg:border-l border-border-06 overflow-y-auto flex-shrink-0">
           <div className="p-4 space-y-4">
             {/* Scenario details */}
             <div>
-              <h3 className="font-heading text-[10px] text-vtext-dim uppercase tracking-wider mb-2">Details</h3>
+              <h3 className="text-text-muted text-[10px] uppercase tracking-wider mb-2 font-mono" style={{ letterSpacing: "0.7px" }}>DETAILS</h3>
               <textarea
                 value={scenarioDesc}
                 onChange={(e) => setScenarioDesc(e.target.value)}
                 placeholder="Briefing description"
                 rows={2}
-                className="w-full bg-vdark border border-vtext-dim/20 rounded px-2 py-1.5 text-xs text-vtext resize-none"
+                className="w-full bg-void border border-border-10 rounded px-2 py-1.5 text-xs text-text-primary font-mono placeholder:text-text-muted/30 resize-none"
+                style={{ borderRadius: 2 }}
               />
               <div className="mt-2 flex items-center gap-2">
-                <label className="text-[10px] text-vtext-dim">Difficulty:</label>
-                <input type="range" min={1} max={5} value={scenarioDifficulty} onChange={(e) => setScenarioDifficulty(parseInt(e.target.value))} className="flex-1 accent-vr" />
-                <span className="text-xs text-vtext font-mono">{scenarioDifficulty}</span>
+                <label className="text-[10px] text-text-muted font-mono" style={{ letterSpacing: "0.3px" }}>DIFFICULTY:</label>
+                <input type="range" min={1} max={5} value={scenarioDifficulty} onChange={(e) => setScenarioDifficulty(parseInt(e.target.value))} className="flex-1" />
+                <span className="text-xs text-text-primary font-mono">{scenarioDifficulty}</span>
               </div>
             </div>
 
             {/* Player Comp */}
             <div>
-              <h3 className="font-heading text-[10px] text-vtext-dim uppercase tracking-wider mb-2">
-                Player Comp ({playerAgents.length}/5)
+              <h3 className="text-text-muted text-[10px] uppercase tracking-wider mb-2 font-mono" style={{ letterSpacing: "0.7px" }}>
+                PLAYER COMP ({playerAgents.length}/5)
               </h3>
               <div className="grid grid-cols-4 gap-1.5">
                 {ALL_AGENTS.map((agent) => {
@@ -566,10 +580,11 @@ export default function AdminCreatePage() {
                     <button
                       key={agent.id}
                       onClick={() => togglePlayerAgent(agent.id)}
-                      className={`relative aspect-square rounded-lg border-2 flex flex-col items-center justify-center transition-all ${isSelected ? "border-vr bg-vr/10" : "border-vtext-dim/10 bg-vdark hover:border-vtext-dim/30"
+                      className={`relative aspect-square border flex flex-col items-center justify-center transition-all ${isSelected ? "border-danger/30 bg-danger-dim" : "border-border-06 bg-void hover:border-border-10"
                         }`}
+                      style={{ borderRadius: 2 }}
                     >
-                      <div className="w-7 h-7 rounded-full overflow-hidden mb-0.5">
+                      <div className="w-7 h-7 overflow-hidden mb-0.5 border border-border-06 bg-pure-black" style={{ borderRadius: 4 }}>
                         <img
                           src={`/assets/agents/${displayName}_icon.webp`}
                           alt={agent.displayName}
@@ -577,7 +592,7 @@ export default function AdminCreatePage() {
                           onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                         />
                       </div>
-                      <span className="text-[7px] text-vtext-dim leading-none">{agent.displayName.slice(0, 5)}</span>
+                      <span className="text-[7px] text-text-muted leading-none font-mono">{agent.displayName.slice(0, 5)}</span>
                     </button>
                   );
                 })}
@@ -587,16 +602,16 @@ export default function AdminCreatePage() {
             {/* Utility preview for comp */}
             {playerAgents.length > 0 && (
               <div>
-                <h3 className="font-heading text-[10px] text-vtext-dim uppercase tracking-wider mb-2">Available Utility</h3>
+                <h3 className="text-text-muted text-[10px] uppercase tracking-wider mb-2 font-mono" style={{ letterSpacing: "0.7px" }}>UTILITY</h3>
                 <div className="space-y-2">
                   {playerAgents.map((agentId) => {
                     const agent = ALL_AGENTS.find((a) => a.id === agentId);
                     if (!agent) return null;
                     const utility = agent.abilities.filter((a) => !a.isUltimate);
                     return (
-                      <div key={agentId} className="bg-vdark rounded-lg overflow-hidden">
-                        <div className="flex items-center gap-2 px-2 py-1.5 border-b border-vtext-dim/5">
-                          <div className="w-5 h-5 rounded-full overflow-hidden">
+                      <div key={agentId} className="bg-void border border-border-06" style={{ borderRadius: 4 }}>
+                        <div className="flex items-center gap-2 px-2 py-1.5 border-b border-border-04">
+                          <div className="w-5 h-5 overflow-hidden border border-border-06 bg-pure-black" style={{ borderRadius: 4 }}>
                             <img
                               src={`/assets/agents/${getAgentDisplayName(agentId)}_icon.webp`}
                               alt=""
@@ -604,16 +619,16 @@ export default function AdminCreatePage() {
                               onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                             />
                           </div>
-                          <span className="text-xs text-vtext font-medium">{agent.displayName}</span>
+                          <span className="text-xs text-text-primary">{agent.displayName}</span>
                         </div>
                         <div className="p-1.5 space-y-0.5">
                           {utility.map((u) => (
                             <div key={u.slot} className="flex items-center gap-1.5 text-[10px]">
-                              <span className="w-4 h-4 rounded bg-vsurface flex items-center justify-center flex-shrink-0">
+                              <span className="w-4 h-4 border border-border-06 bg-pure-black flex items-center justify-center flex-shrink-0" style={{ borderRadius: 2 }}>
                                 <AbilityIconTiny name={u.name} />
                               </span>
-                              <span className="text-vtext-dim truncate">{u.name}</span>
-                              <span className="text-vtext-dim/50 ml-auto font-mono">×{u.charges}</span>
+                              <span className="text-text-muted truncate">{u.name}</span>
+                              <span className="text-text-muted/50 ml-auto font-mono">×{u.charges}</span>
                             </div>
                           ))}
                         </div>
@@ -627,18 +642,18 @@ export default function AdminCreatePage() {
             {/* Placed items */}
             {placedItems.length > 0 && (
               <div>
-                <h3 className="font-heading text-[10px] text-vtext-dim uppercase tracking-wider mb-2">Placed ({placedItems.length})</h3>
+                <h3 className="text-text-muted text-[10px] uppercase tracking-wider mb-2 font-mono" style={{ letterSpacing: "0.7px" }}>PLACED ({placedItems.length})</h3>
                 <div className="space-y-0.5 max-h-32 overflow-y-auto">
                   {placedItems.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between bg-vdark rounded px-2 py-1 text-[10px]">
-                      <span className="text-vtext-dim truncate">
-                        {item.type === "spike" && "🔴 Spike"}
-                        {item.type === "defender" && `🔴 ${item.agentId}`}
-                        {item.type === "hidden" && `👻 ${item.agentId}`}
-                        {item.type === "attacker-spawn" && `🔵 ${item.agentId} spawn`}
-                        {item.type === "retake-entry" && `🟢 ${item.label}`}
+                    <div key={item.id} className="flex items-center justify-between bg-void border border-border-04 px-2 py-1 text-[10px] font-mono" style={{ borderRadius: 2 }}>
+                      <span className="text-text-muted truncate">
+                        {item.type === "spike" && "SPIKE"}
+                        {item.type === "defender" && `${item.agentId}`}
+                        {item.type === "hidden" && `HIDDEN ${item.agentId}`}
+                        {item.type === "attacker-spawn" && `${item.agentId} SPAWN`}
+                        {item.type === "retake-entry" && `${item.label}`}
                       </span>
-                      <button onClick={() => removeItem(item.id)} className="text-vr ml-2">✕</button>
+                      <button onClick={() => removeItem(item.id)} className="text-danger ml-2">✕</button>
                     </div>
                   ))}
                 </div>
@@ -647,11 +662,11 @@ export default function AdminCreatePage() {
 
             {/* Saved scenarios */}
             {savedScenarios.length > 0 && (
-              <div className="pt-3 border-t border-vtext-dim/10">
-                <h3 className="font-heading text-[10px] text-vtext-dim uppercase tracking-wider mb-2">Saved ({savedScenarios.length})</h3>
+              <div className="pt-3 border-t border-border-06">
+                <h3 className="text-text-muted text-[10px] uppercase tracking-wider mb-2 font-mono" style={{ letterSpacing: "0.7px" }}>SAVED ({savedScenarios.length})</h3>
                 <div className="space-y-0.5 max-h-24 overflow-y-auto">
                   {savedScenarios.map((s, i) => (
-                    <div key={i} className="bg-vdark rounded px-2 py-1 text-[10px] text-vtext-dim truncate">{s.name}</div>
+                    <div key={i} className="bg-void border border-border-04 px-2 py-1 text-[10px] text-text-muted font-mono truncate" style={{ borderRadius: 2 }}>{s.name}</div>
                   ))}
                 </div>
               </div>
@@ -750,15 +765,15 @@ function AgentFaceBubble({
   if (!img) {
     return (
       <Group>
-        <Circle x={x} y={y} radius={radius} fill="rgba(91,206,250,0.15)" stroke="#5BCEFA" strokeWidth={1.5} />
-        <Text x={x - 4} y={y - 5} text={agentId[0]?.toUpperCase()} fontSize={9} fill="#5BCEFA" fontFamily="Oswald, sans-serif" fontStyle="bold" />
+        <Circle x={x} y={y} radius={radius} fill="rgba(0,137,255,0.08)" stroke="#0089ff" strokeWidth={1.5} />
+        <Text x={x - 4} y={y - 5} text={agentId[0]?.toUpperCase()} fontSize={9} fill="#0089ff" fontFamily="monospace" fontStyle="bold" />
       </Group>
     );
   }
 
   return (
     <Group>
-      <Circle x={x} y={y} radius={radius + 1} fill="rgba(91,206,250,0.1)" stroke="#5BCEFA" strokeWidth={1.5} />
+      <Circle x={x} y={y} radius={radius + 1} fill="rgba(0,137,255,0.06)" stroke="#0089ff" strokeWidth={1.5} />
       <KonvaImage image={img} x={x - radius} y={y - radius} width={radius * 2} height={radius * 2} clipFunc={drawCircle} customDrawFunc={drawImg} />
     </Group>
   );
@@ -785,9 +800,9 @@ function AbilityIconTiny({ name }: { name: string }) {
 
   // Fallback
   const n = name.toLowerCase();
-  if (n.includes("smoke") || n.includes("cover") || n.includes("nebula")) return <span className="text-blue-400 text-[8px]">●</span>;
-  if (n.includes("flash") || n.includes("blind")) return <span className="text-yellow-400 text-[8px]">✦</span>;
-  if (n.includes("mollie") || n.includes("incendiar") || n.includes("blaze")) return <span className="text-red-400 text-[8px]">▲</span>;
-  if (n.includes("dart") || n.includes("recon") || n.includes("owl")) return <span className="text-green-400 text-[8px]">◆</span>;
-  return <span className="text-vtext-dim text-[8px]">?</span>;
+  if (n.includes("smoke") || n.includes("cover") || n.includes("nebula")) return <span style={{ fontSize: 8, color: "#0089ff", fontFamily: "var(--font-mono)" }}>●</span>;
+  if (n.includes("flash") || n.includes("blind")) return <span style={{ fontSize: 8, color: "#ffaa00", fontFamily: "var(--font-mono)" }}>✦</span>;
+  if (n.includes("mollie") || n.includes("incendiar") || n.includes("blaze")) return <span style={{ fontSize: 8, color: "#ff3b5c", fontFamily: "var(--font-mono)" }}>▲</span>;
+  if (n.includes("dart") || n.includes("recon") || n.includes("owl")) return <span style={{ fontSize: 8, color: "#00ff88", fontFamily: "var(--font-mono)" }}>◆</span>;
+  return <span style={{ fontSize: 8, color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mono)" }}>?</span>;
 }

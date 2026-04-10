@@ -22,7 +22,7 @@ export default function HomePage() {
         } else {
           setError(json.error || "Failed to load scenario");
         }
-      } catch (err) {
+      } catch {
         setError("Could not connect to server. Is the backend running?");
       } finally {
         setLoading(false);
@@ -37,61 +37,80 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-vdark px-4">
-      <div className="max-w-md w-full space-y-8 text-center">
-        {/* Logo / Title */}
-        <div className="space-y-2">
-          <h1 className="font-heading text-5xl font-bold tracking-wider text-vr">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-void px-4">
+      <div className="max-w-lg w-full space-y-8 text-center">
+        {/* Title — compressed, authoritative */}
+        <div className="space-y-3">
+          <h1
+            className="text-5xl sm:text-6xl text-text-primary tracking-tight"
+            style={{ lineHeight: 0.87, fontFamily: "var(--font-sans)" }}
+          >
             RETAKE ROULETTE
           </h1>
-          <p className="text-vtext-dim text-sm tracking-wide">
-            ONE SCENARIO. ONE CHANCE. OUTSMART THE COMMUNITY.
+          <p className="text-text-secondary text-sm tracking-wide">
+            One scenario. One chance. Outsmart the community.
           </p>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-vr to-transparent" />
+        {/* Divider — subtle border mist */}
+        <div className="h-px bg-gradient-to-r from-transparent via-border-08 to-transparent" />
 
         {loading ? (
           <div className="py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-vr border-t-transparent" />
-            <p className="mt-4 text-vtext-dim text-sm">Loading scenario...</p>
+            {/* Terminal-style spinner */}
+            <div className="inline-block animate-spin rounded-none h-5 w-5 border border-cyan border-t-transparent" />
+            <p className="mt-4 text-text-muted text-xs font-mono" style={{ letterSpacing: "0.5px" }}>
+              LOADING SCENARIO...
+            </p>
           </div>
         ) : error ? (
           <div className="py-8 space-y-4">
-            <div className="bg-vsurface rounded-lg p-6 border border-vr/30">
-              <p className="text-vr font-medium">{error}</p>
+            <div
+              className="bg-pure-black rounded p-6 border border-border-10"
+            >
+              <p className="text-danger text-sm font-mono">{error}</p>
             </div>
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-2 bg-vsurface hover:bg-vsurface-hover rounded text-vtext text-sm transition-colors"
+              className="px-6 py-2 bg-charcoal hover:bg-charcoal/80 rounded text-text-secondary text-xs font-mono transition-colors"
+              style={{ letterSpacing: "0.5px" }}
             >
-              Retry
+              RETRY
             </button>
           </div>
         ) : scenario ? (
           <div className="space-y-6">
-            {/* Scenario Card */}
-            <div className="bg-vsurface rounded-lg p-6 border border-vtext-dim/10 space-y-4">
-              <div className="flex items-center justify-center gap-2">
-                <span className="w-2 h-2 bg-vsuccess rounded-full animate-pulse" />
-                <span className="text-vtext-dim text-xs uppercase tracking-widest">
-                  Today&apos;s Scenario
+            {/* Scenario Card — pure black, border containment */}
+            <div
+              className="bg-pure-black rounded p-6 border border-border-10 space-y-4 text-left"
+            >
+              {/* Overline label */}
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-success rounded-none animate-pulse" />
+                <span
+                  className="text-text-tertiary text-[10px] uppercase tracking-widest font-mono"
+                  style={{ letterSpacing: "0.3px" }}
+                >
+                  TODAY&apos;S SCENARIO
                 </span>
               </div>
 
-              <h2 className="font-heading text-2xl font-semibold text-vtext">
+              <h2
+                className="text-2xl text-text-primary tracking-tight"
+                style={{ lineHeight: 1.0 }}
+              >
                 {scenario.scenario.name}
               </h2>
 
-              <p className="text-vtext-dim text-sm leading-relaxed">
+              <p className="text-text-secondary text-sm leading-relaxed">
                 {scenario.scenario.description}
               </p>
 
-              <div className="flex items-center justify-center gap-4 text-xs">
-                <span className="text-vtext-dim">
-                  Difficulty:{" "}
-                  <span className="text-vwarning">
+              {/* Difficulty — monospace metrics */}
+              <div className="flex items-center gap-4 text-xs">
+                <span className="text-text-muted font-mono">
+                  DIFFICULTY{" "}
+                  <span className="text-warning">
                     {"★".repeat(scenario.scenario.difficulty)}
                     {"☆".repeat(5 - scenario.scenario.difficulty)}
                   </span>
@@ -99,31 +118,31 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Play Info */}
-            <div className="flex items-center justify-center gap-3 text-xs text-vtext-dim">
-              <span className="bg-vsurface px-3 py-1 rounded">
-                {scenario.playsRemaining} free play{scenario.playsRemaining !== 1 ? "s" : ""} today
+            {/* Play Info — metadata row */}
+            <div className="flex items-center justify-center gap-3 text-xs text-text-muted font-mono" style={{ letterSpacing: "0.3px" }}>
+              <span className="bg-pure-black border border-border-06 px-3 py-1 rounded">
+                {scenario.playsRemaining} PLAYS TODAY
               </span>
               {scenario.hasAdAvailable && (
-                <span className="bg-vsurface px-3 py-1 rounded">
-                  + Watch ad for extra play
+                <span className="bg-pure-black border border-border-06 px-3 py-1 rounded">
+                  + AD FOR EXTRA PLAY
                 </span>
               )}
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button — white fill, dark text */}
             <button
               onClick={handleStart}
-              className="w-full py-4 bg-vr hover:bg-vr/90 text-white font-heading text-lg font-semibold tracking-widest uppercase rounded transition-all hover:shadow-[0_0_20px_rgba(255,70,85,0.3)] active:scale-[0.98]"
+              className="w-full py-4 bg-text-primary hover:bg-text-primary/90 text-void font-mono text-sm tracking-widest uppercase rounded transition-all active:scale-[0.98]"
             >
               PLAN YOUR RETAKE
             </button>
           </div>
         ) : null}
 
-        {/* Footer */}
-        <div className="pt-8 text-xs text-vtext-dim/50">
-          <p>Retake Roulette — A daily Valorant tactical puzzle</p>
+        {/* Footer — tertiary text */}
+        <div className="pt-8 text-xs text-text-muted/50 font-mono" style={{ letterSpacing: "0.3px" }}>
+          RETAKE ROULETTE — A DAILY TACTICAL PUZZLE
         </div>
       </div>
     </main>

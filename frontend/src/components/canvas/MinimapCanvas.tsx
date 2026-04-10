@@ -30,42 +30,49 @@ import {
 } from "@shared/tileGrid";
 import { getGrid, getMovementRange } from "@shared/mapGrids";
 
-const VALO_BG_DARK = "#0A1118";
-const VALO_BG_CARD = "#121D28";
-const VALO_BORDER = "#2A3A4A";
-const VALO_BORDER_ACCENT = "#FF4655";
-const VALO_TEXT = "#ECE8E1";
-const VALO_TEXT_DIM = "#6B7D8E";
-const VALO_CORNER = "#FF4655";
+const VALO_BG_DARK = "#0a0a0a";
+const VALO_BG_CARD = "#000000";
+const VALO_BORDER = "rgba(255,255,255,0.10)";
+const VALO_BORDER_ACCENT = "#0089ff";
+const VALO_TEXT = "#ffffff";
+const VALO_TEXT_DIM = "rgba(255,255,255,0.5)";
+const VALO_CORNER = "#0089ff";
 
-// Tile colors
-const TILE_COLORS: Record<string, string> = {
-  wall: "rgba(20, 30, 40, 0.8)",
-  chokepoint: "rgba(255, 185, 0, 0.1)",
-  cover: "rgba(91, 206, 250, 0.08)",
-  exposed: "rgba(255, 70, 85, 0.08)",
-  high_ground: "rgba(139, 92, 246, 0.08)",
-  spike_zone: "rgba(29, 245, 160, 0.06)",
+// Tile colors — subtle washes, not boxes
+const TILE_COLORS: Record<string, { light: string; dark: string }> = {
+  walkable: { light: "rgba(255,255,255,0.015)", dark: "rgba(0,0,0,0.0)" },
+  wall: { light: "rgba(20,30,40,0.85)", dark: "rgba(15,22,30,0.9)" },
+  chokepoint: { light: "rgba(255,185,0,0.12)", dark: "rgba(255,185,0,0.07)" },
+  cover: { light: "rgba(91,206,250,0.10)", dark: "rgba(91,206,250,0.05)" },
+  exposed: { light: "rgba(255,70,85,0.10)", dark: "rgba(255,70,85,0.05)" },
+  high_ground: { light: "rgba(139,92,246,0.10)", dark: "rgba(139,92,246,0.05)" },
+  spike_zone: { light: "rgba(29,245,160,0.08)", dark: "rgba(29,245,160,0.04)" },
 };
 
+// Grid line style
+const GRID_LINE_COLOR = "rgba(255,255,255,0.06)";
+const GRID_LINE_WIDTH = 0.5;
+const COORD_LABEL_COLOR = "rgba(255,255,255,0.25)";
+const COORD_LABEL_SIZE = 9;
+
 const UTILITY_COLORS: Record<string, string> = {
-  smoke: "#5BCEFA",
-  flash: "#FFB900",
-  mollie: "#FF4655",
-  dart: "#1DF5A0",
-  concussion: "#FF6B9D",
-  decoy: "#C084FC",
-  dash: "#A78BFA",
-  gravity_well: "#F97316",
-  nanoswarm: "#EAB308",
-  tripwire: "#06B6D4",
-  trap: "#6B7280",
-  heal: "#34D399",
-  revive: "#10B981",
-  wall: "#8B5CF6",
-  turret: "#F59E0B",
-  sensor: "#0EA5E9",
-  alarm: "#EF4444",
+  smoke: "#0089ff",
+  flash: "#ffaa00",
+  mollie: "#ff3b5c",
+  dart: "#00ff88",
+  concussion: "#00ffff",
+  decoy: "#0096ff",
+  dash: "#00ffff",
+  gravity_well: "#ffaa00",
+  nanoswarm: "#ffaa00",
+  tripwire: "#00ffff",
+  trap: "rgba(255,255,255,0.3)",
+  heal: "#00ff88",
+  revive: "#00ff88",
+  wall: "#0089ff",
+  turret: "#ffaa00",
+  sensor: "#0089ff",
+  alarm: "#ff3b5c",
 };
 
 const UTILITY_ICONS: Record<string, string> = {
@@ -122,8 +129,10 @@ function MinimapBackground({ width, height, minimapImage, padding }: MinimapBack
 }
 
 // ========================================
-// Tile Grid Overlay
+// Tile Grid Overlay — chess.com style
 // ========================================
+
+const COL_LABELS = "ABCDEFGHIJKLMNOP";
 
 function TileGridOverlay({
   width,
@@ -157,82 +166,186 @@ function TileGridOverlay({
 
   return (
     <Group>
-      {/* Tile backgrounds */}
+      {/* === Checkerboard tile backgrounds === */}
       {grid.tiles.map((row) =>
         row.map((tile) => {
           const x = padding + tile.col * tileW;
           const y = padding + tile.row * tileH;
-          const color = TILE_COLORS[tile.type] || "transparent";
+          const isLight = (tile.col + tile.row) % 2 === 0;
+          const colors = TILE_COLORS[tile.type] || TILE_COLORS.walkable;
+          const baseFill = isLight ? colors.light : colors.dark;
           const highlight = highlightMap.get(`${tile.col},${tile.row}`);
 
           return (
-            <Group key={`${tile.col}-${tile.row}`}>
-              {/* Base tile */}
-              <Rect x={x} y={y} width={tileW} height={tileH} fill={color} />
+            <Group key={`tile-${tile.col}-${tile.row}`}>
+              {/* Base checkerboard square */}
+              <Rect x={x} y={y} width={tileW} height={tileH} fill={baseFill} />
 
-              {/* Highlight overlay */}
+              {/* Movement-range highlight */}
               {highlight && (
                 <Rect x={x} y={y} width={tileW} height={tileH} fill={highlight} />
-              )}
-
-              {/* Grid lines */}
-              {showGrid && (
-                <Rect
-                  x={x}
-                  y={y}
-                  width={tileW}
-                  height={tileH}
-                  stroke="rgba(42, 58, 74, 0.15)"
-                  strokeWidth={0.5}
-                  fill="transparent"
-                />
-              )}
-
-              {/* Chokepoint indicator */}
-              {tile.type === "chokepoint" && (
-                <Line
-                  points={[x, y, x + tileW, y + tileH]}
-                  stroke="rgba(255, 185, 0, 0.3)"
-                  strokeWidth={1}
-                />
-              )}
-
-              {/* Cover indicator */}
-              {tile.type === "cover" && (
-                <Rect
-                  x={x + 2}
-                  y={y + 2}
-                  width={tileW - 4}
-                  height={tileH - 4}
-                  stroke="rgba(91, 206, 250, 0.15)"
-                  strokeWidth={0.5}
-                  fill="transparent"
-                  cornerRadius={2}
-                />
               )}
             </Group>
           );
         })
       )}
 
-      {/* Coverage overlays (utility areas) */}
-      {coverageTiles.map((coverage, idx) =>
-        coverage.tiles.map((tile) => {
-          const x = padding + tile.col * tileW;
-          const y = padding + tile.row * tileH;
-          return (
-            <Rect
-              key={`cov-${idx}-${tile.col}-${tile.row}`}
+      {/* === Grid lines — full board, chess.com style === */}
+      {/* Vertical lines */}
+      {Array.from({ length: GRID_COLS + 1 }, (_, i) => {
+        const x = padding + i * tileW;
+        return (
+          <Rect
+            key={`vl-${i}`}
+            x={x}
+            y={padding}
+            width={GRID_LINE_WIDTH}
+            height={mapH}
+            fill={GRID_LINE_COLOR}
+          />
+        );
+      })}
+      {/* Horizontal lines */}
+      {Array.from({ length: GRID_ROWS + 1 }, (_, i) => {
+        const y = padding + i * tileH;
+        return (
+          <Rect
+            key={`hl-${i}`}
+            x={padding}
+            y={y}
+            width={mapW}
+            height={GRID_LINE_WIDTH}
+            fill={GRID_LINE_COLOR}
+          />
+        );
+      })}
+
+      {/* === Coordinate labels — chess.com style === */}
+      {/* Column labels (A-P) — top and bottom */}
+      {Array.from({ length: GRID_COLS }, (_, col) => {
+        const x = padding + col * tileW + tileW / 2;
+        const label = COL_LABELS[col] || String(col + 1);
+        return (
+          <Group key={`col-label-${col}`}>
+            <Text
               x={x}
-              y={y}
-              width={tileW}
-              height={tileH}
-              fill={coverage.color}
-              opacity={coverage.opacity}
+              y={padding - 14}
+              text={label}
+              fontSize={COORD_LABEL_SIZE}
+              fill={COORD_LABEL_COLOR}
+              fontFamily="Oswald, Inter, sans-serif"
+              fontStyle="bold"
+              offsetX={4}
             />
-          );
+            <Text
+              x={x}
+              y={padding + mapH + 4}
+              text={label}
+              fontSize={COORD_LABEL_SIZE}
+              fill={COORD_LABEL_COLOR}
+              fontFamily="Oswald, Inter, sans-serif"
+              fontStyle="bold"
+              offsetX={4}
+            />
+          </Group>
+        );
+      })}
+      {/* Row labels (1-16) — left and right */}
+      {Array.from({ length: GRID_ROWS }, (_, row) => {
+        const y = padding + row * tileH + tileH / 2;
+        const label = String(GRID_ROWS - row);
+        return (
+          <Group key={`row-label-${row}`}>
+            <Text
+              x={padding - 12}
+              y={y}
+              text={label}
+              fontSize={COORD_LABEL_SIZE}
+              fill={COORD_LABEL_COLOR}
+              fontFamily="Oswald, Inter, sans-serif"
+              fontStyle="bold"
+              offsetY={5}
+            />
+            <Text
+              x={padding + mapW + 4}
+              y={y}
+              text={label}
+              fontSize={COORD_LABEL_SIZE}
+              fill={COORD_LABEL_COLOR}
+              fontFamily="Oswald, Inter, sans-serif"
+              fontStyle="bold"
+              offsetY={5}
+            />
+          </Group>
+        );
+      })}
+
+      {/* === Tactical markers — elegant, not boxy === */}
+      {grid.tiles.map((row) =>
+        row.map((tile) => {
+          const cx = padding + tile.col * tileW + tileW / 2;
+          const cy = padding + tile.row * tileH + tileH / 2;
+
+          // Chokepoint: small diamond marker
+          if (tile.type === "chokepoint") {
+            const s = tileW * 0.2;
+            return (
+              <Line
+                key={`choke-${tile.col}-${tile.row}`}
+                points={[cx, cy - s, cx + s, cy, cx, cy + s, cx - s, cy, cx, cy - s]}
+                stroke="rgba(255,185,0,0.35)"
+                strokeWidth={1}
+                closed
+                fill="rgba(255,185,0,0.08)"
+              />
+            );
+          }
+
+          // Cover: small shield dot
+          if (tile.type === "cover") {
+            return (
+              <Circle
+                key={`cover-${tile.col}-${tile.row}`}
+                x={cx}
+                y={cy}
+                radius={tileW * 0.12}
+                fill="rgba(91,206,250,0.25)"
+              />
+            );
+          }
+
+          return null;
         })
       )}
+
+      {/* === Coverage overlays — smooth circles per utility === */}
+      {coverageTiles.map((coverage, idx) => {
+        // Compute bounding center and radius for a smooth circle
+        if (coverage.tiles.length === 0) return null;
+        let minC = 999, maxC = 0, minR = 999, maxR = 0;
+        for (const t of coverage.tiles) {
+          if (t.col < minC) minC = t.col;
+          if (t.col > maxC) maxC = t.col;
+          if (t.row < minR) minR = t.row;
+          if (t.row > maxR) maxR = t.row;
+        }
+        const centerX = padding + (minC + maxC) / 2 * tileW + tileW / 2;
+        const centerY = padding + (minR + maxR) / 2 * tileH + tileH / 2;
+        const radiusX = ((maxC - minC) / 2 + 0.5) * tileW;
+        const radiusY = ((maxR - minR) / 2 + 0.5) * tileH;
+        const radius = Math.max(radiusX, radiusY);
+
+        return (
+          <Circle
+            key={`coverage-circle-${idx}`}
+            x={centerX}
+            y={centerY}
+            radius={radius}
+            fill={coverage.color}
+            opacity={coverage.opacity * 0.6}
+          />
+        );
+      })}
     </Group>
   );
 }
@@ -262,7 +375,7 @@ function AgentBubble({
 }) {
   const [img, setImg] = useState<HTMLImageElement | null>(null);
   const groupRef = useRef<any>(null);
-  const strokeColor = isEnemy ? "#FF4655" : "#5BCEFA";
+  const strokeColor = isEnemy ? "#ff3b5c" : "#0089ff";
 
   useEffect(() => {
     const url = getAgentIconUrl(agentId);
@@ -308,9 +421,9 @@ function AgentBubble({
       }}
       onClick={(e: any) => { if (draggable) e.cancelBubble = true; }}
     >
-      <Circle x={0} y={0} radius={radius + 1.5} fill={isEnemy ? "rgba(255,70,85,0.15)" : "rgba(91,206,250,0.15)"} stroke={strokeColor} strokeWidth={isDragging ? 3 : 2} opacity={isDragging ? 0.7 : 1} />
+      <Circle x={0} y={0} radius={radius + 1.5} fill={isEnemy ? "rgba(255,59,92,0.1)" : "rgba(0,137,255,0.1)"} stroke={strokeColor} strokeWidth={isDragging ? 3 : 2} opacity={isDragging ? 0.7 : 1} />
       {img && <KonvaImage image={img} x={-radius} y={-radius} width={radius * 2} height={radius * 2} clipFunc={drawCircle} customDrawFunc={drawImg} />}
-      {!img && <Text x={-5} y={-7} text={agentId[0]?.toUpperCase() || "A"} fontSize={11} fill={strokeColor} fontFamily="Oswald, sans-serif" fontStyle="bold" />}
+      {!img && <Text x={-5} y={-7} text={agentId[0]?.toUpperCase() || "A"} fontSize={11} fill={strokeColor} fontFamily="monospace" fontStyle="bold" />}
       {isDragging && <Circle x={0} y={0} radius={radius + 5} stroke={strokeColor} strokeWidth={1} dash={[3, 3]} opacity={0.5} />}
     </Group>
   );
@@ -369,7 +482,7 @@ interface MinimapCanvasProps {
   selectedAgentId?: string;
 }
 
-const MAP_PADDING = 32;
+const MAP_PADDING = 40;
 
 export default function MinimapCanvas({
   minimapImage,
@@ -487,7 +600,7 @@ export default function MinimapCanvas({
   const minimapUrl = minimapImage || "/assets/minimaps/ascent.png";
 
   return (
-    <div ref={containerRef} className="w-full h-full min-h-[400px] flex items-center justify-center bg-vdark p-4">
+    <div ref={containerRef} className="w-full h-full min-h-[400px] flex items-center justify-center bg-pure-black p-4">
       <Stage
         ref={stageRef}
         width={containerSize.width}
@@ -511,7 +624,7 @@ export default function MinimapCanvas({
             highlightedTiles={movementRangeTiles.map((t) => ({
               col: t.col,
               row: t.row,
-              color: "rgba(29, 245, 160, 0.12)",
+              color: "rgba(0,255,136,0.10)",
             }))}
             coverageTiles={coverageOverlays}
           />
@@ -520,9 +633,9 @@ export default function MinimapCanvas({
         <Layer listening={true}>
           {/* Spike site */}
           <Group>
-            <Circle x={toCanvas(spikeSite).x} y={toCanvas(spikeSite).y} radius={containerSize.width * 0.035} fill="rgba(255, 70, 85, 0.08)" stroke="#FF4655" strokeWidth={1.5} dash={[4, 4]} />
-            <Text x={toCanvas(spikeSite).x - 6} y={toCanvas(spikeSite).y - 8} text="▲" fontSize={12} fill="#FF4655" fontFamily="sans-serif" />
-            <Text x={toCanvas(spikeSite).x - 14} y={toCanvas(spikeSite).y + 12} text="SPIKE" fontSize={8} fill="#FF4655" fontFamily="Oswald, sans-serif" letterSpacing={1} />
+            <Circle x={toCanvas(spikeSite).x} y={toCanvas(spikeSite).y} radius={containerSize.width * 0.035} fill="rgba(255,59,92,0.06)" stroke="#ff3b5c" strokeWidth={1.5} dash={[4, 4]} />
+            <Text x={toCanvas(spikeSite).x - 6} y={toCanvas(spikeSite).y - 8} text="▲" fontSize={12} fill="#ff3b5c" fontFamily="sans-serif" />
+            <Text x={toCanvas(spikeSite).x - 14} y={toCanvas(spikeSite).y + 12} text="SPIKE" fontSize={8} fill="#ff3b5c" fontFamily="monospace" letterSpacing={1} />
           </Group>
 
           {/* Enemy agents */}
@@ -584,9 +697,9 @@ export default function MinimapCanvas({
                 const c = toCanvas(p);
                 return [c.x, c.y];
               })}
-              stroke="#1DF5A0"
+              stroke="#00ff88"
               strokeWidth={2.5}
-              fill="#1DF5A0"
+              fill="#00ff88"
               pointerLength={8}
               pointerWidth={6}
               opacity={0.85}
@@ -595,7 +708,7 @@ export default function MinimapCanvas({
 
           {drawingArrow && arrowStart && (
             <Group>
-              <Circle x={toCanvas(arrowStart).x} y={toCanvas(arrowStart).y} radius={3} fill="#1DF5A0" opacity={0.8} />
+              <Circle x={toCanvas(arrowStart).x} y={toCanvas(arrowStart).y} radius={3} fill="#00ff88" opacity={0.8} />
             </Group>
           )}
         </Layer>

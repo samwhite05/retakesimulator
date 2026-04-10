@@ -11,29 +11,48 @@ interface UtilityToolbarProps {
   onSelectUtility: (type: UtilityType, agentId: string) => void;
 }
 
-const UTILITY_COLORS: Record<UtilityType, string> = {
-  smoke: "bg-blue-400/20 border-blue-400 text-blue-400",
-  flash: "bg-yellow-400/20 border-yellow-400 text-yellow-400",
-  mollie: "bg-red-500/20 border-red-500 text-red-500",
-  dart: "bg-green-400/20 border-green-400 text-green-400",
-  dash: "bg-purple-400/20 border-purple-400 text-purple-400",
-  concussion: "bg-pink-400/20 border-pink-400 text-pink-400",
-  decoy: "bg-indigo-400/20 border-indigo-400 text-indigo-400",
-  gravity_well: "bg-orange-400/20 border-orange-400 text-orange-400",
-  nanoswarm: "bg-yellow-300/20 border-yellow-300 text-yellow-300",
-  tripwire: "bg-cyan-400/20 border-cyan-400 text-cyan-400",
-  trap: "bg-gray-400/20 border-gray-400 text-gray-400",
-  heal: "bg-emerald-400/20 border-emerald-400 text-emerald-400",
-  revive: "bg-green-400/20 border-green-400 text-green-400",
-  wall: "bg-violet-400/20 border-violet-400 text-violet-400",
-  turret: "bg-amber-400/20 border-amber-400 text-amber-400",
-  sensor: "bg-sky-400/20 border-sky-400 text-sky-400",
-  alarm: "bg-red-400/20 border-red-400 text-red-400",
+const UTILITY_BORDER_COLORS: Record<UtilityType, string> = {
+  smoke: "border-signal/30",
+  flash: "border-warning/30",
+  mollie: "border-danger/30",
+  dart: "border-success/30",
+  dash: "border-cyan/30",
+  concussion: "border-cyan/20",
+  decoy: "border-signal/20",
+  gravity_well: "border-warning/30",
+  nanoswarm: "border-warning/20",
+  tripwire: "border-cyan/30",
+  trap: "border-border-10",
+  heal: "border-success/30",
+  revive: "border-success/30",
+  wall: "border-signal/30",
+  turret: "border-warning/30",
+  sensor: "border-signal/30",
+  alarm: "border-danger/20",
+};
+
+const UTILITY_TEXT_COLORS: Record<UtilityType, string> = {
+  smoke: "text-signal",
+  flash: "text-warning",
+  mollie: "text-danger",
+  dart: "text-success",
+  dash: "text-cyan",
+  concussion: "text-cyan",
+  decoy: "text-signal",
+  gravity_well: "text-warning",
+  nanoswarm: "text-warning",
+  tripwire: "text-cyan",
+  trap: "text-text-muted",
+  heal: "text-success",
+  revive: "text-success",
+  wall: "text-signal",
+  turret: "text-warning",
+  sensor: "text-signal",
+  alarm: "text-danger",
 };
 
 // Find ability icon URL by type + agent
 function getIconForUtility(type: UtilityType, agentId: string): string | null {
-  // Import dynamically to find the ability name for this agent+type combo
   try {
     const { ALL_AGENTS } = require("@shared/agentAbilities");
     const agent = ALL_AGENTS.find((a: any) => a.id === agentId);
@@ -79,15 +98,14 @@ function AbilityIconImage({
   }, [type, agentId]);
 
   if (error || !img) {
-    // Fallback emoji
     const fallbacks: Record<UtilityType, string> = {
-      smoke: "💨", flash: "⚡", mollie: "🔥", dart: "🎯", dash: "💨",
-      concussion: "💫", decoy: "👻", gravity_well: "🌀", nanoswarm: "🐝",
-      tripwire: "⚠️", trap: "🪤", heal: "💚", revive: "⭐", wall: "🧱",
-      turret: "🔫", sensor: "📡", alarm: "🚨",
+      smoke: "S", flash: "F", mollie: "M", dart: "D", dash: ">",
+      concussion: "C", decoy: "D", gravity_well: "G", nanoswarm: "N",
+      tripwire: "W", trap: "T", heal: "+", revive: "R", wall: "W",
+      turret: "T", sensor: "S", alarm: "!",
     };
     return (
-      <span style={{ fontSize: size * 0.6, lineHeight: 1 }}>{fallbacks[type] || "?"}</span>
+      <span style={{ fontSize: size * 0.5, lineHeight: 1, fontFamily: "var(--font-mono)", color: "rgba(255,255,255,0.4)" }}>{fallbacks[type] || "?"}</span>
     );
   }
 
@@ -118,7 +136,6 @@ export default function UtilityToolbar({
         };
       }
       acc[key].totalCharges += util.charges;
-      // Try to get ability name
       try {
         const { ALL_AGENTS } = require("@shared/agentAbilities");
         const agent = ALL_AGENTS.find((a: any) => a.id === util.agentId);
@@ -145,7 +162,7 @@ export default function UtilityToolbar({
   });
 
   if (utilities.length === 0) {
-    return <p className="text-vtext-dim text-xs">No utility available</p>;
+    return <p className="text-text-muted text-xs font-mono">No utility available</p>;
   }
 
   return (
@@ -155,7 +172,8 @@ export default function UtilityToolbar({
           const isSelected =
             selectedUtility?.type === util.type &&
             selectedUtility.agentId === util.agentId;
-          const colorClass = UTILITY_COLORS[util.type] || "bg-gray-400/20 border-gray-400 text-gray-400";
+          const borderClass = UTILITY_BORDER_COLORS[util.type] || "border-border-10";
+          const textClass = UTILITY_TEXT_COLORS[util.type] || "text-text-muted";
 
           return (
             <div key={util.key} className="relative group">
@@ -167,34 +185,35 @@ export default function UtilityToolbar({
                 }}
                 disabled={util.isExhausted}
                 className={`
-                  w-14 h-14 rounded-lg border-2 flex items-center justify-center
+                  w-14 h-14 border flex items-center justify-center
                   transition-all touch-manipulation relative overflow-hidden
-                  ${colorClass}
+                  ${borderClass}
                   ${util.isExhausted
-                    ? "opacity-30 cursor-not-allowed"
+                    ? "opacity-20 cursor-not-allowed"
                     : isSelected
-                      ? "ring-2 ring-white ring-offset-2 ring-offset-vdark scale-105"
-                      : "hover:opacity-80 active:scale-95"
+                      ? "ring-1 ring-cyan/40 bg-cyan-dim scale-105"
+                      : "hover:border-border-12 active:scale-95"
                   }
                 `}
+                style={{ borderRadius: 4 }}
                 title={util.abilityName || util.type}
               >
                 {/* Real ability icon */}
                 <AbilityIconImage type={util.type} agentId={util.agentId} size={32} />
 
                 {/* Charge count badge */}
-                <span className="absolute bottom-0.5 right-0.5 bg-vdark/80 text-[8px] font-mono px-1 rounded text-vtext">
+                <span className={`absolute bottom-0.5 right-0.5 bg-void/90 text-[8px] font-mono px-1 text-text-muted`} style={{ borderRadius: 2 }}>
                   {util.remaining}
                 </span>
               </button>
               {/* Agent badge */}
-              <span className="absolute -top-1 -left-1 bg-vdark text-[8px] w-4 h-4 flex items-center justify-center rounded text-vtext-dim border border-vtext-dim/20 font-bold">
+              <span className="absolute -top-1 -left-1 bg-void text-[8px] w-4 h-4 flex items-center justify-center border border-border-08 font-mono font-bold text-text-muted" style={{ borderRadius: 2 }}>
                 {util.agentId[0]?.toUpperCase()}
               </span>
 
               {/* Tooltip on hover */}
               {util.abilityName && (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-vdark border border-vtext-dim/20 rounded text-[10px] text-vtext whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-pure-black border border-border-10 text-[10px] text-text-primary font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20" style={{ borderRadius: 4, letterSpacing: "0.3px" }}>
                   {util.abilityName}
                 </div>
               )}
@@ -204,8 +223,8 @@ export default function UtilityToolbar({
       </div>
 
       {selectedUtility && (
-        <p className="text-xs text-vtext-dim">
-          Selected: <span className="text-vtext font-medium">{selectedUtility.type}</span> — Tap minimap to place
+        <p className="text-xs text-text-muted font-mono" style={{ letterSpacing: "0.3px" }}>
+          SELECTED: <span className="text-text-primary">{selectedUtility.type.toUpperCase()}</span> — TAP MAP TO PLACE
         </p>
       )}
     </div>

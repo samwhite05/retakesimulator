@@ -14,7 +14,7 @@ import { ALL_AGENTS, getCompUtility, type AgentAbilities } from "@shared/agentAb
 import { getAgentIconUrl, getAbilityIconUrl } from "@shared/assets";
 
 // ========================================
-// Agent Ability Card Component
+// Agent Ability Row
 // ========================================
 
 function AgentAbilityRow({
@@ -22,7 +22,6 @@ function AgentAbilityRow({
   abilityType,
   charges,
   used,
-  agentIconUrl,
   isSelected,
   onSelect,
 }: {
@@ -30,94 +29,53 @@ function AgentAbilityRow({
   abilityType: string;
   charges: number;
   used: number;
-  agentIconUrl: string;
   isSelected: boolean;
   onSelect: () => void;
 }) {
   const remaining = Math.max(0, charges - used);
   const isExhausted = remaining <= 0;
 
-  const typeColors: Record<string, string> = {
-    smoke: "border-blue-500/30 bg-blue-500/5",
-    flash: "border-yellow-500/30 bg-yellow-500/5",
-    mollie: "border-red-500/30 bg-red-500/5",
-    dart: "border-green-500/30 bg-green-500/5",
-    concussion: "border-pink-500/30 bg-pink-500/5",
-    decoy: "border-indigo-500/30 bg-indigo-500/5",
-    dash: "border-purple-500/30 bg-purple-500/5",
-    wall: "border-violet-500/30 bg-violet-500/5",
-    sensor: "border-sky-500/30 bg-sky-500/5",
-    heal: "border-emerald-500/30 bg-emerald-500/5",
-    gravity_well: "border-orange-500/30 bg-orange-500/5",
-    trap: "border-gray-500/30 bg-gray-500/5",
-    turret: "border-amber-500/30 bg-amber-500/5",
-    alarm: "border-red-400/30 bg-red-400/5",
-    revive: "border-green-500/30 bg-green-500/5",
-    nanoswarm: "border-yellow-400/30 bg-yellow-400/5",
-    tripwire: "border-cyan-500/30 bg-cyan-500/5",
-  };
-
-  const typeBadgeColors: Record<string, string> = {
-    smoke: "bg-blue-500/20 text-blue-400",
-    flash: "bg-yellow-500/20 text-yellow-400",
-    mollie: "bg-red-500/20 text-red-400",
-    dart: "bg-green-500/20 text-green-400",
-    concussion: "bg-pink-500/20 text-pink-400",
-    decoy: "bg-indigo-500/20 text-indigo-400",
-    dash: "bg-purple-500/20 text-purple-400",
-    wall: "bg-violet-500/20 text-violet-400",
-    sensor: "bg-sky-500/20 text-sky-400",
-    heal: "bg-emerald-500/20 text-emerald-400",
-    gravity_well: "bg-orange-500/20 text-orange-400",
-    trap: "bg-gray-500/20 text-gray-400",
-    turret: "bg-amber-500/20 text-amber-400",
-    alarm: "bg-red-400/20 text-red-400",
-    revive: "bg-green-500/20 text-green-400",
-    nanoswarm: "bg-yellow-400/20 text-yellow-400",
-    tripwire: "bg-cyan-500/20 text-cyan-400",
-  };
-
-  const borderColor = typeColors[abilityType] || "border-vtext-dim/10 bg-vdark";
-  const badgeColor = typeBadgeColors[abilityType] || "bg-vsurface text-vtext-dim";
-
   return (
     <button
       onClick={onSelect}
       disabled={isExhausted}
-      className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg border transition-all text-left group ${borderColor} ${isExhausted
-          ? "opacity-30 cursor-not-allowed"
+      className={`w-full flex items-center gap-2 px-2.5 py-2 border transition-all text-left rounded ${isExhausted
+          ? "opacity-20 cursor-not-allowed border-border-04"
           : isSelected
-            ? "ring-1 ring-vr border-vr/30 bg-vr/5"
-            : "hover:bg-vsurface-hover/50 border-vtext-dim/10"
+            ? "border-cyan/30 bg-cyan-dim"
+            : "border-border-06 hover:border-border-10 hover:bg-pure-black/50"
         }`}
+      style={{ borderRadius: 2 }}
     >
       {/* Ability icon */}
-      <div className="w-7 h-7 rounded bg-vdark/50 flex items-center justify-center flex-shrink-0 overflow-hidden">
-        <AbilityIconImage name={abilityName} size={18} />
+      <div className="w-7 h-7 bg-void flex items-center justify-center flex-shrink-0" style={{ borderRadius: 2 }}>
+        <AbilityIconImage name={abilityName} size={16} />
       </div>
 
       {/* Ability info */}
       <div className="flex-1 min-w-0">
-        <p className={`text-xs font-medium truncate ${isExhausted ? "text-vtext-dim/50" : "text-vtext"}`}>
+        <p className={`text-xs truncate ${isExhausted ? "text-text-muted" : "text-text-primary"}`}>
           {abilityName}
         </p>
-        <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${badgeColor}`}>
-          {abilityType}
+        <span
+          className={`text-[10px] font-mono ${isSelected ? "text-cyan" : "text-text-muted"}`}
+          style={{ letterSpacing: "0.3px" }}
+        >
+          {abilityType.toUpperCase()}
         </span>
       </div>
 
-      {/* Charge counter */}
+      {/* Charge counter — monospace metrics */}
       <div className="flex items-center gap-1 flex-shrink-0">
         <div className="flex gap-0.5">
           {Array.from({ length: charges }).map((_, i) => (
             <div
               key={i}
-              className={`w-1.5 h-1.5 rounded-full ${i < used ? "bg-vtext-dim/30" : "bg-vr"
-                }`}
+              className={`w-1 h-1 ${i < used ? "bg-text-muted" : isSelected ? "bg-cyan" : "border border-border-10"}`}
             />
           ))}
         </div>
-        <span className={`text-[10px] font-mono ${isExhausted ? "text-vtext-dim/30" : "text-vtext-dim"}`}>
+        <span className={`text-[10px] font-mono ${isExhausted ? "text-text-muted/30" : "text-text-muted"}`}>
           {remaining}/{charges}
         </span>
       </div>
@@ -125,7 +83,7 @@ function AgentAbilityRow({
   );
 }
 
-function AbilityIconImage({ name, size = 18 }: { name: string; size?: number }) {
+function AbilityIconImage({ name, size = 16 }: { name: string; size?: number }) {
   const [img, setImg] = useState<HTMLImageElement | null>(null);
 
   useEffect(() => {
@@ -142,27 +100,22 @@ function AbilityIconImage({ name, size = 18 }: { name: string; size?: number }) 
     return <img src={img.src} alt={name} style={{ width: size, height: size, objectFit: "contain" }} />;
   }
 
-  // Fallback
   const fallbacks: Record<string, string> = {
-    smoke: "💨", flash: "⚡", mollie: "🔥", dart: "🎯", dash: "»",
-    concussion: "💫", decoy: "👻", wall: "▮", sensor: "◉", heal: "+",
-    gravity_well: "◎", trap: "⚠", turret: "⊕", alarm: "!", revive: "★",
-    nanoswarm: "⬡", tripwire: "⚡",
+    smoke: "S", flash: "F", mollie: "M", dart: "D", dash: ">",
+    concussion: "C", decoy: "D", wall: "W", sensor: "S", heal: "+",
+    gravity_well: "G", trap: "T", turret: "T", alarm: "!", revive: "R",
+    nanoswarm: "N", tripwire: "W",
   };
 
-  // Try to match by type
-  const type = name.toLowerCase();
-  if (type.includes("smoke") || type.includes("cover") || type.includes("cloud") || type.includes("nebula") || type.includes("cove") || type.includes("ruse") || type.includes("meddle")) return <span style={{ fontSize: size * 0.7 }}>💨</span>;
-  if (type.includes("flash") || type.includes("blind") || type.includes("paranoia") || type.includes("leer") || type.includes("arc rose")) return <span style={{ fontSize: size * 0.7 }}>⚡</span>;
-  if (type.includes("mollie") || type.includes("incendiar") || type.includes("blaze") || type.includes("paint") || type.includes("mosh") || type.includes("aftershock") || type.includes("frag") || type.includes("hot hand") || type.includes("snake") || type.includes("razor")) return <span style={{ fontSize: size * 0.7 }}>🔥</span>;
-  if (type.includes("dart") || type.includes("recon") || type.includes("owl") || type.includes("seeker") || type.includes("prowler") || type.includes("wingman") || type.includes("trail") || type.includes("haunt")) return <span style={{ fontSize: size * 0.7 }}>🎯</span>;
-  if (type.includes("concuss") || type.includes("shock") || type.includes("nova") || type.includes("fault") || type.includes("rolling") || type.includes("null") || type.includes("headhunter") || type.includes("tour") || type.includes("relay") || type.includes("undercut") || type.includes("thrash") || type.includes("armageddon")) return <span style={{ fontSize: size * 0.7 }}>💫</span>;
-
-  return <span style={{ fontSize: size * 0.7, color: "#8B99A5" }}>?</span>;
+  return (
+    <span style={{ fontSize: size * 0.6, color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mono)" }}>
+      {fallbacks[name.toLowerCase()] || "?"}
+    </span>
+  );
 }
 
 // ========================================
-// Agent Card Component
+// Agent Card
 // ========================================
 
 function AgentCard({
@@ -180,26 +133,19 @@ function AgentCard({
   const iconUrl = getAgentIconUrl(agent.id);
   const usableAbilities = agent.abilities.filter((a) => !a.isUltimate);
 
-  const roleColors: Record<string, string> = {
-    duelist: "text-orange-400",
-    initiator: "text-blue-400",
-    controller: "text-purple-400",
-    sentinel: "text-emerald-400",
-  };
-
   return (
-    <div className="bg-vdark/50 rounded-xl overflow-hidden border border-vtext-dim/5">
+    <div className="bg-pure-black border border-border-08 overflow-hidden" style={{ borderRadius: 4 }}>
       {/* Agent header */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-vsurface-hover/30 transition-colors"
+        className="w-full flex items-center gap-2.5 px-3 py-2.5 hover:bg-white/[0.02] transition-colors"
       >
-        {/* Agent icon bubble */}
-        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-vtext-dim/20 flex-shrink-0 bg-vsurface">
+        {/* Agent icon — near-square, subtle border */}
+        <div className="w-9 h-9 overflow-hidden border border-border-10 flex-shrink-0 bg-void" style={{ borderRadius: 4 }}>
           {iconUrl ? (
             <img src={iconUrl} alt={agent.displayName} className="w-full h-full object-cover" />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-vtext-dim text-sm font-bold">
+            <div className="w-full h-full flex items-center justify-center text-text-muted text-xs font-mono">
               {agent.displayName[0]}
             </div>
           )}
@@ -207,14 +153,17 @@ function AgentCard({
 
         {/* Agent info */}
         <div className="flex-1 min-w-0 text-left">
-          <p className="text-sm font-semibold text-vtext">{agent.displayName}</p>
-          <span className={`text-[10px] uppercase tracking-wider ${roleColors[agent.role] || "text-vtext-dim"}`}>
+          <p className="text-sm text-text-primary">{agent.displayName}</p>
+          <span
+            className="text-[10px] uppercase font-mono text-text-muted"
+            style={{ letterSpacing: "0.3px" }}
+          >
             {agent.role}
           </span>
         </div>
 
-        {/* Expand arrow */}
-        <span className="text-vtext-dim text-xs transition-transform duration-200" style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}>
+        {/* Expand indicator */}
+        <span className="text-text-muted text-xs transition-transform duration-200 font-mono" style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}>
           ▾
         </span>
       </button>
@@ -234,7 +183,6 @@ function AgentCard({
                 abilityType={ability.type}
                 charges={ability.charges}
                 used={used}
-                agentIconUrl={iconUrl}
                 isSelected={isSelected}
                 onSelect={() => onSelectAbility(agent.id, ability.type)}
               />
@@ -277,13 +225,11 @@ export default function PlanningPage() {
     return ability ? { type, agentId, agent, ability } : null;
   }, [selectedAbilityKey]);
 
-  // Comp utility from scenario
   const compUtility = useMemo(() => {
     if (!scenario) return [];
     return scenario.availableUtility || [];
   }, [scenario]);
 
-  // Group agents by their abilities for display
   const compAgents = useMemo(() => {
     if (!scenario) return [];
     const agentIds = scenario.availableAgents || [];
@@ -321,7 +267,6 @@ export default function PlanningPage() {
     fetchScenario();
   }, [router]);
 
-  // Handle canvas tap — place utility
   const handleCanvasTap = useCallback(
     (position: { x: number; y: number }) => {
       if (selectedAbilityInfo && scenario) {
@@ -365,14 +310,12 @@ export default function PlanningPage() {
     [selectedAbilityInfo, drawingArrow, arrowStart, selectedAgentForArrow, scenario, compUtility, usedCharges]
   );
 
-  // Handle agent drag on minimap
   const handleAgentMove = useCallback((agentId: string, position: { x: number; y: number }) => {
     setAgentPositions((prev) =>
       prev.map((a) => (a.agentId === agentId ? { ...a, position } : a))
     );
   }, []);
 
-  // Select ability for placement
   const handleSelectAbility = useCallback((agentId: string, type: string) => {
     const key = `${type}:${agentId}`;
     setSelectedAbilityKey((prev) => (prev === key ? null : key));
@@ -381,14 +324,12 @@ export default function PlanningPage() {
     setSelectedAgentForArrow(null);
   }, []);
 
-  // Start drawing arrow for agent
   const handleStartArrow = (agentId: string) => {
     setSelectedAgentForArrow(agentId);
     setDrawingArrow(true);
     setSelectedAbilityKey(null);
   };
 
-  // Submit plan
   const handleSubmit = async () => {
     if (!scenario) return;
     setSubmitting(true);
@@ -425,7 +366,6 @@ export default function PlanningPage() {
     }
   };
 
-  // Clear all
   const handleClear = () => {
     setUtilityPlacements([]);
     setMovementArrows([]);
@@ -438,36 +378,41 @@ export default function PlanningPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-vdark">
+      <main className="min-h-screen flex items-center justify-center bg-void">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-vr border-t-transparent" />
-          <p className="mt-4 text-vtext-dim text-sm">Loading scenario...</p>
+          <div className="inline-block animate-spin rounded-none h-5 w-5 border border-cyan border-t-transparent" />
+          <p className="mt-4 text-text-muted text-xs font-mono" style={{ letterSpacing: "0.5px" }}>
+            LOADING SCENARIO...
+          </p>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-vdark flex flex-col">
-      {/* Header */}
-      <header className="bg-vsurface/80 backdrop-blur-sm border-b border-vtext-dim/10 px-4 py-3 flex items-center justify-between sticky top-0 z-20">
+    <main className="min-h-screen bg-void flex flex-col">
+      {/* Header — sticky, dark, border containment */}
+      <header className="bg-void/90 backdrop-blur-sm border-b border-border-06 px-4 py-3 flex items-center justify-between sticky top-0 z-20">
         <button
           onClick={() => router.push("/")}
-          className="text-vtext-dim hover:text-vtext text-sm transition-colors"
+          className="text-text-muted hover:text-text-primary text-sm font-mono transition-colors"
+          style={{ letterSpacing: "0.3px" }}
         >
-          ← Back
+          ← BACK
         </button>
-        <h1 className="font-heading text-sm sm:text-base font-semibold text-vtext tracking-wide truncate max-w-[200px] sm:max-w-none">
+        <h1
+          className="text-sm text-text-primary tracking-tight truncate max-w-[200px] sm:max-w-none"
+          style={{ lineHeight: 1.0 }}
+        >
           {scenario?.name}
         </h1>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleClear}
-            className="text-vtext-dim hover:text-vr text-sm transition-colors"
-          >
-            Clear
-          </button>
-        </div>
+        <button
+          onClick={handleClear}
+          className="text-text-muted hover:text-danger text-sm font-mono transition-colors"
+          style={{ letterSpacing: "0.3px" }}
+        >
+          CLEAR
+        </button>
       </header>
 
       {/* Main Content */}
@@ -476,6 +421,7 @@ export default function PlanningPage() {
         <div className="flex-1 relative min-h-[50vh] lg:min-h-0">
           <MinimapCanvas
             minimapImage={scenario?.minimapImage}
+            mapId={scenario?.map || "ascent"}
             enemyAgents={scenario?.enemyAgents || []}
             friendlyAgents={scenario?.friendlyAgents || []}
             spikeSite={scenario?.spikeSite}
@@ -488,10 +434,10 @@ export default function PlanningPage() {
             drawingArrow={drawingArrow}
           />
 
-          {/* Active tool indicator */}
+          {/* Active tool indicator — pure black card */}
           {selectedAbilityInfo && (
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-vsurface/90 backdrop-blur-sm border border-vtext-dim/20 rounded-lg px-4 py-2 flex items-center gap-2 z-10">
-              <div className="w-5 h-5 rounded overflow-hidden bg-vdark/50">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-pure-black/95 backdrop-blur-sm border border-border-10 px-4 py-2 flex items-center gap-2 z-10" style={{ borderRadius: 4 }}>
+              <div className="w-5 h-5 bg-void flex items-center justify-center" style={{ borderRadius: 2 }}>
                 <img
                   src={getAbilityIconUrl(selectedAbilityInfo.ability.name)}
                   alt=""
@@ -499,12 +445,12 @@ export default function PlanningPage() {
                   onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                 />
               </div>
-              <span className="text-xs text-vtext">
-                Place <span className="text-vtext font-medium">{selectedAbilityInfo.ability.name}</span>
+              <span className="text-xs text-text-secondary">
+                <span className="text-text-primary">{selectedAbilityInfo.ability.name}</span>
               </span>
               <button
                 onClick={() => setSelectedAbilityKey(null)}
-                className="ml-1 text-vtext-dim hover:text-vr text-xs"
+                className="ml-1 text-text-muted hover:text-danger text-xs font-mono"
               >
                 ✕
               </button>
@@ -512,30 +458,36 @@ export default function PlanningPage() {
           )}
 
           {drawingArrow && (
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-vr/90 backdrop-blur-sm text-white px-4 py-2 rounded text-xs font-medium tracking-wide whitespace-nowrap z-10">
-              🎯 Tap destination to draw movement path
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-cyan-dim border border-cyan/20 text-cyan px-4 py-2 text-xs font-mono tracking-wide whitespace-nowrap z-10" style={{ borderRadius: 4, letterSpacing: "0.5px" }}>
+              TAP DESTINATION TO DRAW MOVEMENT PATH
             </div>
           )}
 
-          {/* Submit Button */}
+          {/* Submit Button — white fill, dark text */}
           <div className="absolute bottom-4 left-4 right-4 lg:left-auto lg:right-4 lg:w-64">
             <button
               onClick={handleSubmit}
               disabled={submitting || utilityPlacements.length === 0}
-              className="w-full py-3 bg-vr hover:bg-vr/90 disabled:bg-vsurface disabled:text-vtext-dim text-white font-heading text-base font-semibold tracking-widest uppercase rounded transition-all active:scale-[0.98] disabled:active:scale-100"
+              className="w-full py-3 bg-text-primary hover:bg-text-primary/90 disabled:bg-border-06 disabled:text-text-muted text-void font-mono text-xs tracking-widest uppercase rounded transition-all active:scale-[0.98] disabled:active:scale-100"
+              style={{ borderRadius: 4, letterSpacing: "0.7px" }}
             >
               {submitting ? "EVALUATING..." : "EXECUTE PLAN"}
             </button>
           </div>
         </div>
 
-        {/* Right Sidebar — Character Abilities */}
-        <div className="lg:w-80 xl:w-96 bg-vsurface/50 backdrop-blur-sm border-t lg:border-t-0 lg:border-l border-vtext-dim/10 flex flex-col">
+        {/* Right Sidebar — pure black containment */}
+        <div className="lg:w-80 xl:w-96 bg-pure-black border-t lg:border-t-0 lg:border-l border-border-06 flex flex-col">
           {/* Sidebar Header */}
-          <div className="px-4 py-3 border-b border-vtext-dim/10 flex-shrink-0">
-            <h2 className="font-heading text-xs text-vtext-dim uppercase tracking-wider">Your Team</h2>
-            <p className="text-[10px] text-vtext-dim/60 mt-0.5">
-              Tap an ability to select it, then tap the minimap to place
+          <div className="px-4 py-3 border-b border-border-06 flex-shrink-0">
+            <h2
+              className="text-text-muted text-[10px] uppercase font-mono tracking-widest"
+              style={{ letterSpacing: "0.7px" }}
+            >
+              YOUR TEAM
+            </h2>
+            <p className="text-[10px] text-text-muted/60 mt-1">
+              Tap ability → tap map to place
             </p>
           </div>
 
@@ -552,20 +504,26 @@ export default function PlanningPage() {
             ))}
           </div>
 
-          {/* Movement arrows section */}
-          <div className="px-4 py-3 border-t border-vtext-dim/10 flex-shrink-0">
-            <p className="text-[10px] text-vtext-dim uppercase tracking-wider mb-2">Movement Paths</p>
+          {/* Movement paths section */}
+          <div className="px-4 py-3 border-t border-border-06 flex-shrink-0">
+            <p
+              className="text-text-muted text-[10px] uppercase font-mono tracking-widest mb-2"
+              style={{ letterSpacing: "0.7px" }}
+            >
+              MOVEMENT PATHS
+            </p>
             <div className="flex flex-wrap gap-1.5">
               {agentPositions.map((agent) => (
                 <button
                   key={agent.agentId}
                   onClick={() => handleStartArrow(agent.agentId)}
-                  className={`px-2.5 py-1.5 rounded text-xs font-medium transition-all flex items-center gap-1.5 ${selectedAgentForArrow === agent.agentId && drawingArrow
-                      ? "bg-vr text-white"
-                      : "bg-vdark text-vtext-dim hover:text-vtext hover:bg-vsurface-hover"
+                  className={`px-2.5 py-1.5 border text-xs font-mono transition-all flex items-center gap-1.5 ${selectedAgentForArrow === agent.agentId && drawingArrow
+                      ? "border-cyan/30 bg-cyan-dim text-cyan"
+                      : "border-border-06 text-text-muted hover:text-text-primary hover:border-border-10"
                     }`}
+                  style={{ borderRadius: 2, letterSpacing: "0.3px" }}
                 >
-                  <span className="w-4 h-4 rounded-full overflow-hidden bg-vsurface inline-block">
+                  <span className="w-4 h-4 overflow-hidden border border-border-08 bg-void inline-block" style={{ borderRadius: 4 }}>
                     <img
                       src={getAgentIconUrl(agent.agentId)}
                       alt=""
@@ -578,15 +536,15 @@ export default function PlanningPage() {
             </div>
           </div>
 
-          {/* Plan summary */}
-          <div className="px-4 py-3 border-t border-vtext-dim/10 flex-shrink-0 bg-vdark/30">
+          {/* Plan summary — metrics display */}
+          <div className="px-4 py-3 border-t border-border-06 flex-shrink-0 bg-void/50">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-vtext-dim">Utility placed</span>
-              <span className="text-vtext font-mono">{utilityPlacements.length}</span>
+              <span className="text-text-muted font-mono" style={{ letterSpacing: "0.3px" }}>UTILITY</span>
+              <span className="text-text-primary font-mono text-sm">{utilityPlacements.length}</span>
             </div>
             <div className="flex items-center justify-between text-xs mt-1">
-              <span className="text-vtext-dim">Movement paths</span>
-              <span className="text-vtext font-mono">{movementArrows.length}</span>
+              <span className="text-text-muted font-mono" style={{ letterSpacing: "0.3px" }}>PATHS</span>
+              <span className="text-text-primary font-mono text-sm">{movementArrows.length}</span>
             </div>
           </div>
         </div>
