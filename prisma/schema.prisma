@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Scenario {
+  id          String   @id
+  name        String
+  map         String
+  config      String   // JSON string of full scenario
+  releaseDate DateTime @unique @map("release_date")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  plans Plan[]
+
+  @@map("scenarios")
+}
+
+model Plan {
+  id         String   @id @default(cuid())
+  scenarioId String   @map("scenario_id")
+  userHash   String   @map("user_hash")
+  planData   String   @map("plan_data") // JSON
+  score      Int
+  tier       String
+  outcome    String   // JSON of SimulationLog + summary
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  scenario Scenario @relation(fields: [scenarioId], references: [id])
+
+  @@index([scenarioId, score])
+  @@index([scenarioId, createdAt])
+  @@map("plans")
+}

@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Base surfaces (warmer charcoal, less cold-black) ───────────────────── */
+  --color-bg: #0b0d11;
+  --color-pure-black: #080a0e;
+  --color-surface: #141820;
+  --color-elevated: #1b2029;
+  --color-void: #0b0d11;
+
+  /* ── Text ── */
+  --color-ink: #e9e4d6;
+  --color-ink-dim: #b4afa3;
+  --color-ink-mute: #6e6a61;
+  --color-text-primary: #e9e4d6;
+  --color-text-secondary: #b4afa3;
+  --color-text-muted: #6e6a61;
+
+  /* ── Borders ── */
+  --color-border-04: rgba(233, 228, 214, 0.04);
+  --color-border-06: rgba(233, 228, 214, 0.06);
+  --color-border-08: rgba(233, 228, 214, 0.08);
+  --color-border-10: rgba(233, 228, 214, 0.10);
+  --color-border-12: rgba(233, 228, 214, 0.14);
+  --color-line: rgba(233, 228, 214, 0.08);
+
+  /* ── Accents ── */
+  --color-valorant-red: #ff4655;
+  --color-valorant-red-dim: rgba(255, 70, 85, 0.12);
+
+  --color-amber: #f5b13c;
+  --color-amber-dim: rgba(245, 177, 60, 0.14);
+  --color-amber-soft: rgba(245, 177, 60, 0.06);
+
+  --color-teal: #5dd4be;
+  --color-teal-dim: rgba(93, 212, 190, 0.14);
+
+  --color-violet: #9a7bd6;
+  --color-violet-dim: rgba(154, 123, 214, 0.14);
+
+  --color-success: #5dd4be;
+  --color-success-dim: rgba(93, 212, 190, 0.14);
+  --color-warning: #f5b13c;
+  --color-warning-dim: rgba(245, 177, 60, 0.14);
+
+  /* Legacy name shim: cyan tokens now resolve to amber (used by older components). */
+  --color-cyan: #f5b13c;
+  --color-cyan-dim: rgba(245, 177, 60, 0.14);
+
+  /* ── Type ── */
+  --font-family-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-family-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-family-display: var(--font-display), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: rgba(255, 70, 85, 0.3);
+  color: #fff;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(233, 228, 214, 0.12);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(233, 228, 214, 0.22);
+}
+
+/* ── Shared motion ── */
+@keyframes retake-ping {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes retake-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.retake-fade-up {
+  animation: retake-fade-up 240ms ease-out both;
+}

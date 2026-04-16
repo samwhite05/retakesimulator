@@ -1,0 +1,7046 @@
+{
+  "scenarioId": "ascent-b-3v2",
+  "authoritativeGrid": true,
+  "grid": {
+    "mapId": "ascent",
+    "cols": 48,
+    "rows": 48,
+    "tiles": [
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "chokepoint"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "exposed"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "spike_zone"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "cover"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "walkable"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ],
+      [
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        },
+        {
+          "type": "void"
+        }
+      ]
+    ]
+  },
+  "plantableArea": {
+    "x": 0.2916666666666667,
+    "y": 0.7916666666666666,
+    "width": 0.041666666666666664,
+    "height": 0.041666666666666664
+  },
+  "spawnZones": [
+    {
+      "x": 0.13231197771587744,
+      "y": 0.48,
+      "width": 0.07660167130919221,
+      "height": 0.2163788300835655
+    },
+    {
+      "x": 0.23955431754874648,
+      "y": 0.5000000000000001,
+      "width": 0.11559888579387187,
+      "height": 0.09749303621169914
+    }
+  ],
+  "camera": {
+    "center": {
+      "x": 0.3125,
+      "y": 0.8125
+    },
+    "zoom": 1.4
+  }
+}
