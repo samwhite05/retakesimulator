@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import TacticalMap from "@/components/canvas/TacticalMap";
 import HelpModal from "@/components/planning/HelpModal";
-import CinematicPlayer from "@/components/animation/CinematicPlayer";
+import InteractiveCinematicPlayer from "@/components/animation/InteractiveCinematicPlayer";
 import PlanningTopBar from "@/components/planning/PlanningTopBar";
 import AgentRail from "@/components/planning/AgentRail";
 import BriefingRail from "@/components/planning/BriefingRail";
@@ -19,8 +19,8 @@ import type {
   ScenarioResponse,
   SubmitPlanResponse,
   UtilityType,
-  SimulationLog,
   Position,
+  FinalRunPayload,
 } from "@/types";
 import { tileToPos, posToTile, findPath, isSpawnable } from "@/engine/simulation/grid";
 import { getAgentDef, getUtilityRenderSpec } from "@/lib/constants";
@@ -40,7 +40,7 @@ export default function PlanningPageContent() {
   const [error, setError] = useState<string | null>(null);
   const [helpOpen, setHelpOpen] = useState(false);
   const [viewport, setViewport] = useState({ w: 1200, h: 800 });
-  const [executeOverlay, setExecuteOverlay] = useState<SimulationLog | null>(null);
+  const [activeRunId, setActiveRunId] = useState<string | null>(null);
   const executeResultsUrlRef = useRef("");
 
   const {
@@ -253,7 +253,10 @@ export default function PlanningPageContent() {
         const role = def?.role || "initiator";
         const start = posToTile(startNorm);
         const end = posToTile(position);
-        const path = findPath(scenario.grid, start, end, role, undefined, { maxCost: 9999 });
+        const path = findPath(scenario.grid, start, end, role, undefined, {
+          maxCost: 9999,
+          wallBitmap,
+        });
         if (path && path.length > 1) {
           setMovePath(selectedAgentId, path.map(tileToPos));
         }
@@ -301,6 +304,7 @@ export default function PlanningPageContent() {
       setMovePath,
       toggleHoldAtIndex,
       handleDropAgent,
+      wallBitmap,
     ]
   );
 
@@ -345,19 +349,7 @@ export default function PlanningPageContent() {
         return;
       }
       if (json.success && json.data) {
-        try {
-          recordDailyRun(
-            scenario.id,
-            json.data.outcome.score,
-            json.data.outcome.tier,
-            json.data.outcome.maxScore
-          );
-        } catch {
-          /* localStorage disabled; ignore */
-        }
-        const out = encodeUtf8JsonForQueryParam(json.data);
-        executeResultsUrlRef.current = `/results?d=${out}&autoplay=0`;
-        setExecuteOverlay(json.data.log);
+        setActiveRunId(json.data.planId);
       } else {
         setError(json.error || "Failed to submit");
       }
@@ -368,11 +360,31 @@ export default function PlanningPageContent() {
     }
   };
 
-  const handleExecuteCinematicComplete = useCallback(() => {
-    const url = executeResultsUrlRef.current;
-    if (url) router.push(url);
-    setExecuteOverlay(null);
-  }, [router]);
+  /**
+   * Called by the interactive player once the full run finalises — we then
+   * hand the resulting log/outcome off to the results page for grading and
+   * rank display.
+   */
+  const handleRunComplete = useCallback(
+    (payload: FinalRunPayload) => {
+      if (!scenario) return;
+      try {
+        recordDailyRun(
+          scenario.id,
+          payload.outcome.score,
+          payload.outcome.tier,
+          payload.outcome.maxScore
+        );
+      } catch {
+        /* localStorage disabled; ignore */
+      }
+      const out = encodeUtf8JsonForQueryParam(payload);
+      executeResultsUrlRef.current = `/results?d=${out}&autoplay=0`;
+      router.push(executeResultsUrlRef.current);
+      setActiveRunId(null);
+    },
+    [router, scenario]
+  );
 
   if (loading) {
     return (
@@ -504,14 +516,15 @@ export default function PlanningPageContent() {
         />
       </div>
 
-      {executeOverlay && (
+      {activeRunId && (
         <div className="fixed inset-0 z-[70] bg-pure-black">
-          <CinematicPlayer
-            log={executeOverlay}
+          <InteractiveCinematicPlayer
+            planId={activeRunId}
             scenario={scenario}
             width={viewport.w}
             height={viewport.h}
-            onComplete={handleExecuteCinematicComplete}
+            onComplete={handleRunComplete}
+            onAbort={() => setActiveRunId(null)}
           />
         </div>
       )}

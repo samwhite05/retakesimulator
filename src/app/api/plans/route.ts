@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { runSimulation } from "@/engine/simulation/runner";
 import { getScenarioForDate } from "@/lib/scenarios";
 import { getUserHash } from "@/lib/crypto";
 import { prisma } from "@/lib/db";
@@ -9,6 +8,11 @@ import { PlayerPlan } from "@/types";
 import { normalizePlayerPlan } from "@/lib/normalizePlan";
 import { isServerPlanRunnable } from "@/lib/planValidation";
 
+/**
+ * Commit a plan for today. This only persists the plan + enforces the daily
+ * cap — the interactive run that actually plays the cinematic is started
+ * separately via `POST /api/runs`. See `src/app/api/runs/route.ts`.
+ */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -49,7 +53,6 @@ export async function POST(req: NextRequest) {
 
     const scenario = { ...base, grid: await resolveScenarioGrid(base) };
 
-    // Validate plan agents match scenario
     const validAgentIds = new Set(scenario.availableAgents);
     const planAgentIds = plan.agentPositions.map((a) => a.agentId);
     if (planAgentIds.some((id) => !validAgentIds.has(id))) {
@@ -58,48 +61,30 @@ export async function POST(req: NextRequest) {
 
     if (!isServerPlanRunnable(scenario, plan)) {
       return NextResponse.json(
-        { success: false, error: "Plan incomplete: need utility, entry path per agent, and re-site (path or hold) each" },
+        {
+          success: false,
+          error:
+            "Plan incomplete: every agent needs a spawn + default path, and at least one utility charge drafted.",
+        },
         { status: 400 }
       );
     }
 
-    // Run simulation
-    const { log, outcome } = runSimulation(plan, scenario);
-
-    // Save plan
     const saved = await prisma.plan.create({
       data: {
         scenarioId: plan.scenarioId,
         userHash,
         planData: JSON.stringify(plan),
-        score: outcome.score,
-        tier: outcome.tier,
-        outcome: JSON.stringify({ log, outcome }),
-      },
-    });
-
-    // Compute rank
-    const betterCount = await prisma.plan.count({
-      where: {
-        scenarioId: plan.scenarioId,
-        score: { gt: outcome.score },
-        createdAt: { gte: today, lt: tomorrow },
-      },
-    });
-    const totalCount = await prisma.plan.count({
-      where: {
-        scenarioId: plan.scenarioId,
-        createdAt: { gte: today, lt: tomorrow },
+        score: 0,
+        tier: "pending",
+        outcome: JSON.stringify({ pending: true }),
       },
     });
 
     return NextResponse.json({
       success: true,
       data: {
-        outcome,
-        log,
-        rank: betterCount + 1,
-        total: totalCount,
+        planId: saved.id,
       },
     });
   } catch (err) {

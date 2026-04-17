@@ -131,10 +131,19 @@ function castRayOnBitmap(
     return false;
   };
 
-  // Grace band: ignore blockers in the immediate 2-px neighbourhood of the
-  // eye so defenders whose tile center samples to a dilated wall pixel still
-  // get a proper cone. tGrace is in normalized coords (~2 px).
-  const tGrace = 2 / Math.min(W, H);
+  // Grace band: only engaged when the defender's tile center itself samples
+  // to a wall pixel (rare, happens when the eye sits right on a dilated wall
+  // edge). Without a condition here, every ray would skip the first few
+  // pixels and let walls adjacent to the defender leak vision through — the
+  // "rays clipping through walls" bug. With the condition, normal defenders
+  // get strict wall blocking while wall-embedded eyes still produce a cone.
+  // IMPORTANT: only check the raw wall bitmap here — NOT smokes. If the
+  // defender is standing *inside* a smoke, we explicitly want their cone to
+  // collapse rather than be given a grace band to escape through.
+  const eyePx = Math.max(0, Math.min(W - 1, Math.floor(ox * W)));
+  const eyePy = Math.max(0, Math.min(H - 1, Math.floor(oy * H)));
+  const eyeInsideWall = bitmap.data[eyePy * W + eyePx] === 1;
+  const tGrace = eyeInsideWall ? 4 / Math.min(W, H) : 0;
 
   while (true) {
     if (tMaxX < tMaxY - 1e-12) {
@@ -200,14 +209,49 @@ export function buildVisionPolygonFromBitmap(
   const coneRightRaw = facing + halfCone;
   const tMax = Math.SQRT2 * 1.02;
 
-  // Dense uniform sampling — at ~0.25° per ray the per-pixel wall detail is
-  // preserved for any reasonable render size. Pixel DDA is cheap so this
-  // costs less than adding every pixel corner as an explicit angle.
-  const numRays = 720;
-  const rim: Position[] = [];
+  // Uniform sampling — at ~0.4° per ray the per-pixel wall detail is preserved
+  // for any reasonable render size. Dropping from 720 to 360 rays cuts cost
+  // substantially while still rendering smoothly once Konva applies stroke
+  // tension. Pixel DDA is cheap so this costs less than injecting every
+  // corner as an explicit angle.
+  const numRays = 360;
+  const distances = new Float64Array(numRays + 1);
+  const angles = new Float64Array(numRays + 1);
   for (let i = 0; i <= numRays; i++) {
     const a = coneLeftRaw + ((coneRightRaw - coneLeftRaw) * i) / numRays;
-    rim.push(castRayOnBitmap(bitmap, smokeTiles, eye.x, eye.y, a, tMax));
+    angles[i] = a;
+    const hit = castRayOnBitmap(bitmap, smokeTiles, eye.x, eye.y, a, tMax);
+    distances[i] = Math.hypot(hit.x - eye.x, hit.y - eye.y);
+  }
+
+  // Conservative inward-only smoothing: a spike where distance[i] >> neighbors
+  // signals a ray slipping past a wall corner. Pull it back to the neighbor
+  // distance. We never push distances *out* (which would leak vision through
+  // a wall). Small-scale jitter (within 8% of neighbors) is left alone so the
+  // cone still respects real geometry edges.
+  const smoothed = new Float64Array(numRays + 1);
+  smoothed[0] = distances[0];
+  smoothed[numRays] = distances[numRays];
+  for (let i = 1; i < numRays; i++) {
+    const prev = distances[i - 1];
+    const cur = distances[i];
+    const next = distances[i + 1];
+    const neighborMax = Math.max(prev, next);
+    const neighborMin = Math.min(prev, next);
+    if (cur > neighborMax * 1.12 && cur - neighborMax > 0.02) {
+      smoothed[i] = neighborMax;
+    } else if (cur < neighborMin * 0.88 && neighborMin - cur > 0.02) {
+      smoothed[i] = neighborMin * 0.88;
+    } else {
+      smoothed[i] = cur;
+    }
+  }
+
+  const rim: Position[] = [];
+  for (let i = 0; i <= numRays; i++) {
+    const a = angles[i];
+    const d = smoothed[i];
+    rim.push({ x: eye.x + Math.cos(a) * d, y: eye.y + Math.sin(a) * d });
   }
 
   // Drop strictly duplicate consecutive rim hits to keep the Konva triangle

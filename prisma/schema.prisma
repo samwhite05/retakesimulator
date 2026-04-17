@@ -31,8 +31,34 @@ model Plan {
   createdAt  DateTime @default(now()) @map("created_at")
 
   scenario Scenario @relation(fields: [scenarioId], references: [id])
+  runs     Run[]
 
   @@index([scenarioId, score])
   @@index([scenarioId, createdAt])
   @@map("plans")
+}
+
+/**
+ * Short-lived interactive run state. A Run is created after a plan is
+ * submitted and stepped forward one decision at a time via the `/api/runs`
+ * endpoints. When the run finalises, its final log + outcome are committed
+ * back to the owning Plan row.
+ */
+model Run {
+  id         String   @id @default(cuid())
+  planId     String   @map("plan_id")
+  scenarioId String   @map("scenario_id")
+  userHash   String   @map("user_hash")
+  seed       Int
+  state      String   // JSON SimState
+  history    String   @default("[]") // JSON DecisionRecord[]
+  pending    String?  // JSON DecisionPoint | null
+  finalLog   String?  @map("final_log") // JSON SimulationLog once finalised
+  createdAt  DateTime @default(now()) @map("created_at")
+  expiresAt  DateTime @map("expires_at")
+
+  plan Plan @relation(fields: [planId], references: [id])
+
+  @@index([userHash, createdAt])
+  @@map("runs")
 }

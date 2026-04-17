@@ -14,7 +14,10 @@ import {
 } from "@/engine/simulation/grid";
 import { getAgentDef, getUtilityRenderSpec, METERS_PER_TILE } from "@/lib/constants";
 import { getAgentIconUrl } from "@/lib/assets";
-import { buildEnemyVisionPolygon, smokeTilesFromPlacements } from "@/engine/simulation/visionCone";
+import {
+  buildEnemyVisionPolygon,
+  visionBlockerTilesFromPlacements,
+} from "@/engine/simulation/visionCone";
 import { buildVisionPolygonFromBitmap } from "@/engine/simulation/minimapVision";
 import { useWallBitmap } from "@/lib/useWallBitmap";
 import { computePathExposure, exposureColor } from "@/engine/simulation/exposure";
@@ -260,10 +263,13 @@ export default function TacticalMap({
     if (!def) return null;
     const start = posToTile(spawnForSelected);
     const end = posToTile(hoverPos);
-    const path = findPath(scenario.grid, start, end, def.role, undefined, { maxCost: 9999 });
+    const path = findPath(scenario.grid, start, end, def.role, undefined, {
+      maxCost: 9999,
+      wallBitmap,
+    });
     if (!path || path.length <= 1) return null;
     return { path, agentPos: spawnForSelected };
-  }, [isMoveMode, selectedAgentId, hoverPos, spawnForSelected, scenario.grid]);
+  }, [isMoveMode, selectedAgentId, hoverPos, spawnForSelected, scenario.grid, wallBitmap]);
 
   const nonVoidGridBounds = useMemo(() => {
     const g = scenario.grid.tiles;
@@ -288,8 +294,8 @@ export default function TacticalMap({
 
   const spikePos = toCanvas(scenario.spikeSite);
 
-  const smokeTilesForVision = useMemo(
-    () => smokeTilesFromPlacements(utilityPlacements),
+  const visionBlockerTiles = useMemo(
+    () => visionBlockerTilesFromPlacements(utilityPlacements),
     [utilityPlacements]
   );
 
@@ -302,14 +308,14 @@ export default function TacticalMap({
         const fan = wallBitmap
           ? buildVisionPolygonFromBitmap(
               wallBitmap,
-              smokeTilesForVision,
+              visionBlockerTiles,
               enemy.position,
               lookAt,
               { offAngle: enemy.offAngle }
             )
           : buildEnemyVisionPolygon(
               scenario.grid,
-              smokeTilesForVision,
+              visionBlockerTiles,
               enemy.position,
               lookAt,
               { offAngle: enemy.offAngle }
@@ -320,7 +326,7 @@ export default function TacticalMap({
     scenario.enemyAgents,
     scenario.grid,
     scenario.spikeSite,
-    smokeTilesForVision,
+    visionBlockerTiles,
     showEnemies,
     wallBitmap,
   ]);
@@ -518,26 +524,47 @@ export default function TacticalMap({
           </Group>
         </Layer>
 
-        {/* Enemy vision wedges */}
+        {/* Enemy vision wedges — radial gradient from eye, faded rim. Rims are
+            built in map-normalized space then projected through toCanvas so zoom
+            and pan stay pixel-locked. */}
         {showEnemies && enemyVisionFans.length > 0 && (
           <Layer listening={false}>
             {enemyVisionFans.map((fan) => {
               const eyeCanvas = toCanvas(fan.eye);
+              const rimCanvas = fan.rim.map((p) => toCanvas(p));
+              if (rimCanvas.length < 2) return null;
               const pts: number[] = [eyeCanvas.x, eyeCanvas.y];
-              for (const p of fan.rim) {
-                const c = toCanvas(p);
+              let maxR = 0;
+              for (const c of rimCanvas) {
                 pts.push(c.x, c.y);
+                const d = Math.hypot(c.x - eyeCanvas.x, c.y - eyeCanvas.y);
+                if (d > maxR) maxR = d;
               }
               pts.push(eyeCanvas.x, eyeCanvas.y);
+              const gradientR = Math.max(maxR, cellSize);
               return (
-                <Line
-                  key={`fov-${fan.id}`}
-                  points={pts}
-                  closed
-                  fill="rgba(255, 70, 85, 0.12)"
-                  stroke="rgba(255, 70, 85, 0.28)"
-                  strokeWidth={0.75}
-                />
+                <Group key={`fov-${fan.id}`}>
+                  <Line
+                    points={pts}
+                    closed
+                    fillRadialGradientStartPoint={eyeCanvas}
+                    fillRadialGradientStartRadius={0}
+                    fillRadialGradientEndPoint={eyeCanvas}
+                    fillRadialGradientEndRadius={gradientR}
+                    fillRadialGradientColorStops={[
+                      0, "rgba(255, 70, 85, 0.55)",
+                      0.35, "rgba(255, 70, 85, 0.28)",
+                      0.75, "rgba(255, 70, 85, 0.12)",
+                      1, "rgba(255, 70, 85, 0.02)",
+                    ]}
+                    stroke="rgba(255, 70, 85, 0.38)"
+                    strokeWidth={0.6}
+                    lineCap="round"
+                    lineJoin="round"
+                    tension={0.05}
+                    listening={false}
+                  />
+                </Group>
               );
             })}
           </Layer>

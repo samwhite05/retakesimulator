@@ -200,6 +200,12 @@ export interface Outcome {
   summary: string;
   highlights: string[];
   mistakes: string[];
+  /** Grades for every decision surfaced during the interactive run. */
+  decisionGrades?: DecisionRecord[];
+  /** Rollup bonus earned from decisions (optimal = full, acceptable = half, bad = 0). */
+  decisionScore?: number;
+  /** Max rollup possible if every decision were optimal. */
+  decisionMaxScore?: number;
 }
 
 export type SimulationPhase =
@@ -256,17 +262,108 @@ export interface SimulationLog {
     spikeDefused: boolean;
   };
   outcome: Outcome;
+  /** Every decision point surfaced during the run, in order. */
+  decisionPoints?: DecisionPoint[];
+  /** Every decision the player actually made, graded. */
+  decisionHistory?: DecisionRecord[];
+}
+
+/**
+ * Canonical list of emergent decision kinds. The engine's detector set maps
+ * 1:1 onto these identifiers; the client uses the kind to pick overlay
+ * copy/tone.
+ */
+export type DecisionKindId =
+  | "first_contact"
+  | "ally_down"
+  | "utility_window"
+  | "spike_threshold"
+  | "recon_info"
+  | "low_hp_duel";
+
+export interface DecisionChoice {
+  id: string;
+  label: string;
+  rationale: string;
+  /** Chosen automatically if the decision timer elapses. */
+  isDefault?: boolean;
+}
+
+export interface DecisionPoint {
+  id: string;
+  kind: DecisionKindId;
+  triggeredBy: {
+    turnIndex: number;
+    agentId?: string;
+    tile?: TileCoord;
+  };
+  /** Headline shown above the choices on the cinematic overlay. */
+  headline: string;
+  /** Flavour sub-line shown under the headline. */
+  subline?: string;
+  timerMs: number;
+  choices: DecisionChoice[];
+}
+
+export type DecisionGrade = "optimal" | "acceptable" | "bad";
+
+export interface DecisionRecord {
+  decision: DecisionPoint;
+  chosenId: string;
+  timedOut: boolean;
+  grade: DecisionGrade;
+  gradeReason: string;
 }
 
 export interface SubmitPlanRequest {
   plan: PlayerPlan;
 }
 
+/**
+ * Response from `POST /api/plans`. The plan is stored and the planId is
+ * handed back — the caller then kicks off an interactive run via
+ * `POST /api/runs`.
+ */
 export interface SubmitPlanResponse {
+  planId: string;
+}
+
+/**
+ * Payload consumed by the post-run results screen. Produced client-side
+ * once the interactive run finalises.
+ */
+export interface FinalRunPayload {
   outcome: Outcome;
   log: SimulationLog;
   rank?: number;
   total?: number;
+}
+
+/** Sent by the client to start a new interactive run against the stored plan. */
+export interface StartRunRequest {
+  planId: string;
+}
+
+/**
+ * Returned by `POST /api/runs` (start) and `POST /api/runs/:id/decide`
+ * (continue). Either the run paused on a new decision or finalised.
+ */
+export interface RunStepResponse {
+  runId: string;
+  /** Events rendered since the last step. */
+  segment: TurnLog[];
+  /** Populated when the run paused on an emergent decision. */
+  pendingDecision?: DecisionPoint;
+  /** Populated when the run finalised (no more decisions). */
+  outcome?: Outcome;
+  finalLog?: SimulationLog;
+  rank?: number;
+  total?: number;
+}
+
+export interface DecideRunRequest {
+  choiceId: string;
+  timedOut?: boolean;
 }
 
 export interface ScenarioResponse {

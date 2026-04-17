@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import type { SubmitPlanResponse, Scenario, ScenarioResponse, GameEvent } from "@/types";
+import type { FinalRunPayload, Scenario, ScenarioResponse, GameEvent } from "@/types";
 import CinematicPlayer from "@/components/animation/CinematicPlayer";
 import { decodeUtf8JsonFromQueryParam } from "@/lib/urlUtf8Payload";
 import { gradeForScore, gradeColor } from "@/lib/streaks";
@@ -16,7 +16,7 @@ interface KeyMoment {
   tone: "teal" | "amber" | "red" | "violet";
 }
 
-function summarizeMoments(log: SubmitPlanResponse["log"]): KeyMoment[] {
+function summarizeMoments(log: FinalRunPayload["log"]): KeyMoment[] {
   const out: KeyMoment[] = [];
   let tSec = 0;
   const phaseLabel: Record<string, string> = {
@@ -122,7 +122,7 @@ export default function ResultsPageContent() {
   const [size, setSize] = useState({ width: 800, height: 600 });
   const autoplayOff = searchParams.get("autoplay") === "0" || searchParams.get("autoplay") === "false";
   const [showCinematic, setShowCinematic] = useState(!autoplayOff);
-  const [data, setData] = useState<SubmitPlanResponse | null>(null);
+  const [data, setData] = useState<FinalRunPayload | null>(null);
   const [scenario, setScenario] = useState<Scenario | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -132,7 +132,7 @@ export default function ResultsPageContent() {
       return;
     }
     try {
-      const parsed = decodeUtf8JsonFromQueryParam<SubmitPlanResponse>(encoded);
+      const parsed = decodeUtf8JsonFromQueryParam<FinalRunPayload>(encoded);
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setData(parsed);
     } catch {
@@ -383,6 +383,73 @@ export default function ResultsPageContent() {
                 })}
               </div>
             </div>
+
+            {outcome.decisionGrades && outcome.decisionGrades.length > 0 && (
+              <div className="rounded-2xl border border-border-10 bg-surface/70 p-5">
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-ink-mute">Live calls</div>
+                  {typeof outcome.decisionScore === "number" && typeof outcome.decisionMaxScore === "number" && (
+                    <div className="font-mono text-[11px] text-ink">
+                      {outcome.decisionScore}
+                      <span className="text-ink-mute">/{outcome.decisionMaxScore}</span>
+                    </div>
+                  )}
+                </div>
+                <ol className="space-y-1.5">
+                  {outcome.decisionGrades.map((record, i) => {
+                    const gradeMap: Record<string, { label: string; ring: string; chip: string }> = {
+                      optimal: {
+                        label: "Optimal",
+                        ring: "border-teal/40 bg-teal/5",
+                        chip: "border-teal/40 bg-teal/10 text-teal",
+                      },
+                      acceptable: {
+                        label: "OK",
+                        ring: "border-amber/30 bg-amber/5",
+                        chip: "border-amber/40 bg-amber/10 text-amber",
+                      },
+                      bad: {
+                        label: "Bad",
+                        ring: "border-valorant-red/30 bg-valorant-red/5",
+                        chip: "border-valorant-red/40 bg-valorant-red/10 text-valorant-red",
+                      },
+                    };
+                    const tone = gradeMap[record.grade] ?? gradeMap.acceptable;
+                    const chosen = record.decision.choices.find((c) => c.id === record.chosenId);
+                    return (
+                      <li
+                        key={`${record.decision.id}-${i}`}
+                        className={`rounded-lg border px-3 py-2 ${tone.ring}`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[12px] font-semibold text-ink">
+                              {record.decision.headline}
+                            </div>
+                            <div className="mt-0.5 truncate text-[11px] text-ink-dim">
+                              Chose <span className="text-ink">{chosen?.label ?? record.chosenId}</span>
+                              {record.timedOut && (
+                                <span className="ml-1 text-ink-mute">· timed out</span>
+                              )}
+                            </div>
+                          </div>
+                          <span
+                            className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${tone.chip}`}
+                          >
+                            {tone.label}
+                          </span>
+                        </div>
+                        {record.gradeReason && (
+                          <div className="mt-1.5 text-[10px] italic text-ink-mute">
+                            {record.gradeReason}
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            )}
 
             {(outcome.highlights.length > 0 || outcome.mistakes.length > 0) && (
               <div className="grid grid-cols-1 gap-3">

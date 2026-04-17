@@ -1,13 +1,15 @@
 import { SimAgent, GameEvent } from "@/types";
-import { GridMap, TileType } from "@/types";
-import { getTile, tileKey } from "./grid";
+import { GridMap } from "@/types";
+import { getTile } from "./grid";
 import { canSeeAgent } from "./vision";
 import { WEAPON_DAMAGE, GRID_COLS, GRID_ROWS } from "@/lib/constants";
+import type { Rng } from "./rng";
 
 export interface CombatContext {
   grid: GridMap;
   smokeTiles: Set<string>;
   wallTiles: Set<string>;
+  rng: Rng;
 }
 
 export function resolveCombat(
@@ -17,14 +19,14 @@ export function resolveCombat(
 ): { winner: SimAgent; loser: SimAgent; damage: number; events: GameEvent[] } {
   const advantage = computeAdvantage(attacker, defender, ctx);
   const winChance = Math.max(0.1, Math.min(0.9, 0.5 + advantage / 100));
-  const roll = Math.random();
+  const roll = ctx.rng.next();
 
   const attackerWins = roll < winChance;
   const winner = attackerWins ? attacker : defender;
   const loser = attackerWins ? defender : attacker;
 
   const weapon = WEAPON_DAMAGE[winner.weapon] || WEAPON_DAMAGE.vandal;
-  const damage = Math.floor(weapon.min + Math.random() * (weapon.max - weapon.min));
+  const damage = Math.floor(weapon.min + ctx.rng.next() * (weapon.max - weapon.min));
 
   const events: GameEvent[] = [
     {

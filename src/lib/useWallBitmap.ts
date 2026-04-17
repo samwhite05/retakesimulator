@@ -33,7 +33,12 @@ function loadBitmap(src: string): Promise<WallBitmap | null> {
           resolve(null);
           return;
         }
-        const maxDim = 640;
+        // Use the minimap at its native resolution (up to 1200px). Downsampling
+        // through canvas with default bilinear smoothing blurs thin wall
+        // strokes (1-2px) below the wall-pixel threshold, which is what causes
+        // rays to clip through walls in the cone renderer. Staying at native
+        // resolution keeps wall detection pixel-exact.
+        const maxDim = 1200;
         let rw = w0;
         let rh = h0;
         if (Math.max(rw, rh) > maxDim) {
@@ -49,6 +54,9 @@ function loadBitmap(src: string): Promise<WallBitmap | null> {
           resolve(null);
           return;
         }
+        // Disable smoothing so any downscale preserves hard edges instead of
+        // blending wall pixels into neighbouring floor pixels.
+        ctx.imageSmoothingEnabled = false;
         ctx.drawImage(img, 0, 0, rw, rh);
         const data = ctx.getImageData(0, 0, rw, rh);
         const bitmap = buildWallBitmapFromImageData(data);

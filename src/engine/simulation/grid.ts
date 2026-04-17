@@ -1,6 +1,63 @@
 import { Position, TileCoord, GridMap, TileType, AgentRole } from "@/types";
 import { GRID_COLS, GRID_ROWS, TILE_COST, ROLE_MOVEMENT } from "@/lib/constants";
 
+/**
+ * Minimal shape of a pixel-level wall bitmap (width / height + row-major 1 = wall,
+ * 0 = open). Kept here to avoid pulling minimapVision into a circular dep — the
+ * real bitmap producer lives in `@/engine/simulation/minimapVision`.
+ */
+export interface WallBitmapLite {
+  width: number;
+  height: number;
+  data: Uint8Array | Uint8ClampedArray;
+}
+
+/** Bresenham-style pixel walk; returns true if any wall pixel lies on segment A→B. */
+export function segmentCrossesBitmapWall(
+  bitmap: WallBitmapLite,
+  a: Position,
+  b: Position
+): boolean {
+  const W = bitmap.width;
+  const H = bitmap.height;
+  if (W < 2 || H < 2) return false;
+  const ax = Math.max(0, Math.min(W - 1, Math.floor(a.x * W)));
+  const ay = Math.max(0, Math.min(H - 1, Math.floor(a.y * H)));
+  const bx = Math.max(0, Math.min(W - 1, Math.floor(b.x * W)));
+  const by = Math.max(0, Math.min(H - 1, Math.floor(b.y * H)));
+  let x = ax;
+  let y = ay;
+  const dx = Math.abs(bx - ax);
+  const dy = Math.abs(by - ay);
+  const sx = ax < bx ? 1 : -1;
+  const sy = ay < by ? 1 : -1;
+  let err = dx - dy;
+  // Tolerate a 1-pixel grace band around each endpoint — tile centers can land
+  // inside the dilated wall border and we don't want every edge rejected by
+  // sampling noise.
+  const skipHead = 2;
+  const skipTail = 2;
+  let step = 0;
+  const maxSteps = dx + dy;
+  while (true) {
+    const nearEndpoint = step <= skipHead || step >= maxSteps - skipTail;
+    if (!nearEndpoint && bitmap.data[y * W + x] === 1) return true;
+    if (x === bx && y === by) break;
+    const e2 = 2 * err;
+    if (e2 > -dy) {
+      err -= dy;
+      x += sx;
+    }
+    if (e2 < dx) {
+      err += dx;
+      y += sy;
+    }
+    step++;
+    if (step > maxSteps + 4) break;
+  }
+  return false;
+}
+
 /** Permanent map boundary: geometry wall or off-map transparent (void). */
 export function isImpassableTerrain(type: TileType): boolean {
   return type === "wall" || type === "void";
@@ -333,11 +390,25 @@ function pathHeuristic(a: TileCoord, b: TileCoord): number {
 export interface FindPathOptions {
   /** Max movement budget (same units as TILE_COST sums in getReachableTiles). */
   maxCost?: number;
+  /**
+   * When true (default unless the destination is itself on the spike site), routing
+   * refuses to cross spike_zone tiles. This keeps attackers pathing *around* the
+   * bombsite on entry rather than strolling through it to reach a post-plant angle.
+   */
+  omitSpikeZone?: boolean;
+  /**
+   * Optional pixel-level wall bitmap (the same one used for vision cones). When
+   * provided, pathfinding additionally rejects any tile-to-tile edge whose
+   * straight line crosses a wall pixel — this catches thin walls the 48×48
+   * tactical grid is too coarse to see.
+   */
+  wallBitmap?: WallBitmapLite | null;
 }
 
 /**
  * Shortest path under a movement budget using the same tile costs as getReachableTiles.
- * Spike site tiles are not traversable unless the goal tile is on the spike site (defuse).
+ * Spike site tiles are not traversable unless the goal tile is on the spike site (defuse)
+ * or the caller explicitly opts out via `omitSpikeZone: false`.
  */
 export function findPath(
   grid: GridMap,
@@ -352,10 +423,22 @@ export function findPath(
   const { diagonal, range } = ROLE_MOVEMENT[role];
   const maxCost = options?.maxCost ?? range;
 
+  const endTile = getTile(grid, end);
+  const endIsSpike = endTile?.type === "spike_zone";
+  const startTile = getTile(grid, start);
+  const startIsSpike = startTile?.type === "spike_zone";
+  const omitSpikeZone = options?.omitSpikeZone ?? !(endIsSpike || startIsSpike);
+
   const canStep = (tile: TileCoord): boolean => {
     if (blockedTiles?.has(tileKey(tile))) return false;
     const t = getTile(grid, tile);
     if (!t || isImpassableTerrain(t.type)) return false;
+    if (omitSpikeZone && t.type === "spike_zone") {
+      // Always allow the endpoints so paths can land on the plant in edge cases.
+      if (tile.col === end.col && tile.row === end.row) return true;
+      if (tile.col === start.col && tile.row === start.row) return true;
+      return false;
+    }
     return true;
   };
 
@@ -398,6 +481,14 @@ export function findPath(
         const c1 = { col: cur.tile.col, row: nb.row };
         const c2 = { col: nb.col, row: cur.tile.row };
         if (!canStep(c1) || !canStep(c2)) continue;
+      }
+      if (options?.wallBitmap) {
+        const edgeCrossesWall = segmentCrossesBitmapWall(
+          options.wallBitmap,
+          tileToPos(cur.tile),
+          tileToPos(nb)
+        );
+        if (edgeCrossesWall) continue;
       }
       const nt = getTile(grid, nb)!;
       const step = TILE_COST[nt.type];

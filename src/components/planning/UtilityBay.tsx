@@ -52,10 +52,13 @@ export default function UtilityBay({
     <div className="flex items-center gap-3 border-t border-border-06 bg-pure-black/85 px-5 py-3 backdrop-blur-md">
       <div className="flex min-w-[150px] flex-col">
         <div className="text-[10px] uppercase tracking-[0.2em] text-ink-mute">
-          Utility drafted
+          Pre-contact util
         </div>
         <div className="font-mono text-[13px] text-ink">
           {usedCount} <span className="text-ink-mute">/ {totalUtilityCharges}</span>
+        </div>
+        <div className="mt-0.5 text-[9px] italic text-ink-mute">
+          Rest saved for live calls
         </div>
       </div>
 
@@ -138,6 +141,15 @@ export default function UtilityBay({
         Clear
       </button>
 
+      <div className="hidden flex-col items-end text-right lg:flex">
+        <div className="text-[9px] uppercase tracking-[0.22em] text-ink-mute">
+          Post-contact
+        </div>
+        <div className="text-[10px] font-semibold text-amber">
+          Live calls after contact
+        </div>
+      </div>
+
       <button
         type="button"
         onClick={onSimulate}
@@ -151,7 +163,7 @@ export default function UtilityBay({
           </>
         ) : (
           <>
-            Run simulation
+            Commit &amp; Execute
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <polyline points="9 18 15 12 9 6" />
             </svg>

@@ -1,8 +1,9 @@
 import type { GridMap, Position, Scenario, UtilityItem } from "@/types";
-import { buildEnemyVisionPolygon, smokeTilesFromPlacements } from "./visionCone";
+import {
+  buildEnemyVisionPolygon,
+  visionBlockerTilesFromPlacements,
+} from "./visionCone";
 import { buildVisionPolygonFromBitmap, type WallBitmap } from "./minimapVision";
-
-type SmokePlacementLike = Pick<UtilityItem, "type" | "position">;
 
 /**
  * Exposure-driven pathing model.
@@ -68,7 +69,18 @@ function pointInVisionFan(
   const leftAngle = Math.atan2(leftDy, leftDx);
   const rightDx = rim[rim.length - 1].x - eye.x;
   const rightDy = rim[rim.length - 1].y - eye.y;
-  const rightAngle = Math.atan2(rightDy, rightDx);
+  const rightAngleRaw = Math.atan2(rightDy, rightDx);
+
+  // `atan2` returns in (-π, π] — the two endpoints of a cone that straddles
+  // ±π come back on opposite sides of the wrap and their naive average flips
+  // the facing by 180°. Unwrap right relative to left so a defender looking
+  // west (left=126°, rightRaw=-150°) averages to 168° (correct) rather than
+  // -12° (inverted). Without this fix, path exposure for west-facing cones
+  // was reported as the *complement* of reality.
+  const TAU = 2 * Math.PI;
+  let rightAngle = rightAngleRaw;
+  while (rightAngle - leftAngle > Math.PI) rightAngle -= TAU;
+  while (rightAngle - leftAngle < -Math.PI) rightAngle += TAU;
 
   const facing = (leftAngle + rightAngle) / 2;
   const normAngle = normalizeAngle(angle, facing);
@@ -112,7 +124,7 @@ export function computePathExposure(
   scenario: Scenario,
   startPosition: Position,
   path: Position[],
-  utilityPlacements: SmokePlacementLike[],
+  utilityPlacements: UtilityItem[],
   /**
    * Optional minimap-derived wall bitmap. When provided, defender vision
    * fans are raycast against the painted wall outlines for pixel-accurate
@@ -132,19 +144,18 @@ export function computePathExposure(
     };
   }
 
-  const smoke = smokeTilesFromPlacements(
-    utilityPlacements.filter((u): u is UtilityItem => u.type === "smoke" && !!u.position)
-  );
+  // Smokes + placed walls both block vision; they share one occluder tile set.
+  const blockers = visionBlockerTilesFromPlacements(utilityPlacements);
   const fans = scenario.enemyAgents
     .filter((e) => !e.isHidden)
     .map((e) => {
       const lookAt = e.lookAt ?? scenario.spikeSite;
       if (wallBitmap) {
-        return buildVisionPolygonFromBitmap(wallBitmap, smoke, e.position, lookAt, {
+        return buildVisionPolygonFromBitmap(wallBitmap, blockers, e.position, lookAt, {
           offAngle: e.offAngle,
         });
       }
-      return buildEnemyVisionPolygon(scenario.grid, smoke, e.position, lookAt, {
+      return buildEnemyVisionPolygon(scenario.grid, blockers, e.position, lookAt, {
         offAngle: e.offAngle,
       });
     });

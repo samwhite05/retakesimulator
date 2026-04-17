@@ -1,0 +1,17 @@
+# Render Blueprint — single Next.js app (no backend/ folder).
+# Apply: Dashboard → New → Blueprint → connect this repo, or merge into an existing Blueprint.
+# If you already have a Web Service, set Build / Start manually (see comments below).
+services:
+  - type: web
+    name: retakesimulator
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Prisma SQLite (matches prisma/schema.prisma). Use Render Postgres later if you switch provider.
+      - key: DATABASE_URL
+        value: file:./prisma/dev.db

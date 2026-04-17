@@ -1,14 +1,29 @@
 import type { GridMap, Position, UtilityItem } from "@/types";
-import { GRID_COLS, GRID_ROWS, METERS_PER_TILE, UTILITY_RADIUS } from "@/lib/constants";
-import { getTile, getTilesInRadius, isImpassableTerrain, posToTile, tileKey } from "./grid";
+import {
+  GRID_COLS,
+  GRID_ROWS,
+  METERS_PER_TILE,
+  UTILITY_RADIUS,
+  getUtilityRenderSpec,
+} from "@/lib/constants";
+import {
+  getLineTiles,
+  getTile,
+  getTilesInRadius,
+  isImpassableTerrain,
+  posToTile,
+  tileKey,
+} from "./grid";
 
 /** Approximate smoke volume on the tactical grid from placed smokes (planning / preview). */
 export function smokeTilesFromPlacements(utilityPlacements: UtilityItem[]): Set<string> {
   const out = new Set<string>();
   for (const u of utilityPlacements) {
     if (u.type !== "smoke") continue;
+    const spec = getUtilityRenderSpec(u.agentId, u.type);
+    const radiusM = spec.radiusMeters ?? UTILITY_RADIUS.smoke;
+    const rTiles = Math.max(1, Math.ceil(radiusM / METERS_PER_TILE));
     const center = posToTile(u.position);
-    const rTiles = Math.max(1, Math.ceil(UTILITY_RADIUS.smoke / METERS_PER_TILE) + 1);
     for (const t of getTilesInRadius(center, rTiles)) {
       if (t.row >= 0 && t.row < GRID_ROWS && t.col >= 0 && t.col < GRID_COLS) {
         out.add(tileKey(t));
@@ -16,6 +31,90 @@ export function smokeTilesFromPlacements(utilityPlacements: UtilityItem[]): Set<
     }
   }
   return out;
+}
+
+/**
+ * Union of every utility placement that hard-blocks vision on the tactical
+ * grid: smokes (circles at the correct per-agent radius) and placed walls
+ * (rasterized as lines between the placement endpoints). Used by planning
+ * exposure and the tactical map's cone renderer so LOS responds to *all*
+ * occluders, not just smokes.
+ */
+export function visionBlockerTilesFromPlacements(
+  utilityPlacements: UtilityItem[]
+): Set<string> {
+  const out = new Set<string>();
+  for (const u of utilityPlacements) {
+    if (u.type === "smoke") {
+      const spec = getUtilityRenderSpec(u.agentId, u.type);
+      const radiusM = spec.radiusMeters ?? UTILITY_RADIUS.smoke;
+      const rTiles = Math.max(1, Math.ceil(radiusM / METERS_PER_TILE));
+      const center = posToTile(u.position);
+      for (const t of getTilesInRadius(center, rTiles)) {
+        if (t.row >= 0 && t.row < GRID_ROWS && t.col >= 0 && t.col < GRID_COLS) {
+          out.add(tileKey(t));
+        }
+      }
+    } else if (u.type === "wall" && u.target) {
+      const a = posToTile(u.target);
+      const b = posToTile(u.position);
+      for (const t of getLineTiles(a, b)) {
+        if (t.row < 0 || t.row >= GRID_ROWS || t.col < 0 || t.col >= GRID_COLS) continue;
+        out.add(tileKey(t));
+        // Thicken by 1 tile perpendicular so a thin line still occludes
+        // through the full wall width (~1.4m tiles give ~2.8m painted wall).
+        for (const dr of [-1, 1]) {
+          for (const dc of [-1, 1]) {
+            const tc = t.col + dc;
+            const tr = t.row + dr;
+            if (tr >= 0 && tr < GRID_ROWS && tc >= 0 && tc < GRID_COLS) {
+              out.add(tileKey({ col: tc, row: tr }));
+            }
+          }
+        }
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * Radius (in meters) at which a blinding/suppressing utility forces a defender
+ * off their hold. Kept conservative so users have to actually target the
+ * defender to break their angle.
+ */
+const SUPPRESSION_RADIUS_M: Partial<Record<UtilityItem["type"], number>> = {
+  flash: 5.5,
+  concussion: 6.5,
+  mollie: 4.0,
+  nanoswarm: 4.0,
+};
+
+/**
+ * Returns true if a defender should be treated as "off-angle" due to an
+ * attacker utility placement. Flashes blind, mollies burn them off the spot,
+ * concussions slow/disorient — in all cases the defender is not holding a
+ * usable sightline on the path.
+ */
+export function isDefenderSuppressedByUtility(
+  defenderPos: Position,
+  utilityPlacements: UtilityItem[]
+): boolean {
+  for (const u of utilityPlacements) {
+    const radiusM = SUPPRESSION_RADIUS_M[u.type];
+    if (radiusM == null) continue;
+    // Consider both the placement center AND the target point (omen flash /
+    // breach walls travel toward target, so either endpoint can catch the
+    // defender).
+    const points: Position[] = [u.position];
+    if (u.target) points.push(u.target);
+    for (const p of points) {
+      const dx = (p.x - defenderPos.x) * GRID_COLS * METERS_PER_TILE;
+      const dy = (p.y - defenderPos.y) * GRID_ROWS * METERS_PER_TILE;
+      if (dx * dx + dy * dy <= radiusM * radiusM) return true;
+    }
+  }
+  return false;
 }
 
 function occludes(grid: GridMap, smoke: Set<string>, col: number, row: number): boolean {

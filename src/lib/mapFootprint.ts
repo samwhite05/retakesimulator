@@ -28,7 +28,11 @@ export function isOutlineWallPixel(r: number, g: number, b: number, a: number): 
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   const chroma = max - min;
-  return max >= 228 && min >= 198 && chroma <= 42;
+  // Riot's wall strokes are near-white (R,G,B in the 230–255 band). We widen the
+  // acceptable range slightly so antialiased wall edges — which drop to ~210 on
+  // client-side canvas reads — still register as walls. The floor gray sits
+  // around 140–170 so there is comfortable headroom.
+  return max >= 210 && min >= 175 && chroma <= 48;
 }
 
 /**
