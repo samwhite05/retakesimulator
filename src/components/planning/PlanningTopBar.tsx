@@ -15,8 +15,8 @@ interface PlanningTopBarProps {
 const STEPS: { id: 1 | 2 | 3 | 4; label: string; hint: string }[] = [
   { id: 1, label: "Place", hint: "Drop your squad" },
   { id: 2, label: "Utility", hint: "Draft smokes & flashes" },
-  { id: 3, label: "Paths", hint: "Draw routes with hold points" },
-  { id: 4, label: "Simulate", hint: "Run the retake" },
+  { id: 3, label: "Paths", hint: "Draw each agent’s route to site" },
+  { id: 4, label: "Simulate", hint: "Commit & execute" },
 ];
 
 function IconButton({
@@ -61,6 +61,7 @@ export default function PlanningTopBar({
         <button
           type="button"
           onClick={onBack}
+          aria-label="Back to home"
           className="flex items-center gap-2 text-ink-dim transition-colors hover:text-ink"
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-md border border-valorant-red/40 bg-valorant-red/10 text-valorant-red">
@@ -77,39 +78,59 @@ export default function PlanningTopBar({
         </div>
       </div>
 
-      <nav className="hidden items-center gap-1 md:flex" aria-label="Planning progress">
-        {STEPS.map((step, idx) => {
-          const done = step.id < activeStep;
-          const active = step.id === activeStep;
-          return (
-            <div key={step.id} className="flex items-center gap-1">
-              <div
-                className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium tracking-wide transition-colors ${
-                  active
-                    ? "bg-amber/15 text-amber ring-1 ring-amber/30"
-                    : done
-                      ? "text-teal"
-                      : "text-ink-mute"
+      <nav className="flex min-w-0 flex-1 items-center justify-center gap-1 md:flex-none" aria-label="Planning progress">
+        <span className="sr-only">
+          Step {activeStep} of 4: {STEPS.find((s) => s.id === activeStep)?.label}.{" "}
+          {STEPS.find((s) => s.id === activeStep)?.hint}
+        </span>
+        <div className="flex items-center gap-1 md:hidden" title={STEPS.find((s) => s.id === activeStep)?.hint}>
+          {STEPS.map((step) => {
+            const done = step.id < activeStep;
+            const active = step.id === activeStep;
+            return (
+              <span
+                key={step.id}
+                className={`h-1.5 w-6 rounded-full ${
+                  active ? "bg-amber" : done ? "bg-teal/70" : "bg-border-10"
                 }`}
-                title={step.hint}
-              >
-                <span
-                  className={`flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-semibold ${
+              />
+            );
+          })}
+        </div>
+        <div className="hidden items-center gap-1 md:flex">
+          {STEPS.map((step, idx) => {
+            const done = step.id < activeStep;
+            const active = step.id === activeStep;
+            return (
+              <div key={step.id} className="flex items-center gap-1">
+                <div
+                  className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium tracking-wide transition-colors ${
                     active
-                      ? "bg-amber text-pure-black"
+                      ? "bg-amber/15 text-amber ring-1 ring-amber/30"
                       : done
-                        ? "bg-teal text-pure-black"
-                        : "bg-surface text-ink-mute"
+                        ? "text-teal"
+                        : "text-ink-mute"
                   }`}
+                  title={step.hint}
                 >
-                  {done ? "✓" : step.id}
-                </span>
-                {step.label}
+                  <span
+                    className={`flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-semibold ${
+                      active
+                        ? "bg-amber text-pure-black"
+                        : done
+                          ? "bg-teal text-pure-black"
+                          : "bg-surface text-ink-mute"
+                    }`}
+                  >
+                    {done ? "✓" : step.id}
+                  </span>
+                  {step.label}
+                </div>
+                {idx < STEPS.length - 1 && <div className="h-px w-4 bg-border-08" />}
               </div>
-              {idx < STEPS.length - 1 && <div className="h-px w-4 bg-border-08" />}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </nav>
 
       <div className="flex items-center gap-1.5">

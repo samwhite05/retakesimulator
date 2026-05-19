@@ -51,7 +51,7 @@
   --font-family-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   --font-family-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-family-display: var(--font-display), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
@@ -114,4 +114,18 @@ body {
 
 .retake-fade-up {
   animation: retake-fade-up 240ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .retake-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  :where(.animate-pulse, .animate-spin) {
+    animation: none !important;
+  }
 }

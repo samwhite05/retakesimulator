@@ -376,91 +376,98 @@ export default function TacticalMap({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <Layer>
-          {minimapImage && (
-            <Image
-              image={minimapImage}
-              x={contentOffsetX}
-              y={contentOffsetY}
-              width={contentSize}
-              height={contentSize}
-              opacity={0.95}
-            />
-          )}
+        <Layer name="map-underlay">
+          <Group name="map-base" listening={false}>
+            {minimapImage && (
+              <Image
+                image={minimapImage}
+                x={contentOffsetX}
+                y={contentOffsetY}
+                width={contentSize}
+                height={contentSize}
+                opacity={0.95}
+              />
+            )}
 
-          {scenario.plantableArea && (
-            <Rect
-              x={toCanvas({ x: scenario.plantableArea.x, y: scenario.plantableArea.y }).x}
-              y={toCanvas({ x: scenario.plantableArea.x, y: scenario.plantableArea.y }).y}
-              width={scenario.plantableArea.width * contentSize}
-              height={scenario.plantableArea.height * contentSize}
-              fill="rgba(255, 200, 100, 0.06)"
-              stroke="rgba(255, 200, 100, 0.4)"
-              strokeWidth={1.5}
-              dash={[6, 4]}
-              listening={false}
-            />
-          )}
+            {scenario.plantableArea && (
+              <Rect
+                x={toCanvas({ x: scenario.plantableArea.x, y: scenario.plantableArea.y }).x}
+                y={toCanvas({ x: scenario.plantableArea.x, y: scenario.plantableArea.y }).y}
+                width={scenario.plantableArea.width * contentSize}
+                height={scenario.plantableArea.height * contentSize}
+                fill="rgba(255, 200, 100, 0.06)"
+                stroke="rgba(255, 200, 100, 0.4)"
+                strokeWidth={1.5}
+                dash={[6, 4]}
+                listening={false}
+              />
+            )}
+          </Group>
 
-          {Array.from({ length: GRID_ROWS }).map((_, row) =>
-            Array.from({ length: GRID_COLS }).map((_, col) => {
-              const tile = scenario.grid.tiles[row]?.[col];
-              if (!tile || tile.type === "void") return null;
-              const interiorFrac = gridInteriorFrac?.[row * GRID_COLS + col] ?? 1;
-              const showGridChrome = interiorFrac >= GRID_VISUAL_INTERIOR_MIN;
-              if (!showGridChrome) return null;
-              const pos = toCanvas({ x: col / GRID_COLS, y: row / GRID_ROWS });
+          <Group name="grid-cells" listening={false}>
+            {Array.from({ length: GRID_ROWS }, (_, row) =>
+              Array.from({ length: GRID_COLS }, (_, col) => {
+                const tile = scenario.grid.tiles[row]?.[col];
+                if (!tile || tile.type === "void") return null;
+                const interiorFrac = gridInteriorFrac?.[row * GRID_COLS + col] ?? 1;
+                const showGridChrome = interiorFrac >= GRID_VISUAL_INTERIOR_MIN;
+                if (!showGridChrome) return null;
+                const pos = toCanvas({ x: col / GRID_COLS, y: row / GRID_ROWS });
 
-              return (
-                <Rect
-                  key={`cell-${col}-${row}`}
-                  x={pos.x}
-                  y={pos.y}
-                  width={cellSize}
-                  height={cellSize}
-                  fill="transparent"
-                  stroke="rgba(255,255,255,0.024)"
-                  strokeWidth={0.85}
-                  listening={false}
+                return (
+                  <Rect
+                    key={`cell-${col}-${row}`}
+                    x={pos.x}
+                    y={pos.y}
+                    width={cellSize}
+                    height={cellSize}
+                    fill="transparent"
+                    stroke="rgba(255,255,255,0.024)"
+                    strokeWidth={0.85}
+                    listening={false}
+                  />
+                );
+              })
+            ).flat()}
+          </Group>
+
+          <Group name="grid-axis-labels" listening={false}>
+            {nonVoidGridBounds &&
+              Array.from(
+                { length: nonVoidGridBounds.maxC - nonVoidGridBounds.minC + 1 },
+                (_, k) => nonVoidGridBounds.minC + k
+              ).map((i) => (
+                <Text
+                  key={`col-label-${i}`}
+                  x={contentOffsetX + i * cellSize + cellSize / 2 - 4}
+                  y={contentOffsetY + contentSize + 4}
+                  text={String.fromCharCode(65 + i)}
+                  fontSize={10}
+                  fill="rgba(255,255,255,0.3)"
+                  fontFamily="var(--font-mono)"
                 />
-              );
-            })
-          )}
-
-          {nonVoidGridBounds &&
-            Array.from(
-              { length: nonVoidGridBounds.maxC - nonVoidGridBounds.minC + 1 },
-              (_, k) => nonVoidGridBounds.minC + k
-            ).map((i) => (
-              <Text
-                key={`col-label-${i}`}
-                x={contentOffsetX + i * cellSize + cellSize / 2 - 4}
-                y={contentOffsetY + contentSize + 4}
-                text={String.fromCharCode(65 + i)}
-                fontSize={10}
-                fill="rgba(255,255,255,0.3)"
-                fontFamily="var(--font-mono)"
-              />
-            ))}
-          {nonVoidGridBounds &&
-            Array.from(
-              { length: nonVoidGridBounds.maxR - nonVoidGridBounds.minR + 1 },
-              (_, k) => nonVoidGridBounds.minR + k
-            ).map((i) => (
-              <Text
-                key={`row-label-${i}`}
-                x={contentOffsetX - 14}
-                y={contentOffsetY + i * cellSize + cellSize / 2 - 5}
-                text={String(i + 1)}
-                fontSize={10}
-                fill="rgba(255,255,255,0.3)"
-                fontFamily="var(--font-mono)"
-              />
-            ))}
+              ))}
+            {nonVoidGridBounds &&
+              Array.from(
+                { length: nonVoidGridBounds.maxR - nonVoidGridBounds.minR + 1 },
+                (_, k) => nonVoidGridBounds.minR + k
+              ).map((i) => (
+                <Text
+                  key={`row-label-${i}`}
+                  x={contentOffsetX - 14}
+                  y={contentOffsetY + i * cellSize + cellSize / 2 - 5}
+                  text={String(i + 1)}
+                  fontSize={10}
+                  fill="rgba(255,255,255,0.3)"
+                  fontFamily="var(--font-mono)"
+                />
+              ))}
+          </Group>
         </Layer>
 
         {/* Utility Layer */}
-        <Layer>
+        <Layer name="utility">
+          <Group name="utility-glyphs">
           {utilityPlacements.map((u) => {
             const pos = toCanvas(u.position);
             const spec = getUtilityRenderSpec(u.agentId, u.type);
@@ -513,6 +520,7 @@ export default function TacticalMap({
 
             return <UtilityGlyph key={u.id} {...glyphProps} />;
           })}
+          </Group>
         </Layer>
 
         {/* Spike marker */}
@@ -528,7 +536,8 @@ export default function TacticalMap({
             built in map-normalized space then projected through toCanvas so zoom
             and pan stay pixel-locked. */}
         {showEnemies && enemyVisionFans.length > 0 && (
-          <Layer listening={false}>
+          <Layer listening={false} name="enemy-vision">
+            <Group name="enemy-vision-fans" listening={false}>
             {enemyVisionFans.map((fan) => {
               const eyeCanvas = toCanvas(fan.eye);
               const rimCanvas = fan.rim.map((p) => toCanvas(p));
@@ -567,11 +576,13 @@ export default function TacticalMap({
                 </Group>
               );
             })}
+            </Group>
           </Layer>
         )}
 
         {/* Paths layer — exposure-colored segments */}
-        <Layer>
+        <Layer name="paths">
+          <Group name="movement-paths">
           {movementPaths.map((mp) => {
             const agent = agentPositions.find((a) => a.agentId === mp.agentId);
             if (!agent || mp.path.length === 0) return null;
@@ -740,10 +751,12 @@ export default function TacticalMap({
               />
             );
           })()}
+          </Group>
         </Layer>
 
         {/* Agents Layer */}
-        <Layer>
+        <Layer name="agents">
+          <Group name="defenders" listening={false}>
           {showEnemies &&
             scenario.enemyAgents.map((enemy) => {
               const pos = toCanvas(enemy.position);
@@ -761,6 +774,8 @@ export default function TacticalMap({
                 />
               );
             })}
+          </Group>
+          <Group name="attackers">
           {agentPositions.map((ap) => {
             const pos = toCanvas(ap.position);
             const isSelected = selectedAgentId === ap.agentId;
@@ -817,10 +832,12 @@ export default function TacticalMap({
               </Group>
             );
           })}
+          </Group>
         </Layer>
 
         {showSpawnZones && scenario.spawnZones && (
-          <Layer listening={false}>
+          <Layer listening={false} name="spawn-zones">
+            <Group name="spawn-zone-rects" listening={false}>
             {scenario.spawnZones.map((z, i) => {
               const p1 = toCanvas({ x: z.x, y: z.y });
               const p2 = toCanvas({ x: z.x + z.width, y: z.y + z.height });
@@ -840,10 +857,11 @@ export default function TacticalMap({
                 />
               );
             })}
+            </Group>
           </Layer>
         )}
 
-        <Layer listening={false}>
+        <Layer listening={false} name="vignette">
           <Rect
             x={0}
             y={0}
@@ -860,23 +878,29 @@ export default function TacticalMap({
 
       <div className="absolute bottom-4 right-4 z-10 flex flex-col gap-1">
         <button
+          type="button"
           onClick={handleZoomIn}
-          className="w-8 h-8 flex items-center justify-center bg-pure-black/80 backdrop-blur-sm border border-border-10 text-ink hover:text-amber hover:border-amber/30 rounded text-sm font-mono transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded border border-border-10 bg-pure-black/80 text-sm font-mono text-ink backdrop-blur-sm transition-colors hover:border-amber/30 hover:text-amber"
           title="Zoom in"
+          aria-label="Zoom in"
         >
           +
         </button>
         <button
+          type="button"
           onClick={handleResetZoom}
-          className="w-8 h-8 flex items-center justify-center bg-pure-black/80 backdrop-blur-sm border border-border-10 text-ink-mute hover:text-ink hover:border-border-10 rounded text-[10px] font-mono transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded border border-border-10 bg-pure-black/80 text-[10px] font-mono text-ink-mute backdrop-blur-sm transition-colors hover:border-border-10 hover:text-ink"
           title="Reset zoom"
+          aria-label="Reset zoom"
         >
           ⊙
         </button>
         <button
+          type="button"
           onClick={handleZoomOut}
-          className="w-8 h-8 flex items-center justify-center bg-pure-black/80 backdrop-blur-sm border border-border-10 text-ink hover:text-amber hover:border-amber/30 rounded text-sm font-mono transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded border border-border-10 bg-pure-black/80 text-sm font-mono text-ink backdrop-blur-sm transition-colors hover:border-amber/30 hover:text-amber"
           title="Zoom out"
+          aria-label="Zoom out"
         >
           −
         </button>

@@ -24,12 +24,12 @@ const PHASE_HINTS: Record<number, { title: string; body: string }> = {
     body: "Only util you want fired before first contact goes here. Save your reactive smokes + mollies for live calls mid-retake.",
   },
   3: {
-    title: "Draw your default-side path",
-    body: "One path per agent from spawn up to first-contact. The sim pauses at contact and asks you live questions — don't over-plan it.",
+    title: "Draw each agent’s route",
+    body: "Use Route under each agent, then tap the map to set where they take first contact. Paths snap to walkable tiles. If a line won’t draw, try a destination closer to the site.",
   },
   4: {
     title: "Commit & execute",
-    body: "One official commit per day. After first contact, you'll be asked to make live tactical calls under a 10-second clock.",
+    body: "When everyone has a path, use Commit & Execute to run the interactive sim. You get one scored submit per calendar day (see home); scrim mode is for practice after that.",
   },
 };
 

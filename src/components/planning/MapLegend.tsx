@@ -10,7 +10,6 @@ const ITEMS: LegendItem[] = [
   { color: "var(--color-teal)", label: "Safe segment" },
   { color: "var(--color-amber)", label: "Trade segment" },
   { color: "var(--color-valorant-red)", label: "Open / sightline" },
-  { color: "var(--color-amber)", label: "Hold waypoint", dashed: true },
   { color: "var(--color-violet)", label: "Smokes" },
 ];
 

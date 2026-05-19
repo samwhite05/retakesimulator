@@ -42,6 +42,35 @@ export default function PlanningPageContent() {
   const [viewport, setViewport] = useState({ w: 1200, h: 800 });
   const [activeRunId, setActiveRunId] = useState<string | null>(null);
   const executeResultsUrlRef = useRef("");
+  const [mapHint, setMapHint] = useState<string | null>(null);
+  const mapHintTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** Start hidden until client checks sessionStorage (avoids hydration mismatch). */
+  const [narrowLayoutHintDismissed, setNarrowLayoutHintDismissed] = useState(true);
+
+  const showMapHint = useCallback((message: string) => {
+    if (mapHintTimerRef.current) clearTimeout(mapHintTimerRef.current);
+    setMapHint(message);
+    mapHintTimerRef.current = setTimeout(() => {
+      setMapHint(null);
+      mapHintTimerRef.current = null;
+    }, 4500);
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("retake-planning-layout-hint") !== "1") {
+        setNarrowLayoutHintDismissed(false);
+      }
+    } catch {
+      setNarrowLayoutHintDismissed(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (mapHintTimerRef.current) clearTimeout(mapHintTimerRef.current);
+    };
+  }, []);
 
   const {
     agentPositions,
@@ -56,7 +85,6 @@ export default function PlanningPageContent() {
     placeUtility,
     removeUtility,
     startMoveMode,
-    startHoldMode,
     startPlaceMode,
     setMovePath,
     toggleHoldAtIndex,
@@ -259,12 +287,13 @@ export default function PlanningPageContent() {
         });
         if (path && path.length > 1) {
           setMovePath(selectedAgentId, path.map(tileToPos));
+          clearSelection();
+        } else {
+          showMapHint("No route found — try a destination closer to the site.");
         }
-        clearSelection();
       } else if (mode === "hold" && selectedAgentId) {
-        // Click on an existing path point to toggle a hold there. The map's
-        // own hit-testing on hold diamonds handles removal; here we handle
-        // "tap near a path point" by finding the nearest index.
+        // Hold editing is not exposed in the current rail UI; keep handler for
+        // legacy plans / map diamonds if hold mode is ever re-enabled.
         const mp = movementPaths.find((p) => p.agentId === selectedAgentId);
         if (!mp || mp.path.length < 2) return;
         let bestIdx = -1;
@@ -287,6 +316,7 @@ export default function PlanningPageContent() {
         if (valid) {
           handleDropAgent(selectedAgentId, tileToPos(tile), true);
         } else {
+          showMapHint("That tile isn’t in a spawn zone.");
           clearSelection();
         }
       }
@@ -305,6 +335,7 @@ export default function PlanningPageContent() {
       toggleHoldAtIndex,
       handleDropAgent,
       wallBitmap,
+      showMapHint,
     ]
   );
 
@@ -333,6 +364,11 @@ export default function PlanningPageContent() {
     if (!scenario || !canSimulate) return;
     setSubmitting(true);
     setError(null);
+    setMapHint(null);
+    if (mapHintTimerRef.current) {
+      clearTimeout(mapHintTimerRef.current);
+      mapHintTimerRef.current = null;
+    }
     try {
       const plan = { ...getPlan(), createdAt: new Date().toISOString() };
       const res = await fetch("/api/plans", {
@@ -427,7 +463,47 @@ export default function PlanningPageContent() {
         canRedo={future.length > 0}
       />
 
-      <div className="flex flex-1 min-h-0">
+      {error ? (
+        <div
+          className="flex shrink-0 items-start gap-3 border-b border-valorant-red/35 bg-valorant-red/10 px-4 py-3 text-ink"
+          role="alert"
+        >
+          <p className="min-w-0 flex-1 text-[13px] leading-snug">{error}</p>
+          <button
+            type="button"
+            onClick={() => setError(null)}
+            className="shrink-0 rounded-md border border-border-10 px-3 py-1 text-[11px] uppercase tracking-wider text-ink-dim transition-colors hover:border-border-12 hover:text-ink"
+          >
+            Dismiss
+          </button>
+        </div>
+      ) : null}
+
+      {!narrowLayoutHintDismissed ? (
+        <div className="flex shrink-0 items-start gap-3 border-b border-amber/25 bg-amber/10 px-4 py-2.5 lg:hidden">
+          <p className="min-w-0 flex-1 text-[12px] leading-snug text-ink-dim">
+            Squad and briefing sit beside the map. On a small screen, scroll horizontally to reach each panel, or widen the
+            window.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              try {
+                sessionStorage.setItem("retake-planning-layout-hint", "1");
+              } catch {
+                /* ignore */
+              }
+              setNarrowLayoutHintDismissed(true);
+            }}
+            className="shrink-0 rounded-md border border-border-10 px-2.5 py-1 text-[10px] uppercase tracking-wider text-ink hover:border-border-12"
+          >
+            OK
+          </button>
+        </div>
+      ) : null}
+
+      <div className="flex min-h-0 flex-1 overflow-x-auto overflow-y-hidden">
+        <div className="flex min-h-0 min-w-[960px] flex-1">
         <AgentRail
           scenario={scenario}
           agentPositions={agentPositions}
@@ -441,7 +517,6 @@ export default function PlanningPageContent() {
           onSelectAgent={handleSelectAgentFromRail}
           onSelectAbility={(agentId, type) => selectAbility(agentId, type)}
           onStartMovePath={(id) => startMoveMode(id)}
-          onStartHoldMode={(id) => startHoldMode(id)}
           onClearMovePath={(id) => clearMovePath(id)}
         />
 
@@ -481,17 +556,20 @@ export default function PlanningPageContent() {
               </div>
             )}
 
-            {mode === "hold" && selectedAgentId && (
-              <div className="pointer-events-none absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-amber/30 bg-amber/10 px-4 py-1.5 text-[11px] uppercase tracking-wide text-amber backdrop-blur">
-                Hold mode · tap a point on the path to pause &amp; hold an angle
-              </div>
-            )}
-
             {mode === "place" && selectedAgentId && (
               <div className="pointer-events-none absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-amber/30 bg-amber/10 px-4 py-1.5 text-[11px] uppercase tracking-wide text-amber backdrop-blur">
                 Tap a highlighted tile to drop {getAgentDef(selectedAgentId)?.displayName ?? "agent"}
               </div>
             )}
+
+            {mapHint ? (
+              <div
+                className="pointer-events-none absolute bottom-16 left-1/2 z-20 max-w-sm -translate-x-1/2 rounded-lg border border-border-10 bg-pure-black/90 px-4 py-2 text-center text-[12px] leading-snug text-ink shadow-lg backdrop-blur-md"
+                role="status"
+              >
+                {mapHint}
+              </div>
+            ) : null}
           </div>
 
           <UtilityBay
@@ -514,6 +592,7 @@ export default function PlanningPageContent() {
           activeStep={activeStep}
           averageExposure={squadExposure}
         />
+        </div>
       </div>
 
       {activeRunId && (

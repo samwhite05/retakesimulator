@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { DecisionPoint, DecisionKindId } from "@/types";
 
 interface DecisionOverlayProps {
@@ -26,6 +26,7 @@ const KIND_TONE: Record<DecisionKindId, { label: string; color: string }> = {
  * auto-picks the default option on expiry.
  */
 export default function DecisionOverlay({ decision, onDecide, submitting }: DecisionOverlayProps) {
+  const headlineId = useId();
   const [now, setNow] = useState(0);
   const startRef = useRef<number>(0);
   const settledRef = useRef(false);
@@ -80,8 +81,13 @@ export default function DecisionOverlay({ decision, onDecide, submitting }: Deci
   };
 
   return (
-    <div className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-pure-black/60 backdrop-blur-[2px]" />
+    <div
+      className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={headlineId}
+    >
+      <div className="absolute inset-0 bg-pure-black/60 backdrop-blur-[2px]" aria-hidden />
 
       <div
         className="relative z-10 flex w-[min(680px,92vw)] flex-col gap-5 rounded-xl border border-border-12 bg-surface/95 p-6 shadow-[0_18px_60px_rgba(0,0,0,0.55)]"
@@ -92,7 +98,7 @@ export default function DecisionOverlay({ decision, onDecide, submitting }: Deci
             <div className={`text-[10px] uppercase tracking-[0.3em] ${tone?.color ?? "text-ink-mute"}`}>
               {tone?.label ?? decision.kind}
             </div>
-            <h2 className="mt-1 text-[22px] font-bold leading-tight text-ink">
+            <h2 id={headlineId} className="mt-1 text-[22px] font-bold leading-tight text-ink">
               {decision.headline}
             </h2>
             {decision.subline && (

@@ -7,7 +7,7 @@ const STORAGE_KEY = "retake-onboarded-v1";
 const STEPS: Record<number, { title: string; body: string; hint: string }> = {
   1: {
     title: "Start here → pick an agent",
-    body: "The left rail holds your squad. Tap an agent's card to start placing them, then tap a spawn tile.",
+    body: "The squad rail holds your agents. Tap an agent’s card to start placing them, then tap a spawn tile.",
     hint: "Tip: every agent needs a starting tile before you can draw paths.",
   },
   2: {
@@ -16,14 +16,14 @@ const STEPS: Record<number, { title: string; body: string; hint: string }> = {
     hint: "Smokes block vision. Flashes blind. Molotovs clear corners. Use them on enemy sightlines.",
   },
   3: {
-    title: "Draw an entry path for each agent",
-    body: "Use the teal Entry chip under an agent, then tap where they should rush in wave 1.",
-    hint: "Dashes (Jett, Raze) extend wave-1 range once per agent. Paths snap to reachable tiles.",
+    title: "Draw a route for each agent",
+    body: "Tap the teal Route chip under an agent, then tap the map for their path to first contact.",
+    hint: "If no line appears, pick a destination closer to the site. Dashes extend range once where applicable.",
   },
   4: {
-    title: "Lock it in and simulate",
-    body: "Everything looks good. Press Run simulation to watch the retake and see your daily grade.",
-    hint: "You get one official run a day. After grading, scrim mode lets you retry freely.",
+    title: "Commit & execute",
+    body: "When the checklist is complete, use Commit & Execute in the bottom bar to run the interactive sim and get your grade.",
+    hint: "Home shows whether you still have today’s scored submit. After that, scrim mode is for practice.",
   },
 };
 

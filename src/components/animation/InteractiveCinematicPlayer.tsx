@@ -607,6 +607,17 @@ export default function InteractiveCinematicPlayer({
         }`}
       />
 
+      <div className="pointer-events-auto absolute left-4 top-4 z-40">
+        <button
+          type="button"
+          onClick={onAbort}
+          className="rounded-md border border-border-10 bg-pure-black/85 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-ink-dim backdrop-blur-md transition-colors hover:border-valorant-red/40 hover:text-valorant-red"
+          aria-label="Exit run and return to planning"
+        >
+          Exit run
+        </button>
+      </div>
+
       {/* HUD top */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-start justify-between px-6 pt-5">
         <div className="pointer-events-auto flex items-center gap-3 rounded-md border border-border-10 bg-pure-black/70 px-3 py-2 backdrop-blur-md">

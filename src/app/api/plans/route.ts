@@ -89,6 +89,28 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("[POST /api/plans]", err);
-    return NextResponse.json({ success: false, error: "Failed to process plan" }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    const readonly =
+      /readonly|read-only|SQLITE_READONLY|1032/i.test(message) ||
+      (typeof err === "object" &&
+        err !== null &&
+        "code" in err &&
+        String((err as { code?: string }).code).includes("1032"));
+
+    if (readonly) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Database file is read-only. Ensure prisma/dev.db and the prisma folder are writable, or set DATABASE_URL to a writable path. In dev, the app may fall back to a temp SQLite file — run `npx prisma db push` once if you see that warning in the server log.",
+        },
+        { status: 503 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: false, error: process.env.NODE_ENV === "development" ? message : "Failed to process plan" },
+      { status: 500 }
+    );
   }
 }

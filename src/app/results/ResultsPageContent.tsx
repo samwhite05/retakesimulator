@@ -277,11 +277,14 @@ export default function ResultsPageContent() {
                       violet: "border-violet/30 text-violet",
                     };
                     return (
-                      <li key={i} className={`flex items-center gap-3 rounded-lg border bg-pure-black/30 px-3 py-2 ${toneMap[m.tone]}`}>
+                      <li
+                        key={i}
+                        className={`flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border bg-pure-black/30 px-3 py-2 ${toneMap[m.tone]}`}
+                      >
                         <span className="font-mono text-[10px] text-ink-mute">{m.tLabel}</span>
                         <span className="rounded-full border border-border-08 px-2 py-0.5 text-[9px] uppercase tracking-wider text-ink-mute">{m.phase}</span>
-                        <span className="flex-1 text-[13px] font-semibold text-ink">{m.title}</span>
-                        <span className="hidden text-[11px] text-ink-dim sm:inline">{m.detail}</span>
+                        <span className="min-w-0 flex-1 text-[13px] font-semibold text-ink">{m.title}</span>
+                        <span className="w-full text-[11px] text-ink-dim sm:w-auto sm:max-w-[55%] sm:text-right">{m.detail}</span>
                       </li>
                     );
                   })}

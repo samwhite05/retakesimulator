@@ -60,12 +60,15 @@ export default function UtilityBay({
         <div className="mt-0.5 text-[9px] italic text-ink-mute">
           Rest saved for live calls
         </div>
+        <p className="mt-1.5 max-w-[14rem] text-[9px] leading-snug text-ink-mute/90">
+          One scored submit per day (see home). Commit &amp; Execute uploads this plan and starts the run.
+        </p>
       </div>
 
       <div className="relative flex-1 overflow-x-auto">
         {usedCount === 0 ? (
           <div className="flex h-10 items-center text-[11px] italic text-ink-mute">
-            Tap an ability in the left rail, then tap the map to place it.
+            Tap an ability in the squad rail, then tap the map to place it.
           </div>
         ) : (
           <div className="flex items-center gap-2">
@@ -75,12 +78,14 @@ export default function UtilityBay({
               const iconUrl = getAbilityIconUrl(info.name);
               const tone = TONE_CHIP[info.tone];
               const slot = info.slot ? SLOT_LABEL[info.slot] : null;
+              const removeLabel = `Remove ${info.name} for ${agentDisplay}`;
               return (
                 <button
                   key={u.id}
                   type="button"
                   onClick={() => onRemoveUtility(u.id)}
-                  title={`${agentDisplay} · ${info.name} — click to remove`}
+                  title={`${agentDisplay} · ${info.name} — tap to remove`}
+                  aria-label={removeLabel}
                   className={`group relative flex h-10 items-center gap-2 rounded-md border pl-1.5 pr-3 transition-all ${tone}`}
                 >
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-pure-black/40">
@@ -109,7 +114,10 @@ export default function UtilityBay({
                       {slot}
                     </span>
                   )}
-                  <span className="pointer-events-none ml-1 text-[10px] opacity-0 transition-opacity group-hover:opacity-80">
+                  <span
+                    className="pointer-events-none ml-1 text-[10px] text-ink-mute/80 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-80"
+                    aria-hidden
+                  >
                     ✕
                   </span>
                 </button>
@@ -133,6 +141,7 @@ export default function UtilityBay({
       <button
         type="button"
         onClick={onClear}
+        aria-label="Clear entire plan"
         className="flex h-9 items-center gap-1.5 rounded-md border border-border-10 px-3 text-[11px] uppercase tracking-wider text-ink-dim transition-colors hover:border-valorant-red/40 hover:text-valorant-red"
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -154,7 +163,8 @@ export default function UtilityBay({
         type="button"
         onClick={onSimulate}
         disabled={!canSimulate || simulating}
-        className="flex h-9 items-center gap-2 rounded-md bg-valorant-red px-5 text-[12px] font-semibold uppercase tracking-wider text-white transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+        aria-label={simulating ? "Submitting plan" : "Commit and execute simulation"}
+        className="flex h-9 shrink-0 items-center gap-2 rounded-md bg-valorant-red px-4 text-[12px] font-semibold uppercase tracking-wider text-white transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 sm:px-5"
       >
         {simulating ? (
           <>

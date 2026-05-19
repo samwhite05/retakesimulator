@@ -49,7 +49,6 @@ export default function DailyStats({ totalPlaysToday }: DailyStatsProps) {
 
   const { streak, week, avgGrade } = stats;
 
-  const dayLabels = ["M", "T", "W", "T", "F", "S", "S"];
   return (
     <div className="rounded-2xl border border-border-10 bg-surface/70 p-5">
       <div className="flex items-center justify-between">
@@ -97,7 +96,9 @@ export default function DailyStats({ totalPlaysToday }: DailyStatsProps) {
                 title={played ? `${d.date} · ${d.score} pts (${d.tier})` : `${d.date} · no play`}
                 className={`flex h-10 flex-col items-center justify-center rounded-md border text-[10px] ${tone}`}
               >
-                <span className="text-ink-mute">{dayLabels[new Date(d.date).getDay() === 0 ? 6 : new Date(d.date).getDay() - 1]}</span>
+                <span className="text-ink-mute">
+                  {new Date(d.date + "T12:00:00").toLocaleDateString(undefined, { weekday: "short" })}
+                </span>
                 <span className="font-mono font-semibold text-ink">
                   {played ? d.score : "·"}
                 </span>

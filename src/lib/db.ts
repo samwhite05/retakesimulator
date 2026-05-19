@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { PrismaClient } from "@prisma/client";
 
@@ -88,6 +89,98 @@ function normalizeSqliteDatabaseUrl() {
 }
 
 normalizeSqliteDatabaseUrl();
+
+/**
+ * Parse a normalized `file:...` Prisma SQLite URL back to a filesystem path.
+ * Supports `file:/abs/path`, `file:C:/win/path`, and `file:///` forms.
+ */
+function sqliteFsPathFromDatabaseUrl(url: string | undefined): string | null {
+  const trimmed = trimEnv(url);
+  if (!trimmed?.toLowerCase().startsWith("file:")) return null;
+  if (trimmed.startsWith("file://")) {
+    try {
+      return fileURLToPath(new URL(trimmed));
+    } catch {
+      return null;
+    }
+  }
+  return trimmed.slice("file:".length);
+}
+
+function tryMakeSqliteWritable(absDbPath: string): boolean {
+  const parent = path.dirname(absDbPath);
+  try {
+    fs.mkdirSync(parent, { recursive: true });
+  } catch {
+    return false;
+  }
+
+  if (process.platform !== "win32") {
+    try {
+      fs.chmodSync(parent, 0o755);
+    } catch {
+      /* ignore */
+    }
+    if (fs.existsSync(absDbPath)) {
+      try {
+        fs.chmodSync(absDbPath, 0o644);
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+
+  try {
+    const probe = path.join(parent, `.rw-probe-${process.pid}`);
+    fs.writeFileSync(probe, "ok");
+    fs.unlinkSync(probe);
+    if (fs.existsSync(absDbPath)) {
+      fs.accessSync(absDbPath, fs.constants.R_OK | fs.constants.W_OK);
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * SQLite needs a writable directory for the DB file and any `-wal` / `-shm` sidecars.
+ * If the project DB is read-only (common with sandboxes or `chmod`), fall back to a
+ * temp file in development so local API routes can still persist plans.
+ */
+function ensureSqliteDatabaseWritableForRuntime() {
+  const fsPath = sqliteFsPathFromDatabaseUrl(process.env.DATABASE_URL);
+  if (!fsPath) return;
+
+  if (tryMakeSqliteWritable(fsPath)) return;
+
+  const isProd = process.env.NODE_ENV === "production";
+  if (isProd) {
+    console.error(
+      `[db] SQLite is not writable at ${path.dirname(fsPath)}. Set DATABASE_URL to a writable path ` +
+        "(e.g. a folder outside a read-only volume) and redeploy."
+    );
+    return;
+  }
+
+  const fallback = path.join(tmpdir(), "retake-roulette-dev.sqlite");
+  if (!tryMakeSqliteWritable(fallback)) {
+    console.error(
+      `[db] SQLite not writable at ${fsPath} and could not use fallback ${fallback}. ` +
+        "Check permissions or set DATABASE_URL explicitly."
+    );
+    return;
+  }
+
+  process.env.DATABASE_URL = toPrismaSqliteFileUrl(fallback);
+  console.warn(
+    `[db] Project SQLite was read-only; using dev fallback:\n      ${fallback}\n` +
+      "      Apply schema once: npx prisma db push\n" +
+      "      Or fix permissions on your project DB and restart (unset fallback by fixing the original file)."
+  );
+}
+
+ensureSqliteDatabaseWritableForRuntime();
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 

@@ -34,7 +34,6 @@ interface AgentRailProps {
   onSelectAgent: (agentId: string) => void;
   onSelectAbility: (agentId: string, type: UtilityType) => void;
   onStartMovePath: (agentId: string) => void;
-  onStartHoldMode: (agentId: string) => void;
   onClearMovePath: (agentId: string) => void;
 }
 
@@ -75,12 +74,14 @@ function IconAction({
       ? "border-amber/50 bg-amber/10 text-amber"
       : "border-border-08 text-ink-dim hover:border-amber/40 hover:bg-amber/[0.06] hover:text-amber",
   };
+  const a11y = [label, title].filter(Boolean).join(". ");
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      title={title}
+      title={title ?? label}
+      aria-label={a11y}
       className={`inline-flex h-7 items-center gap-1.5 rounded-md border px-2 text-[10px] font-medium uppercase tracking-[0.08em] transition-colors disabled:opacity-30 disabled:pointer-events-none ${toneMap[tone]}`}
     >
       {icon}
@@ -127,7 +128,6 @@ export default function AgentRail({
   onSelectAgent,
   onSelectAbility,
   onStartMovePath,
-  onStartHoldMode,
   onClearMovePath,
 }: AgentRailProps) {
   const roster = scenario.planningRoster ?? scenario.availableAgents.map((id) => ({ agentId: id, eliminated: false }));
@@ -284,6 +284,7 @@ export default function AgentRail({
                               disabled={depleted}
                               onClick={() => onSelectAbility(def.id, ability.type)}
                               title={`${ability.name} — ${remaining}/${totalCharges} charges`}
+                              aria-label={`${ability.name} for ${def.displayName}: ${remaining} of ${totalCharges} charges left`}
                               className={`relative flex h-9 items-center gap-1.5 rounded-md border px-1.5 transition-colors disabled:cursor-not-allowed ${
                                 active
                                   ? "border-amber/60 bg-amber/10"
@@ -332,6 +333,7 @@ export default function AgentRail({
                         type="button"
                         onClick={() => onClearMovePath(def.id)}
                         title="Clear path"
+                        aria-label="Clear path"
                         className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border-08 text-ink-mute transition-colors hover:border-valorant-red/40 hover:text-valorant-red"
                       >
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
